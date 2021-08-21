@@ -35,6 +35,8 @@ cp_trans = {
     '新疆维吾尔自治区': ('乌鲁木齐市', '克拉玛依市', '石河子市', '伊犁哈萨克自治州', '塔城地区', '阿勒泰地区', '博尔塔拉蒙古自治州', '昌吉回族自治州', '巴音郭楞蒙古自治州', '阿克苏地区', '克孜勒苏柯尔克孜自治州', '喀什地区', '和田地区', '吐鲁番市', '哈密市', '阿拉尔市', '图木舒克市', '五家渠市', '北屯市', '铁门关市', '双河市', '可克达拉市', '昆玉市', '胡杨河市', '新星市'),
 }
 
+zx_cities = ['北京市', '天津市', '上海市', '重庆市']
+
 
 def inverse_dic(dictionary):
     new_dic = {}
@@ -56,8 +58,9 @@ def ctwop(city):
             if (city[0: 2] == targets[0: 2]) or (city[0: 3] == targets[0: 3]):
                 return dictionary[targets]
         else:
+            cn_length = len(city)
             for target in targets:
-                if (city[0: 2] == target[0: 2]) or (city[0: 3] == target[0: 3]):
+                if city == target[0: cn_length]:
                     return dictionary[targets]
 
 
@@ -69,3 +72,18 @@ def add_pro(column):
         provinces.append(prov)
     newarray = pd.DataFrame(provinces)
     return newarray
+
+
+def fillup_city(column):
+    col_len = len(column)
+    add_cities = []
+    for i in range(col_len):
+        cn_length = len(column[i])
+        for zx_city in zx_cities:
+            if column[i] == zx_city[0:cn_length]:
+                add_cities.append(zx_city)
+        for cities in cp_trans.values():
+            for city in cities:
+                if column[i] == city[0:cn_length]:
+                    add_cities.append(city)
+    return pd.DataFrame(add_cities)
