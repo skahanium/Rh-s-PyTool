@@ -39,6 +39,9 @@ zx_cities = ['北京市', '天津市', '上海市', '重庆市']
 
 
 def inverse_dic(dictionary):
+    '''
+    反转dic对象的key和value
+    '''
     new_dic = {}
     for k, v in dictionary.items():
         new_dic[v] = k
@@ -46,12 +49,18 @@ def inverse_dic(dictionary):
 
 
 def ptwoc(prov):
+    """
+    根据省级行政区域名（及其简称）给出下辖所有地级行政区域名单
+    """
     for province in cp_trans.keys():
         if (prov[0: 2] == province[0: 2]) or (prov[0: 3] == province[0: 3]):
             return cp_trans[province]
 
 
 def ctwop(city):
+    '''
+    根据地级行政区域名（及其简称）给出所属省级行政区名
+    '''
     dictionary = inverse_dic(cp_trans)
     for targets, trash in dictionary.items():
         if targets == trash:
@@ -65,6 +74,9 @@ def ctwop(city):
 
 
 def add_pro(column):
+    """
+    根据一列地级行政区名给出一列对应的省级行政区域名
+    """
     col_len = len(column)
     provinces = []
     for i in range(col_len):
@@ -75,6 +87,9 @@ def add_pro(column):
 
 
 def fillup_city(column):
+    """
+    对一列不完整的地级行政区名单进行名称补完
+    """
     col_len = len(column)
     add_cities = []
     for i in range(col_len):
