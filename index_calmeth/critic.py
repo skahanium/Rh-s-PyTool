@@ -11,7 +11,7 @@ class Critic():
         """
         初始化：由原矩阵得到可用的归一化矩阵
         """
-        self.df = dataframe.iloc[:, 3:].dropna()  # 选出无空值的观测数据以方便进行权重计算
+        self.df = dataframe.copy().iloc[:, 3:].dropna()  # 选出无空值的观测数据以方便进行权重计算
         self.toone = (self.df - self.df.min()) / \
             (self.df.max() - self.df.min())
 
@@ -40,7 +40,7 @@ class Critic():
         for j in range(q):
             conflict = 0
             for i in range(p):
-                conflict += (1 - np.abs(corr_matrix.iloc[i, j]))
+                conflict += (1 - corr_matrix.iloc[i, j])
             conflicts.append(conflict)
         return conflicts
 
