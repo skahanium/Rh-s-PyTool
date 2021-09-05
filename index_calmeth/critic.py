@@ -4,7 +4,7 @@ import numpy as np
 
 class Critic():
     """
-    对传入的pd.dataframe类型数据进行Rsr权重计算
+    对传入的pd.dataframe类型数据进行critic权重计算
     """
 
     def __init__(self, dataframe):
@@ -13,7 +13,7 @@ class Critic():
         """
         self.df = dataframe.iloc[:, 3:].dropna()  # 选出无空值的观测数据以方便进行权重计算
         self.toone = (self.df - self.df.min()) / \
-            (self.df.max() - self.df.min())  # 计算归一化矩阵
+            (self.df.max() - self.df.min())
 
     def vardata(self):
         """
