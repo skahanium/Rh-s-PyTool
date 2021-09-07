@@ -39,9 +39,9 @@ zx_cities = ['北京市', '天津市', '上海市', '重庆市']
 
 
 def inverse_dic(dictionary):
-    '''
+    """
     反转dic对象的key和value
-    '''
+    """
     new_dic = {}
     for k, v in dictionary.items():
         new_dic[v] = k
@@ -58,9 +58,9 @@ def ptwoc(prov):
 
 
 def ctwop(city):
-    '''
+    """
     根据地级行政区域名（及其简称）给出所属省级行政区名
-    '''
+    """
     dictionary = inverse_dic(cp_trans)
     for targets, trash in dictionary.items():
         if targets == trash:
