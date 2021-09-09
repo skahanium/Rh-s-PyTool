@@ -1,3 +1,4 @@
+from functools import reduce
 import numpy as np
 
 
@@ -10,7 +11,7 @@ class NonDimension:
         """
         初始化：得到可用数据矩阵及其长宽数据
         """
-        self.df = dataframe.copy().iloc[:, 3:]
+        self.df = dataframe.copy()
         self.m, self.n = self.df.shape
 
     def tiny_convert(self, mode, change_list):
@@ -108,10 +109,22 @@ class NonDimension:
                 for i in range(self.m):
                     copy_matrix.iloc[i, j] = (self.df.iloc[i, j]-mmean) / mstd
             return copy_matrix
+        elif mode == '3':
+            """
+            Vector normalization
+            """
+            for j in range(self.n):
+                vec_length = np.sqrt(np.array(reduce(fn, self.df.iloc[:, j])))
+                for i in range(self.m):
+                    copy_matrix.iloc[i, j] = self.df.iloc[i, j] / vec_length
+            return copy_matrix
         else:
             print('输入正确的模式')
 
 
+############################################################################
+def fn(x, y):
+    return x**2 + y**2
 ############################################################################
 
 
@@ -216,6 +229,16 @@ def toone(dataframe, mode):
             mstd = dataframe.iloc[:, j].std()
             for i in range(m):
                 copy_matrix.iloc[i, j] = (dataframe.iloc[i, j]-mmean) / mstd
+        return copy_matrix
+    elif mode == '3':
+        """
+        Vector normalization
+        """
+        for j in range(n):
+            vec_length = np.sqrt(np.array(reduce(fn, dataframe.iloc[:, j])))
+            print(vec_length)
+            for i in range(m):
+                copy_matrix.iloc[i, j] = dataframe.iloc[i, j] / vec_length
         return copy_matrix
     else:
         print('输入正确的模式')

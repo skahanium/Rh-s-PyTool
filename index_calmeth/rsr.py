@@ -12,7 +12,7 @@ class Rsr():
         """
         初始化：得到可用数据矩阵及其长宽数据
         """
-        self.df = dataframe.copy().iloc[:, 3:]
+        self.df = dataframe.copy()
         self.m, self.n = self.df.shape
 
     def score_matrix(self, bv_list):

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-class Critic():
+class Critic:
     """
     对传入的pd.dataframe类型数据进行critic权重计算
     """
@@ -11,7 +11,7 @@ class Critic():
         """
         初始化：由原矩阵得到可用的归一化矩阵
         """
-        self.df = dataframe.copy().iloc[:, 3:].dropna()  # 选出无空值的观测数据以方便进行权重计算
+        self.df = dataframe.copy().dropna()  # 选出无空值的观测数据以方便进行权重计算
         self.toone = (self.df - self.df.min()) / \
             (self.df.max() - self.df.min())
 
