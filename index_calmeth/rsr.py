@@ -3,7 +3,7 @@ import numpy as np
 import bisect
 
 
-class Rsr():
+class Rsr:
     """
     对传入的pd.dataframe数据进行rsr打分
     """
@@ -34,12 +34,10 @@ class Rsr():
 
                 rsr_matrix = pd.DataFrame(
                     np.empty((self.m, self.n)), columns=self.df.columns)  # 创建与打分矩阵形状相同的空矩阵
-                for j in range(self.n):
-                    for i in range(self.m):
-                        compare_list = sorted(dist_matrix.iloc[:, j])
-                        rsr_matrix.iloc[i, j] = bisect.bisect_left(
-                            compare_list, dist_matrix.iloc[i, j])
+                for q in range(self.n):
+                    for p in range(self.m):
+                        compare_list = sorted(dist_matrix.iloc[:, q])
+                        rsr_matrix.iloc[p, q] = bisect.bisect_left(
+                            compare_list, dist_matrix.iloc[p, q])
                 score_matrix = rsr_matrix / self.m * 100
                 return score_matrix
-
-

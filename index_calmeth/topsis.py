@@ -34,4 +34,3 @@ class Topsis:
                 var2 += weights[j] * (Z_min[j]-copy_matrix.iloc[i, j]) ** 2
             scoring.append(np.sqrt(var2)/(np.sqrt(var1)+np.sqrt(var2)))
         return np.array(scoring).T
-
