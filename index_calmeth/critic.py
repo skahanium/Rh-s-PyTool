@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import index_calmeth.NonDimension as icn
 
 
 class Critic:
@@ -12,8 +13,7 @@ class Critic:
         初始化：由原矩阵得到可用的归一化矩阵
         """
         self.df = dataframe.copy().dropna()  # 选出无空值的观测数据以方便进行权重计算
-        self.toone = (self.df - self.df.min()) / \
-            (self.df.max() - self.df.min())
+        self.toone = icn.toone(self.df, mode='0')
 
     def vardata(self):
         """

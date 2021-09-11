@@ -4,7 +4,8 @@ import numpy as np
 
 class NonDimension:
     """
-    构建实例化对象进行正向化、归一化等预处理
+    构建实例化对象进行正向化、归一化等预处理。
+    方法来源：https://blog.csdn.net/limiyudianzi/article/details/103410150
     """
 
     def __init__(self, dataframe):
@@ -61,10 +62,11 @@ class NonDimension:
                     a = low_limit[change_list.index(j)]
                     b = high_limit[change_list.index(j)]
                     mm = max(a - self.df.iloc[:, j].min(), self.df.iloc[:, j].max() - b)
+                    # mm为偏离最优区间最远的值
                     for i in range(self.m):
-                        if self.df.iloc[i, j] > a:
+                        if self.df.iloc[i, j] < a:
                             df2.iloc[i, j] = 1 - (a - self.df.iloc[i, j]) / mm
-                        elif self.df.iloc[i, j] < b:
+                        elif self.df.iloc[i, j] > b:
                             df2.iloc[i, j] = 1 - (self.df.iloc[i, j] - b) / mm
                         else:
                             df2.iloc[i, j] = 1
@@ -111,7 +113,7 @@ class NonDimension:
             return copy_matrix
         elif mode == '3':
             """
-            Vector normalization
+            正则化
             """
             for j in range(self.n):
                 vec_length = np.sqrt(np.array(reduce(fn, self.df.iloc[:, j])))
@@ -201,7 +203,7 @@ def toone(dataframe, mode):
     m, n = copy_matrix.shape
     if mode == '0':
         """
-        Rescaling
+        归一化
         """
         for j in range(n):
             mmax = dataframe.iloc[:, j].max()
@@ -211,7 +213,7 @@ def toone(dataframe, mode):
         return copy_matrix
     elif mode == '1':
         """
-        Mean normalization
+        平均归一化
         """
         for j in range(n):
             mmean = dataframe.iloc[:, j].mean()
@@ -222,7 +224,7 @@ def toone(dataframe, mode):
         return copy_matrix
     elif mode == '2':
         """
-        Standardization
+        标准化
         """
         for j in range(n):
             mmean = dataframe.iloc[:, j].mean()
@@ -232,7 +234,7 @@ def toone(dataframe, mode):
         return copy_matrix
     elif mode == '3':
         """
-        Vector normalization
+        正则化
         """
         for j in range(n):
             vec_length = np.sqrt(np.array(reduce(fn, dataframe.iloc[:, j])))
