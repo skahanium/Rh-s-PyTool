@@ -211,6 +211,16 @@ def toone(dataframe, mode):
             for i in range(m):
                 copy_matrix.iloc[i, j] = (dataframe.iloc[i, j]-mmin) / (mmax-mmin)
         return copy_matrix
+    elif mode == '01':
+        """
+        归一化后化作百分制分数
+        """
+        for j in range(n):
+            mmax = dataframe.iloc[:, j].max()
+            mmin = dataframe.iloc[:, j].min()
+            for i in range(m):
+                copy_matrix.iloc[i, j] = (dataframe.iloc[i, j]-mmin) / (mmax-mmin) * 100
+        return copy_matrix
     elif mode == '1':
         """
         平均归一化
@@ -238,7 +248,6 @@ def toone(dataframe, mode):
         """
         for j in range(n):
             vec_length = np.sqrt(np.array(reduce(fn, dataframe.iloc[:, j])))
-            print(vec_length)
             for i in range(m):
                 copy_matrix.iloc[i, j] = dataframe.iloc[i, j] / vec_length
         return copy_matrix

@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import index_calmeth.NonDimension as Nd
 
 
@@ -19,18 +20,23 @@ class Topsis:
         """
         计算得分矩阵。weights为权重矩阵,得分越低越优秀。
         """
-        copy_matrix = Nd.toone(self.df, mode='3')
-        print(copy_matrix)
-        scoring = []
-        Z_max = Z_min = []
+        copy_matrix = Nd.toone(self.df, mode='1')
+        empty_matrix = copy_matrix.copy()
+        z_max = z_min = []
         for j in range(self.n):
-            Z_max.append(copy_matrix.iloc[:, j].max())
-            Z_min.append(copy_matrix.iloc[:, j].min())
+            z_max.append(copy_matrix.iloc[:, j].max())
+            z_min.append(copy_matrix.iloc[:, j].min())
 
         for i in range(self.m):
-            var1 = var2 = 0
             for j in range(self.n):
-                var1 += weights[j] * (Z_max[j]-copy_matrix.iloc[i, j]) ** 2
-                var2 += weights[j] * (Z_min[j]-copy_matrix.iloc[i, j]) ** 2
-            scoring.append(np.sqrt(var2)/(np.sqrt(var1)+np.sqrt(var2)))
-        return np.array(scoring).T
+                empty_matrix.iloc[i, j] = weights[j] * (z_max[j]-copy_matrix.iloc[i, j]) ** 2
+
+        for i in range(self.m):
+            for j in range(self.n):
+                if empty_matrix.iloc[i, j] is np.nan:
+                    empty_matrix.iloc[i, j] = 0
+
+        scoring = empty_matrix.sum(axis=1)
+        scoring = pd.DataFrame(scoring)
+        result = Nd.toone(scoring, mode='01')
+        return result
