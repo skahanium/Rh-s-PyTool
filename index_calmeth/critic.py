@@ -12,29 +12,29 @@ class Critic:
         """
         初始化：由原矩阵得到可用的归一化矩阵
         """
-        self.df = dataframe.copy().dropna()  # 选出无空值的观测数据以方便进行权重计算
-        self.toone = icn.toone(self.df, mode='0')
+        self.__df = dataframe.copy().dropna()  # 选出无空值的观测数据以方便进行权重计算
+        self.__toone = icn.toone(self.__df, mode='0')
 
-    def vardata(self):
+    def __vardata(self):
         """
         获取变异性数据
         """
-        m, n = self.toone.shape  # 获取归一数据集的形状
+        m, n = self.__toone.shape  # 获取归一数据集的形状
         variabilities = []
         for j in range(n):
-            ave_x = self.toone.iloc[:, j].mean()
+            ave_x = self.__toone.iloc[:, j].mean()
             sum_var = 0
             for i in range(m):
-                diff = self.toone.iloc[i, j] - ave_x
+                diff = self.__toone.iloc[i, j] - ave_x
                 sum_var += diff ** 2 / (m - 1)
             variabilities.append(sum_var ** 0.5)
         return variabilities
 
-    def corrdata(self):
+    def __corrdata(self):
         """
         获取冲突性数据
         """
-        corr_matrix = self.toone.corr()
+        corr_matrix = self.__toone.corr()
         conflicts = []
         p, q = corr_matrix.shape
         for j in range(q):
@@ -48,11 +48,11 @@ class Critic:
         """
         通过变异性指标和冲突性指标计算最后权重
         """
-        info1 = self.vardata()
-        info2 = self.corrdata()
+        info1 = self.__vardata()
+        info2 = self.__corrdata()
         information = np.array(info1) * np.array(info2)
 
-        p, q = self.toone.shape
+        p, q = self.__toone.shape
         weights = []
         for c in range(q):
             wei = information[c] / information.sum()

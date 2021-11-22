@@ -54,7 +54,7 @@
   对pd.dataframe对象进行Critic类的实例化。pd.dataframe对象的前三列不能为指标
 
   1. **vardata( )**:获取指标变异性数据
-  2. **corrdata( )**:获取指标冲突性数据
+  2. **__corrdata( )**:获取指标冲突性数据
   3. **weights( )**:得到指标critic权重数据
 
 ---

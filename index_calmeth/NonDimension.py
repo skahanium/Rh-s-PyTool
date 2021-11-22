@@ -12,22 +12,22 @@ class NonDimension:
         """
         初始化：得到可用数据矩阵及其长宽数据
         """
-        self.df = dataframe.copy()
-        self.m, self.n = self.df.shape
+        self.__df = dataframe.copy()
+        self.__m, self.__n = self.__df.shape
 
     def tiny_convert(self, mode, change_list):
         """
         极小型指标转化为极大型指标
         """
-        df1 = self.df.copy()
+        df1 = self.__df.copy()
         if mode == '0':
-            for j in range(self.n):
+            for j in range(self.__n):
                 if j in change_list:
                     df1.iloc[:, j] = 1 / df1.iloc[:, j]
             return df1
 
         elif mode == '1':
-            for j in range(self.n):
+            for j in range(self.__n):
                 if j in change_list:
                     j_max = df1.iloc[:, j].max()
                     df1.iloc[:, j] = j_max - df1.iloc[:, j]
@@ -43,12 +43,12 @@ class NonDimension:
         if len(change_list) != len(best_value):
             print("请检查可变列表和最佳值列表的元素数量")
         else:
-            copy_matrix = self.df.copy()
-            for j in range(self.n):
+            copy_matrix = self.__df.copy()
+            for j in range(self.__n):
                 if j in change_list:
-                    for i in range(self.m):
-                        copy_matrix.iloc[i, j] = 1 - np.abs(self.df.iloc[i, j] - best_value[change_list.index(j)]) / \
-                                                 np.abs(self.df.iloc[:, j] - best_value[change_list.index(j)]).max()
+                    for i in range(self.__m):
+                        copy_matrix.iloc[i, j] = 1 - np.abs(self.__df.iloc[i, j] - best_value[change_list.index(j)]) / \
+                                                 np.abs(self.__df.iloc[:, j] - best_value[change_list.index(j)]).max()
             return copy_matrix
 
     def moderate_convert(self, change_list, low_limit, high_limit):
@@ -56,18 +56,18 @@ class NonDimension:
         适度性指标转化为极大型指标
         """
         if len(low_limit) == len(high_limit) == len(change_list):
-            df2 = self.df.copy()
-            for j in range(self.n):
+            df2 = self.__df.copy()
+            for j in range(self.__n):
                 if j in change_list:
                     a = low_limit[change_list.index(j)]
                     b = high_limit[change_list.index(j)]
-                    mm = max(a - self.df.iloc[:, j].min(), self.df.iloc[:, j].max() - b)
+                    mm = max(a - self.__df.iloc[:, j].min(), self.__df.iloc[:, j].max() - b)
                     # mm为偏离最优区间最远的值
-                    for i in range(self.m):
-                        if self.df.iloc[i, j] < a:
-                            df2.iloc[i, j] = 1 - (a - self.df.iloc[i, j]) / mm
-                        elif self.df.iloc[i, j] > b:
-                            df2.iloc[i, j] = 1 - (self.df.iloc[i, j] - b) / mm
+                    for i in range(self.__m):
+                        if self.__df.iloc[i, j] < a:
+                            df2.iloc[i, j] = 1 - (a - self.__df.iloc[i, j]) / mm
+                        elif self.__df.iloc[i, j] > b:
+                            df2.iloc[i, j] = 1 - (self.__df.iloc[i, j] - b) / mm
                         else:
                             df2.iloc[i, j] = 1
             return df2
@@ -79,46 +79,46 @@ class NonDimension:
         """
         矩阵归一化
         """
-        copy_matrix = self.df.copy()
+        copy_matrix = self.__df.copy()
         if mode == '0':
             """
             Rescaling
             """
-            for j in range(self.n):
-                mmax = self.df.iloc[:, j].max()
-                mmin = self.df.iloc[:, j].min()
-                for i in range(self.m):
-                    copy_matrix.iloc[i, j] = (self.df.iloc[i, j]-mmin) / (mmax-mmin)
+            for j in range(self.__n):
+                mmax = self.__df.iloc[:, j].max()
+                mmin = self.__df.iloc[:, j].min()
+                for i in range(self.__m):
+                    copy_matrix.iloc[i, j] = (self.__df.iloc[i, j] - mmin) / (mmax - mmin)
             return copy_matrix
         elif mode == '1':
             """
             Mean normalization
             """
-            for j in range(self.n):
-                mmean = self.df.iloc[:, j].mean()
-                mmax = self.df.iloc[:, j].max()
-                mmin = self.df.iloc[:, j].min()
-                for i in range(self.m):
-                    copy_matrix.iloc[i, j] = (self.df.iloc[i, j]-mmean) / (mmax-mmin)
+            for j in range(self.__n):
+                mmean = self.__df.iloc[:, j].mean()
+                mmax = self.__df.iloc[:, j].max()
+                mmin = self.__df.iloc[:, j].min()
+                for i in range(self.__m):
+                    copy_matrix.iloc[i, j] = (self.__df.iloc[i, j] - mmean) / (mmax - mmin)
             return copy_matrix
         elif mode == '2':
             """
             Standardization
             """
-            for j in range(self.n):
-                mmean = self.df.iloc[:, j].mean()
-                mstd = self.df.iloc[:, j].std()
-                for i in range(self.m):
-                    copy_matrix.iloc[i, j] = (self.df.iloc[i, j]-mmean) / mstd
+            for j in range(self.__n):
+                mmean = self.__df.iloc[:, j].mean()
+                mstd = self.__df.iloc[:, j].std()
+                for i in range(self.__m):
+                    copy_matrix.iloc[i, j] = (self.__df.iloc[i, j] - mmean) / mstd
             return copy_matrix
         elif mode == '3':
             """
             正则化
             """
-            for j in range(self.n):
-                vec_length = np.sqrt(np.array(reduce(fn, self.df.iloc[:, j])))
-                for i in range(self.m):
-                    copy_matrix.iloc[i, j] = self.df.iloc[i, j] / vec_length
+            for j in range(self.__n):
+                vec_length = np.sqrt(np.array(reduce(fn, self.__df.iloc[:, j])))
+                for i in range(self.__m):
+                    copy_matrix.iloc[i, j] = self.__df.iloc[i, j] / vec_length
             return copy_matrix
         else:
             print('输入正确的模式')
@@ -166,7 +166,7 @@ def middle_convert(dataframe, change_list, best_value):
             if j in change_list:
                 for i in range(m):
                     copy_matrix.iloc[i, j] = 1 - np.abs(dataframe.iloc[i, j] - best_value[change_list.index(j)]) / \
-                                             np.abs(dataframe.df.iloc[:, j] - best_value[change_list.index(j)]).max()
+                                             np.abs(dataframe.__df.iloc[:, j] - best_value[change_list.index(j)]).max()
         return copy_matrix
 
 
