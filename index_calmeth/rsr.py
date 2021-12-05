@@ -43,20 +43,39 @@ class Rsr:
             score_matrix = rsr_matrix / self.__m * 100
             return score_matrix
 
-    def score_matrix2(self, bv_list):
+    def score_matrix11(self, bv_list):
         """
-        非整次秩和比法计算得分，方法同上
+        优化了距离矩阵计算方法，排序求秩次时不使用set()函数的整次秩和比法。
         """
         if len(bv_list) != self.__n:
             print("重新考虑最佳贡献值列表元素数量")
         else:
             # 计算距离矩阵
-            dist_matrix = pd.DataFrame(
-                np.empty((self.__m, self.__n)), columns=self.__df.columns)
-            for j in range(self.__n):
-                for i in range(self.__m):
-                    dist_matrix.iloc[i, j] = np.abs(
-                        self.__df.iloc[i, j] - bv_list[j])
+            bv_matrix = pd.DataFrame(
+                np.tile(np.array(bv_list).T, (self.__m, 1)), columns=self.__df.columns)
+            dist_matrix = (self.__df - bv_matrix).abs()
+            # 计算打分矩阵
+            rsr_matrix = pd.DataFrame(
+                np.empty((self.__m, self.__n)), columns=self.__df.columns)  # 创建与距离矩阵形状相同的空矩阵
+            for q in range(self.__n):
+                for p in range(self.__m):
+                    compare_list = np.sort(dist_matrix.iloc[:, q])
+                    rsr_matrix.iloc[p, q] = bisect.bisect_left(
+                        compare_list, dist_matrix.iloc[p, q])
+            score_matrix = rsr_matrix / self.__m * 100
+            return score_matrix
+
+    def score_matrix2(self, bv_list):
+        """
+        非整次秩和比法，使用方法同上。
+        """
+        if len(bv_list) != self.__n:
+            print("重新考虑最佳贡献值列表元素数量")
+        else:
+            # 计算距离矩阵
+            bv_matrix = pd.DataFrame(
+                np.tile(np.array(bv_list).T, (self.__m, 1)), columns=self.__df.columns)
+            dist_matrix = (self.__df - bv_matrix).abs()
             # 计算打分矩阵
             rsr_matrix = pd.DataFrame(
                 np.empty((self.__m, self.__n)), columns=self.__df.columns)  # 创建与距离矩阵形状相同的空矩阵
@@ -64,7 +83,8 @@ class Rsr:
                 max_v = dist_matrix.iloc[:, q].max()
                 min_v = dist_matrix.iloc[:, q].min()
                 for p in range(self.__m):
-                    rsr_matrix.iloc[p, q] = 1 + ((self.__m - 1) * (dist_matrix.iloc[p, q] - min_v) / (max_v - min_v))
+                    rsr_matrix.iloc[p, q] = 1 + ((self.__m - 1) * (
+                        dist_matrix.iloc[p, q] - min_v) / (max_v - min_v))
             # 得分标准化
             score_matrix = pd.DataFrame(
                 np.empty((self.__m, self.__n)), columns=self.__df.columns)
@@ -72,6 +92,7 @@ class Rsr:
                 max_v = rsr_matrix.iloc[:, q].max()
                 min_v = rsr_matrix.iloc[:, q].min()
                 for p in range(self.__m):
-                    score_matrix.iloc[p, q] = rsr_matrix.iloc[p, q] / (max_v - min_v) * 100
+                    score_matrix.iloc[p, q] = rsr_matrix.iloc[p,
+                                                              q] / (max_v - min_v) * 100
             score_matrix = score_matrix.fillna(0)
             return score_matrix
