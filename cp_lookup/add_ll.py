@@ -375,7 +375,7 @@ def city_info(city):
     pro = cities[city][0]
     lat = cities[city][1]
     lon = cities[city][2]
-    return pro, lat, lon
+    return pro, float(lat), float(lon)
 
 ########################################
 
