@@ -89,7 +89,7 @@
 
 3. **moderate_convert(change_list, low_limit, high_limit)**：将数组中适度型指标转化为极大值指标。change_list为存放需转化指标索引的列表；low_limit与high_limit分别为存放适度下界与上界的列表。
 
-4. **toone(mode)**：将数组矩阵归一化。mode = "0"时进行标准归一化， mode= "1"时进行平均归一化；mode = "2"时进行Z-score规范化。
+4. **toone(mode)**：将数组矩阵归一化。mode = "0"时进行标准归一化， mode= "1"时进行平均归一化；mode = "2"时进行Z-score规范化；mode = "3"时进行向量规范化。
    
    - ###### tiny_cinvert(mode, change_list):
    

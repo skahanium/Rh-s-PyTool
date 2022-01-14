@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import index_calmeth.NonDimension as Nd
+import index_calmeth.NonDimension as icn
 
 
 class Topsis:
@@ -32,7 +32,7 @@ class Topsis:
                         self.__df.iloc[i, j] - bv_list[j])
 
             # 利用距离矩阵进行topsis打分
-            copy_matrix = Nd.toone(dist_matrix, mode='1')
+            copy_matrix = icn.toone(dist_matrix, mode='1')
             empty_matrix1 = pd.DataFrame(np.empty((self.__m, self.__n)))
             empty_matrix2 = pd.DataFrame(np.empty((self.__m, self.__n)))
             z_max = []
@@ -57,6 +57,6 @@ class Topsis:
             d2 = np.sqrt(empty_matrix2.sum(axis=1))
 
             result = pd.DataFrame(d2/(d1+d2))
-            result = Nd.toone(result, mode='01')
+            result = icn.toone(result, mode='0') * 100
             return result
 
