@@ -34,8 +34,8 @@ class Rsr:
             rsr_matrix = pd.DataFrame(
                 np.empty((self.__m, self.__n)), columns=self.__df.columns)  # 创建与距离矩阵形状相同的空矩阵
             for q in range(self.__n):
+                compare_list = np.sort(dist_matrix.iloc[:, q])
                 for p in range(self.__m):
-                    compare_list = np.sort(dist_matrix.iloc[:, q])
                     rsr_matrix.iloc[p, q] = bisect.bisect_left(
                         compare_list, dist_matrix.iloc[p, q])
             score_matrix = rsr_matrix / self.__m * 100
@@ -68,7 +68,6 @@ class Rsr:
                 max_v = rsr_matrix.iloc[:, q].max()
                 min_v = rsr_matrix.iloc[:, q].min()
                 for p in range(self.__m):
-                    score_matrix.iloc[p, q] = rsr_matrix.iloc[p,
-                                                              q] / (max_v - min_v) * 100
-            score_matrix = score_matrix.fillna(0)
+                    score_matrix.iloc[p, q] = rsr_matrix.iloc[p, q] / (max_v - min_v) * 100
+            score_matrix.fillna(0, inplace=True)
             return score_matrix

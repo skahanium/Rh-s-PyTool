@@ -1,6 +1,3 @@
-import pandas as pd
-
-#####################################
 provinces = {
     '吉林省': [125.326800, 43.896160], '黑龙江省': [126.662850, 45.742080],
     '辽宁省': [123.429250, 41.835710], '内蒙古自治区': [111.765220, 40.817330],
@@ -372,40 +369,8 @@ def pro_info(province):
 
 
 def city_info(city):
-    pro = cities[city][0]
     lat = cities[city][1]
     lon = cities[city][2]
-    return pro, float(lat), float(lon)
+    return float(lat), float(lon)
 
-########################################
-
-
-def pro_add(column):
-    latitude = []
-    longitude = []
-    for i in range(len(column)):
-        lat = pro_info(column[i])[0]
-        lon = pro_info(column[i])[1]
-        latitude.append(lat)
-        longitude.append(lon)
-    return pd.DataFrame(latitude), pd.DataFrame(longitude)
-
-
-def city_add(column, mode):
-    zhoushi = []
-    latitude = []
-    longitude = []
-    for i in range(len(column)):
-        dijishi = city_info(column[i])[0]
-        lat = city_info(column[i])[1]
-        lon = city_info(column[i])[2]
-        zhoushi.append(dijishi)
-        latitude.append(lat)
-        longitude.append(lon)
-    if mode == '1':
-        return pd.DataFrame(zhoushi)
-    elif mode == '2':
-        return pd.DataFrame(latitude), pd.DataFrame(longitude)
-    else:
-        return 'x'
-
+#

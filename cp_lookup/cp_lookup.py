@@ -1,5 +1,3 @@
-import pandas as pd
-
 cp_trans = {
     '北京市': ('北京市'),
     '天津市': ('天津市'),
@@ -72,32 +70,22 @@ def ctwop(city):
                     return dictionary[targets]
 
 
-def add_pro(column):
-    """
-    根据一列地级行政区名给出一列对应的省级行政区域名
-    """
-    col_len = len(column)
-    provinces = []
-    for i in range(col_len):
-        prov = ctwop(column[i])
-        provinces.append(prov)
-    newarray = pd.DataFrame(provinces)
-    return newarray
-
-
-def fillup_city(column):
-    """
-    对一列不完整的地级行政区名单进行名称补完
-    """
-    col_len = len(column)
-    add_cities = []
-    for i in range(col_len):
-        cn_length = len(column[i])
+def fillup_city(city: str) -> str:
+    cn_length = len(city)
+    if cn_length <= 2:
         for zx_city in zx_cities:
-            if column[i] == zx_city[0:cn_length]:
-                add_cities.append(zx_city)
-        for cities in cp_trans.values():
-            for city in cities:
-                if column[i] == city[0:cn_length]:
-                    add_cities.append(city)
-    return pd.DataFrame(add_cities)
+            if city == zx_city[0:cn_length]:
+                return zx_city
+        for fzx_cities in cp_trans.values():
+            for fzx_city in fzx_cities:
+                if city == fzx_city[0:cn_length]:
+                    return fzx_city
+    else:
+        for zx_city in zx_cities:
+            if (city == zx_city[0:cn_length]) | (city[:cn_length-1] == zx_city[0:cn_length-1]):
+                return zx_city
+        for fzx_cities in cp_trans.values():
+            for fzx_city in fzx_cities:
+                if (city == fzx_city[0:cn_length]) | (city[:cn_length-1] == fzx_city[0:cn_length-1]):
+                    return fzx_city
+

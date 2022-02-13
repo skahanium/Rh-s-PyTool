@@ -12,10 +12,10 @@ class Critic:
         """
         初始化：由原矩阵得到可用的归一化矩阵
         """
-        self.__df = dataframe.copy().dropna()  # 选出无空值的观测数据以方便进行权重计算
+        self.__df = dataframe.dropna()  # 剔除包含空值的观测数据以方便进行权重计算
         self.__toone = icn.toone(self.__df, mode='0')
 
-    def __vardata(self):
+    def variability(self):
         """
         获取变异性数据
         """
@@ -30,7 +30,7 @@ class Critic:
             variabilities.append(sum_var ** 0.5)
         return variabilities
 
-    def __corrdata(self):
+    def conflict(self):
         """
         获取冲突性数据
         """
@@ -48,8 +48,8 @@ class Critic:
         """
         通过变异性指标和冲突性指标计算最后权重
         """
-        info1 = self.__vardata()
-        info2 = self.__corrdata()
+        info1 = self.variability()
+        info2 = self.conflict()
         information = np.array(info1) * np.array(info2)
 
         p, q = self.__toone.shape
