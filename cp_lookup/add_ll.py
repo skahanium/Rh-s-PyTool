@@ -363,14 +363,14 @@ cities = {
 
 
 def pro_info(province):
-    lat = provinces[province][0]
-    lon = provinces[province][1]
-    return lat, lon
+    lon = provinces[province][0]
+    lat = provinces[province][1]
+    return lon, lat
 
 
 def city_info(city):
-    lat = cities[city][1]
-    lon = cities[city][2]
-    return float(lat), float(lon)
+    lon = cities[city][1]
+    lat = cities[city][2]
+    return float(lon), float(lat)
 
-#
+
