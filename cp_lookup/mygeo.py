@@ -21,7 +21,7 @@ def haversine(lon1, lat1, lon2, lat2):  # 经度1，纬度1，经度2，纬度2 
 
 def dist(city1, city2):
     '''
-    利用两个地区的城市名计算球面距离
+    利用两个地区的城市名称计算球面距离
     '''
     distance = haversine(float(cal.cities[city1][1]), float(cal.cities[city1][2]),
                          float(cal.cities[city2][1]), float(cal.cities[city2][2]))
