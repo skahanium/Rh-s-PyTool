@@ -37,10 +37,7 @@ def inverse_dic(dictionary: dict):
     """
     反转dic对象的key和value
     """
-    new_dic = {}
-    for k, v in dictionary.items():
-        new_dic[v] = k
-    return new_dic
+    return {v: k for k, v in dictionary.items()}
 
 
 def ptwoc(prov):
@@ -48,7 +45,7 @@ def ptwoc(prov):
     根据省级行政区域名（及其简称）给出下辖所有地级行政区域名单
     """
     for province in cp_trans.keys():
-        if (prov[0: 2] == province[0: 2]) or (prov[0: 3] == province[0: 3]):
+        if prov[:2] == province[:2] or prov[:3] == province[:3]:
             return cp_trans[province]
 
 
@@ -59,12 +56,12 @@ def ctwop(city):
     dictionary = inverse_dic(cp_trans)
     for targets, trash in dictionary.items():
         if targets == trash:
-            if (city[0: 2] == targets[0: 2]) or (city[0: 3] == targets[0: 3]):
+            if city[:2] == targets[:2] or city[:3] == targets[:3]:
                 return dictionary[targets]
         else:
             cn_length = len(city)
             for target in targets:
-                if city == target[0: cn_length]:
+                if city == target[:cn_length]:
                     return dictionary[targets]
 
 
@@ -72,17 +69,17 @@ def fillup_city(city: str) -> str:
     cn_length = len(city)
     if cn_length <= 2:
         for zx_city in zx_cities:
-            if city == zx_city[0:cn_length]:
+            if city == zx_city[:cn_length]:
                 return zx_city
         for fzx_cities in cp_trans.values():
             for fzx_city in fzx_cities:
-                if city == fzx_city[0:cn_length]:
+                if city == fzx_city[:cn_length]:
                     return fzx_city
     else:
         for zx_city in zx_cities:
-            if (city == zx_city[0:cn_length]) | (city[:cn_length-1] == zx_city[0:cn_length-1]):
+            if (city == zx_city[:cn_length]) | (city[: cn_length - 1] == zx_city[: cn_length - 1]):
                 return zx_city
         for fzx_cities in cp_trans.values():
             for fzx_city in fzx_cities:
-                if (city == fzx_city[0:cn_length]) | (city[:cn_length-1] == fzx_city[0:cn_length-1]):
+                if (city == fzx_city[:cn_length]) | (city[: cn_length - 1] == fzx_city[: cn_length - 1]):
                     return fzx_city

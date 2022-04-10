@@ -48,7 +48,8 @@ class NonDimension:
                 if j in change_list:
                     for i in range(self.__m):
                         copy_matrix.iloc[i, j] = 1 - np.abs(self.__df.iloc[i, j] - best_value[change_list.index(j)]) / \
-                                                 np.abs(self.__df.iloc[:, j] - best_value[change_list.index(j)]).max()
+                            np.abs(
+                                self.__df.iloc[:, j] - best_value[change_list.index(j)]).max()
             return copy_matrix
 
     def moderate_convert(self, change_list, low_limit, high_limit):
@@ -61,13 +62,16 @@ class NonDimension:
                 if j in change_list:
                     a = low_limit[change_list.index(j)]
                     b = high_limit[change_list.index(j)]
-                    mm = max(a - self.__df.iloc[:, j].min(), self.__df.iloc[:, j].max() - b)
+                    mm = max(a - self.__df.iloc[:, j].min(),
+                             self.__df.iloc[:, j].max() - b)
                     # mm为偏离最优区间最远的值
                     for i in range(self.__m):
                         if self.__df.iloc[i, j] < a:
-                            df2.iloc[i, j] = 1 - (a - self.__df.iloc[i, j]) / mm
+                            df2.iloc[i, j] = 1 - \
+                                (a - self.__df.iloc[i, j]) / mm
                         elif self.__df.iloc[i, j] > b:
-                            df2.iloc[i, j] = 1 - (self.__df.iloc[i, j] - b) / mm
+                            df2.iloc[i, j] = 1 - \
+                                (self.__df.iloc[i, j] - b) / mm
                         else:
                             df2.iloc[i, j] = 1
             return df2
@@ -88,7 +92,8 @@ class NonDimension:
                 mmax = self.__df.iloc[:, j].max()
                 mmin = self.__df.iloc[:, j].min()
                 for i in range(self.__m):
-                    copy_matrix.iloc[i, j] = (self.__df.iloc[i, j] - mmin) / (mmax - mmin)
+                    copy_matrix.iloc[i, j] = (
+                        self.__df.iloc[i, j] - mmin) / (mmax - mmin)
             return copy_matrix
         elif mode == '1':
             """
@@ -99,7 +104,8 @@ class NonDimension:
                 mmax = self.__df.iloc[:, j].max()
                 mmin = self.__df.iloc[:, j].min()
                 for i in range(self.__m):
-                    copy_matrix.iloc[i, j] = (self.__df.iloc[i, j] - mmean) / (mmax - mmin)
+                    copy_matrix.iloc[i, j] = (
+                        self.__df.iloc[i, j] - mmean) / (mmax - mmin)
             return copy_matrix
         elif mode == '2':
             """
@@ -109,14 +115,16 @@ class NonDimension:
                 mmean = self.__df.iloc[:, j].mean()
                 mstd = self.__df.iloc[:, j].std()
                 for i in range(self.__m):
-                    copy_matrix.iloc[i, j] = (self.__df.iloc[i, j] - mmean) / mstd
+                    copy_matrix.iloc[i, j] = (
+                        self.__df.iloc[i, j] - mmean) / mstd
             return copy_matrix
         elif mode == '3':
             """
             正则化
             """
             for j in range(self.__n):
-                vec_length = np.sqrt(np.array(reduce(fn, self.__df.iloc[:, j])))
+                vec_length = np.sqrt(
+                    np.array(reduce(fn, self.__df.iloc[:, j])))
                 for i in range(self.__m):
                     copy_matrix.iloc[i, j] = self.__df.iloc[i, j] / vec_length
             return copy_matrix
@@ -166,7 +174,8 @@ def middle_convert(dataframe, change_list, best_value):
             if j in change_list:
                 for i in range(m):
                     copy_matrix.iloc[i, j] = 1 - np.abs(dataframe.iloc[i, j] - best_value[change_list.index(j)]) / \
-                                             np.abs(dataframe.__df.iloc[:, j] - best_value[change_list.index(j)]).max()
+                        np.abs(
+                            dataframe.__df.iloc[:, j] - best_value[change_list.index(j)]).max()
         return copy_matrix
 
 
@@ -181,7 +190,8 @@ def moderate_convert(dataframe, change_list, low_limit, high_limit):
             if j in change_list:
                 a = low_limit[change_list.index(j)]
                 b = high_limit[change_list.index(j)]
-                mm = max(a - dataframe.iloc[:, j].min(), dataframe.iloc[:, j].max() - b)
+                mm = max(a - dataframe.iloc[:, j].min(),
+                         dataframe.iloc[:, j].max() - b)
                 for i in range(m):
                     if dataframe.iloc[i, j] > a:
                         df2.iloc[i, j] = 1 - (a - dataframe.iloc[i, j]) / mm
@@ -209,7 +219,8 @@ def toone(dataframe, mode):
             mmax = dataframe.iloc[:, j].max()
             mmin = dataframe.iloc[:, j].min()
             for i in range(m):
-                copy_matrix.iloc[i, j] = (dataframe.iloc[i, j]-mmin) / (mmax-mmin)
+                copy_matrix.iloc[i, j] = (
+                    dataframe.iloc[i, j]-mmin) / (mmax-mmin)
         return copy_matrix
     elif mode == '1':
         """
@@ -220,7 +231,8 @@ def toone(dataframe, mode):
             mmax = dataframe.iloc[:, j].max()
             mmin = dataframe.iloc[:, j].min()
             for i in range(m):
-                copy_matrix.iloc[i, j] = (dataframe.iloc[i, j]-mmean) / (mmax-mmin)
+                copy_matrix.iloc[i, j] = (
+                    dataframe.iloc[i, j]-mmean) / (mmax-mmin)
         return copy_matrix
     elif mode == '2':
         """

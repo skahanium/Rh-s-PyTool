@@ -38,8 +38,7 @@ class Rsr:
                 for p in range(self.__m):
                     rsr_matrix.iloc[p, q] = bisect.bisect_left(
                         compare_list, dist_matrix.iloc[p, q])
-            score_matrix = rsr_matrix / self.__m * 100
-            return score_matrix
+            return rsr_matrix / self.__m * 100
 
     def score_matrix2(self, bv_list):
         """
@@ -68,6 +67,7 @@ class Rsr:
                 max_v = rsr_matrix.iloc[:, q].max()
                 min_v = rsr_matrix.iloc[:, q].min()
                 for p in range(self.__m):
-                    score_matrix.iloc[p, q] = rsr_matrix.iloc[p, q] / (max_v - min_v) * 100
+                    score_matrix.iloc[p, q] = rsr_matrix.iloc[p,
+                                                              q] / (max_v - min_v) * 100
             score_matrix.fillna(0, inplace=True)
             return score_matrix

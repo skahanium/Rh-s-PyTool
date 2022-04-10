@@ -37,11 +37,9 @@ class Critic:
         corr_matrix = self.__toone.corr()
         conflicts = []
         p, q = corr_matrix.shape
-        for j in range(q):
-            conflict = 0
-            for i in range(p):
-                conflict += (1 - corr_matrix.iloc[i, j])
-            conflicts.append(conflict)
+        conflicts.extend(
+            sum((1 - corr_matrix.iloc[i, j]) for i in range(p)) for j in range(q))
+
         return conflicts
 
     def weights(self):

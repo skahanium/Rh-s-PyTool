@@ -1,3 +1,4 @@
+import itertools
 import numpy as np
 import pandas as pd
 import index_calmeth.NonDimension as icn
@@ -26,10 +27,9 @@ class Topsis:
             # 计算距离矩阵
             dist_matrix = pd.DataFrame(
                 np.empty((self.__m, self.__n)), columns=self.__df.columns)
-            for j in range(self.__n):
-                for i in range(self.__m):
-                    dist_matrix.iloc[i, j] = np.abs(
-                        self.__df.iloc[i, j] - bv_list[j])
+            for j, i in itertools.product(range(self.__n), range(self.__m)):
+                dist_matrix.iloc[i, j] = np.abs(
+                    self.__df.iloc[i, j] - bv_list[j])
 
             # 利用距离矩阵进行topsis打分
             copy_matrix = icn.toone(dist_matrix, mode='1')
@@ -41,17 +41,17 @@ class Topsis:
                 z_max.append(copy_matrix.iloc[:, j].max())
                 z_min.append(copy_matrix.iloc[:, j].min())
 
-            for i in range(self.__m):
-                for j in range(self.__n):
-                    empty_matrix1.iloc[i, j] = weights[j] * (z_max[j] - copy_matrix.iloc[i, j]) ** 2
-                    empty_matrix2.iloc[i, j] = weights[j] * (z_min[j] - copy_matrix.iloc[i, j]) ** 2
+            for i, j in itertools.product(range(self.__m), range(self.__n)):
+                empty_matrix1.iloc[i, j] = weights[j] * \
+                    (z_max[j] - copy_matrix.iloc[i, j]) ** 2
+                empty_matrix2.iloc[i, j] = weights[j] * \
+                    (z_min[j] - copy_matrix.iloc[i, j]) ** 2
 
-            for i in range(self.__m):
-                for j in range(self.__n):
-                    if empty_matrix1.iloc[i, j] is np.nan:
-                        empty_matrix1.iloc[i, j] = 0
-                    elif empty_matrix2.iloc[i, j] is np.nan:
-                        empty_matrix2.iloc[i, j] = 0
+            for i, j in itertools.product(range(self.__m), range(self.__n)):
+                if empty_matrix1.iloc[i, j] is np.nan:
+                    empty_matrix1.iloc[i, j] = 0
+                elif empty_matrix2.iloc[i, j] is np.nan:
+                    empty_matrix2.iloc[i, j] = 0
 
             d1 = np.sqrt(empty_matrix1.sum(axis=1))
             d2 = np.sqrt(empty_matrix2.sum(axis=1))
@@ -59,4 +59,3 @@ class Topsis:
             result = pd.DataFrame(d2/(d1+d2))
             result = icn.toone(result, mode='0') * 100
             return result
-
