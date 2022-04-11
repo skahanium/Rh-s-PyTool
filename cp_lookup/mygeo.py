@@ -2,7 +2,7 @@ from math import radians, cos, sin, asin, sqrt
 import cp_lookup.add_ll as cal
 
 
-def haversine(lon1, lat1, lon2, lat2):  # 经度1，纬度1，经度2，纬度2 （十进制度数）
+def haversine(lon1: float, lat1: float, lon2: float, lat2: float) -> float:  # 经度1，纬度1，经度2，纬度2 （十进制度数）
     """
     利用两个地点的经纬度计算球面距离
     """
@@ -19,14 +19,14 @@ def haversine(lon1, lat1, lon2, lat2):  # 经度1，纬度1，经度2，纬度2 
     return c * r
 
 
-def dist(city1, city2):
+def dist(city1: str, city2: str) -> float:
     '''
     利用两个地区的城市名称计算球面距离
     '''
     return haversine(float(cal.cities[city1][1]), float(cal.cities[city1][2]), float(cal.cities[city2][1]), float(cal.cities[city2][2]))
 
 
-def dist2(city, lon, lat):
+def dist2(city: str, lon: float, lat: float) -> float:
     """
     利用一个地区的城市名和另一个地区的经纬度计算球面距离
     """

@@ -1,4 +1,6 @@
-cp_trans = {
+from typing import List, Dict, Tuple
+
+cp_trans: Dict[str, Tuple[str, ...]] = {
     '北京市': ('北京市'), '天津市': ('天津市'), '重庆市': ('重庆市'), '上海市': ('上海市'),
     '河北省': ('石家庄市', '唐山市', '邯郸市', '张家口市', '保定市', '沧州市', '秦皇岛市', '邢台市', '廊坊市', '承德市', '衡水市', '雄安新区'),
     '山西省': ('太原市', '阳泉市', '长治市', '晋城市', '朔州市', '忻州市', '晋中市', '吕梁市', '临汾市', '运城市', '大同市'),
@@ -30,17 +32,17 @@ cp_trans = {
 }
 
 
-zx_cities = ['北京市', '天津市', '上海市', '重庆市']
+zx_cities: List[str] = ['北京市', '天津市', '上海市', '重庆市']
 
 
-def inverse_dic(dictionary: dict):
+def inverse_dic(dictionary: Dict[str, Tuple[str, ...]]) -> Dict[Tuple[str, ...], str]:
     """
     反转dic对象的key和value
     """
     return {v: k for k, v in dictionary.items()}
 
 
-def ptwoc(prov):
+def ptwoc(prov: str) -> Tuple[str, ...]:
     """
     根据省级行政区域名（及其简称）给出下辖所有地级行政区域名单
     """
@@ -49,7 +51,7 @@ def ptwoc(prov):
             return cp_trans[province]
 
 
-def ctwop(city):
+def ctwop(city: str) -> str:
     """
     根据地级行政区域名（及其简称）给出所属省级行政区名
     """

@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import bisect
+from typing import List
 
 
 class Rsr:
@@ -8,14 +9,14 @@ class Rsr:
     对传入的pd.dataframe数据进行rsr打分
     """
 
-    def __init__(self, dataframe):
+    def __init__(self, dataframe: pd.DataFrame):
         """
         初始化：得到可用数据矩阵及其长宽数据
         """
         self.__df = dataframe.copy()
         self.__m, self.__n = self.__df.shape
 
-    def score_matrix1(self, bv_list):
+    def score_matrix1(self, bv_list: List[float]) -> pd.DataFrame:
         """
         整次秩和比法计算得分，bv_list是由各指标正向最佳贡献值构成的列表
         注：所谓正向最佳贡献值，指的是从正面考虑指标贡献度时的最佳值。
@@ -40,7 +41,7 @@ class Rsr:
                         compare_list, dist_matrix.iloc[p, q])
             return rsr_matrix / self.__m * 100
 
-    def score_matrix2(self, bv_list):
+    def score_matrix2(self, bv_list: List[float]) -> pd.DataFrame:
         """
         非整次秩和比法，使用方法同上。
         """

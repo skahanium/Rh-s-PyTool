@@ -2,6 +2,7 @@ import itertools
 import numpy as np
 import pandas as pd
 import index_calmeth.NonDimension as icn
+from typing import List
 
 
 class Topsis:
@@ -10,14 +11,14 @@ class Topsis:
     注：dataframe必须经过正向化处理。
     """
 
-    def __init__(self, dataframe):
+    def __init__(self, dataframe: pd.DataFrame):
         """
         初始化：得到可用数据矩阵及其长宽数据。
         """
         self.__df = dataframe.copy()
         self.__m, self.__n = self.__df.shape
 
-    def score_matrix(self, weights, bv_list):
+    def score_matrix(self, weights, bv_list: List[float]):
         """
         计算得分矩阵。weights为权重矩阵,bv_list为最佳值列表
         """

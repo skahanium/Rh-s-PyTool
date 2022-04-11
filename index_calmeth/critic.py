@@ -8,7 +8,7 @@ class Critic:
     对传入的pd.dataframe类型数据进行critic权重计算
     """
 
-    def __init__(self, dataframe):
+    def __init__(self, dataframe: pd.DataFrame):
         """
         初始化：由原矩阵得到可用的归一化矩阵
         """
