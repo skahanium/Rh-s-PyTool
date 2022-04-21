@@ -1,6 +1,4 @@
-from typing import List, Dict, Tuple
-
-provinces: Dict[str, List[float]] = {
+provinces: dict[str, list[float]] = {
     '吉林省': [125.326800, 43.896160], '黑龙江省': [126.662850, 45.742080],
     '辽宁省': [123.429250, 41.835710], '内蒙古自治区': [111.765220, 40.817330],
     '新疆维吾尔自治区': [87.627100, 43.793430], '青海省': [101.780110, 36.620870],
@@ -19,7 +17,7 @@ provinces: Dict[str, List[float]] = {
     '香港': [114.165460, 22.275340], '澳门': [113.549130, 22.198750],
     '海南省': [110.348630, 20.019970], '台湾省': [121.520076, 25.030724],
 }
-cities: Dict[str, List[str]] = {
+cities: dict[str, list[str]] = {
     '北京市': ['北京市', '116.407170', '39.904690'],
     '天津市': ['天津市', '117.199370', '39.085100'],
     '上海市': ['上海市', '121.473700', '31.230370'],
@@ -364,13 +362,13 @@ cities: Dict[str, List[str]] = {
 #####################################
 
 
-def pro_info(province: str) -> Tuple[float, float]:
+def pro_info(province: str) -> tuple[float, float]:
     lon = provinces[province][0]
     lat = provinces[province][1]
     return lon, lat
 
 
-def city_info(city: str) -> Tuple[float, float]:
+def city_info(city: str) -> tuple[float, float]:
     lon = cities[city][1]
     lat = cities[city][2]
     return float(lon), float(lat)

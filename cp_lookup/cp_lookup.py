@@ -1,7 +1,5 @@
-from typing import List, Dict, Tuple
-
-cp_trans: Dict[str, Tuple[str, ...]] = {
-    '北京市': ('北京市'), '天津市': ('天津市'), '重庆市': ('重庆市'), '上海市': ('上海市'),
+cp_trans: dict[str, tuple[str, ...]] = {
+    '北京市': ('北京市',), '天津市': ('天津市',), '重庆市': ('重庆市',), '上海市': ('上海市',),
     '河北省': ('石家庄市', '唐山市', '邯郸市', '张家口市', '保定市', '沧州市', '秦皇岛市', '邢台市', '廊坊市', '承德市', '衡水市', '雄安新区'),
     '山西省': ('太原市', '阳泉市', '长治市', '晋城市', '朔州市', '忻州市', '晋中市', '吕梁市', '临汾市', '运城市', '大同市'),
     '内蒙古自治区': ('呼和浩特市', '呼伦贝尔市', '兴安盟', '通辽市', '锡林郭勒盟', '乌兰察布市', '鄂尔多斯市', '巴彦淖尔市', '阿拉善盟', '包头市', '乌海市', '赤峰市'),
@@ -32,17 +30,17 @@ cp_trans: Dict[str, Tuple[str, ...]] = {
 }
 
 
-zx_cities: List[str] = ['北京市', '天津市', '上海市', '重庆市']
+zx_cities: list[str] = ['北京市', '天津市', '上海市', '重庆市']
 
 
-def inverse_dic(dictionary: Dict[str, Tuple[str, ...]]) -> Dict[Tuple[str, ...], str]:
+def inverse_dic(dictionary: dict[str, tuple[str, ...]]) -> dict[tuple[str, ...], str]:
     """
     反转dic对象的key和value
     """
     return {v: k for k, v in dictionary.items()}
 
 
-def ptwoc(prov: str) -> Tuple[str, ...]:
+def ptwoc(prov: str) -> tuple[str, ...] | None:
     """
     根据省级行政区域名（及其简称）给出下辖所有地级行政区域名单
     """
@@ -51,7 +49,7 @@ def ptwoc(prov: str) -> Tuple[str, ...]:
             return cp_trans[province]
 
 
-def ctwop(city: str) -> str:
+def ctwop(city: str) -> str | None:
     """
     根据地级行政区域名（及其简称）给出所属省级行政区名
     """
@@ -67,7 +65,7 @@ def ctwop(city: str) -> str:
                     return dictionary[targets]
 
 
-def fillup_city(city: str) -> str:
+def fillup_city(city: str) -> str | None:
     cn_length = len(city)
     if cn_length <= 2:
         for zx_city in zx_cities:

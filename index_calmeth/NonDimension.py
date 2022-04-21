@@ -1,5 +1,6 @@
 from functools import reduce
 import numpy as np
+import pandas as pd
 
 
 class NonDimension:
@@ -209,6 +210,7 @@ def toone(dataframe, mode):
     """
     矩阵归一化
     """
+    assert isinstance(dataframe, pd.DataFrame)
     copy_matrix = dataframe.copy()
     m, n = copy_matrix.shape
     if mode == '0':
@@ -232,7 +234,7 @@ def toone(dataframe, mode):
             mmin = dataframe.iloc[:, j].min()
             for i in range(m):
                 copy_matrix.iloc[i, j] = (
-                    dataframe.iloc[i, j]-mmean) / (mmax-mmin)
+                    dataframe.iloc[i, j]-mmean) / (mmax-mmin)  # type: ignore
         return copy_matrix
     elif mode == '2':
         """
@@ -242,7 +244,8 @@ def toone(dataframe, mode):
             mmean = dataframe.iloc[:, j].mean()
             mstd = dataframe.iloc[:, j].std()
             for i in range(m):
-                copy_matrix.iloc[i, j] = (dataframe.iloc[i, j]-mmean) / mstd
+                copy_matrix.iloc[i, j] = (
+                    dataframe.iloc[i, j]-mmean) / mstd  # type: ignore
         return copy_matrix
     elif mode == '3':
         """

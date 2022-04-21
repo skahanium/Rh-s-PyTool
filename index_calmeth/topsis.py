@@ -30,10 +30,11 @@ class Topsis:
                 np.empty((self.__m, self.__n)), columns=self.__df.columns)
             for j, i in itertools.product(range(self.__n), range(self.__m)):
                 dist_matrix.iloc[i, j] = np.abs(
-                    self.__df.iloc[i, j] - bv_list[j])
+                    self.__df.iloc[i, j] - bv_list[j])  # type: ignore
 
             # 利用距离矩阵进行topsis打分
             copy_matrix = icn.toone(dist_matrix, mode='1')
+            assert isinstance(copy_matrix, pd.DataFrame)
             empty_matrix1 = pd.DataFrame(np.empty((self.__m, self.__n)))
             empty_matrix2 = pd.DataFrame(np.empty((self.__m, self.__n)))
             z_max = []
@@ -58,5 +59,5 @@ class Topsis:
             d2 = np.sqrt(empty_matrix2.sum(axis=1))
 
             result = pd.DataFrame(d2/(d1+d2))
-            result = icn.toone(result, mode='0') * 100
+            result = icn.toone(result, mode='0') * 100  # type: ignore
             return result
