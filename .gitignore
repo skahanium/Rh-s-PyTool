@@ -6,4 +6,6 @@ setup.py
 build
 dist
 Rh_s_Tool.egg-info
-tets.py
+test.py
+test.ipynb
+
