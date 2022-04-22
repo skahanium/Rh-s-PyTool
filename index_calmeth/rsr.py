@@ -1,6 +1,10 @@
 import pandas as pd
 import numpy as np
 import bisect
+from typing import Union
+
+
+num = Union[int, float]
 
 
 class Rsr:
@@ -15,13 +19,14 @@ class Rsr:
         self.__df = dataframe.copy()
         self.__m, self.__n = self.__df.shape
 
-    def score_matrix1(self, bv_list: list[float]) -> pd.DataFrame | None:
-        """
-        整次秩和比法计算得分，bv_list是由各指标正向最佳贡献值构成的列表
-        注：所谓正向最佳贡献值，指的是从正面考虑指标贡献度时的最佳值。
-           比如用不同指标合成金融风险指数(相较于安全而言是一个负面形容)，因此从正面考虑时对于正向指标其最佳值便是最低值，负向指标
-           最佳值是最高值，适度指标由文献或前人研究来确定。
-        更新：优化了距离矩阵计算方法，排序求秩次时不使用set()函数的整次秩和比法。
+    def score_matrix1(self, bv_list: list[num]) -> pd.DataFrame | None:
+        """整次秩和比法计算得分，bv_list是由各指标正向最佳贡献值构成的列表
+
+        Args:
+            bv_list (list[num]): 正向最佳值列表
+
+        Returns:
+            pd.DataFrame | None: 若参数无误，返回转化后的数据框，否则返回None
         """
         if len(bv_list) != self.__n:
             print("重新考虑最佳贡献值列表元素数量")
@@ -40,9 +45,14 @@ class Rsr:
                         compare_list, dist_matrix.iloc[p, q])  # type: ignore
             return rsr_matrix / self.__m * 100
 
-    def score_matrix2(self, bv_list: list[float]) -> pd.DataFrame | None:
-        """
-        非整次秩和比法，使用方法同上。
+    def score_matrix2(self, bv_list: list[num]) -> pd.DataFrame | None:
+        """非整次秩和比法计算得分，bv_list是由各指标正向最佳贡献值构成的列表
+
+        Args:
+            bv_list (list[num]): 正向最佳值列表
+
+        Returns:
+            pd.DataFrame | None: 若参数无误，返回转化后的数据框，否则返回None
         """
         if len(bv_list) != self.__n:
             print("重新考虑最佳贡献值列表元素数量")
@@ -69,5 +79,4 @@ class Rsr:
                 for p in range(self.__m):
                     score_matrix.iloc[p, q] = rsr_matrix.iloc[p,
                                                               q] / (max_v - min_v) * 100
-            score_matrix.fillna(0, inplace=True)
             return score_matrix

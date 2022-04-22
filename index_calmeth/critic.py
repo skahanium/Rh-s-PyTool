@@ -19,14 +19,13 @@ class Critic:
         """
         获取变异性数据
         """
+        assert isinstance(self.__toone, pd.DataFrame)
         m, n = self.__toone.shape  # 获取归一数据集的形状
         variabilities = []
         for j in range(n):
             ave_x = self.__toone.iloc[:, j].mean()
-            sum_var = 0
-            for i in range(m):
-                diff = self.__toone.iloc[i, j] - ave_x
-                sum_var += diff ** 2 / (m - 1)
+            diff = np.array(self.__toone.iloc[:, j] - ave_x)
+            sum_var = np.sum(diff ** 2 / (m - 1))
             variabilities.append(sum_var ** 0.5)
         return variabilities
 
@@ -34,11 +33,12 @@ class Critic:
         """
         获取冲突性数据
         """
-        corr_matrix = self.__toone.corr()
+        assert isinstance(self.__toone, pd.DataFrame)
+        corr_matrix = np.array(self.__toone.corr())
         conflicts = []
         p, q = corr_matrix.shape
         conflicts.extend(
-            sum((1 - corr_matrix.iloc[i, j]) for i in range(p)) for j in range(q))
+            sum((1 - corr_matrix[i, j]) for i in range(p)) for j in range(q))
 
         return conflicts
 
@@ -49,8 +49,9 @@ class Critic:
         info1 = self.variability()
         info2 = self.conflict()
         information = np.array(info1) * np.array(info2)
+        assert isinstance(self.__toone, pd.DataFrame)
 
-        p, q = self.__toone.shape
+        _, q = self.__toone.shape
         weights = []
         for c in range(q):
             wei = information[c] / information.sum()
