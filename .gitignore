@@ -2,10 +2,12 @@
 **/__pycache__
 .vscode
 .DS_Store
-setup.py
 build
-dist
-Rh_s_Tool.egg-info
 test.py
 test.ipynb
-
+__pypackages__
+.ipynb_checkpoints
+.pdm.toml
+pdm.lock
+pyproject.toml
+dist
