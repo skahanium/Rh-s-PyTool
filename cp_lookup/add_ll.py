@@ -1,3 +1,5 @@
+import numpy as np
+
 provinces: dict[str, list[float]] = {
     '吉林省': [125.326800, 43.896160], '黑龙江省': [126.662850, 45.742080],
     '辽宁省': [123.429250, 41.835710], '内蒙古自治区': [111.765220, 40.817330],
@@ -363,12 +365,12 @@ cities: dict[str, list[str]] = {
 
 
 def pro_info(province: str) -> tuple[float, float]:
-    lon = provinces[province][0]
-    lat = provinces[province][1]
+    lon = provinces.get(province, [np.nan, ])[0]
+    lat = provinces.get(province, [np.nan, ])[1]
     return lon, lat
 
 
 def city_info(city: str) -> tuple[float, float]:
-    lon = cities[city][1]
-    lat = cities[city][2]
+    lon = cities.get(city, [np.nan, ])[0]
+    lat = cities.get(city, [np.nan, ])[1]
     return float(lon), float(lat)
