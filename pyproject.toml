@@ -5,6 +5,7 @@ description = "Instruments used in school-project"
 authors = [
     {name = "skahanium", email = "61221285+skahanium@users.noreply.github.com"},
 ]
+readme = "README.md"
 dependencies = [
     "numpy>=1.22.3",
 ]
