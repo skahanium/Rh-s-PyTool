@@ -371,6 +371,6 @@ def pro_info(province: str) -> tuple[float, float]:
 
 
 def city_info(city: str) -> tuple[float, float]:
-    lon = cities.get(city, [np.nan, ])[0]
-    lat = cities.get(city, [np.nan, ])[1]
+    lon = cities.get(city, [np.nan, ])[1]
+    lat = cities.get(city, [np.nan, ])[2]
     return float(lon), float(lat)

@@ -8,6 +8,4 @@ test.ipynb
 __pypackages__
 .ipynb_checkpoints
 .pdm.toml
-pdm.lock
-pyproject.toml
 dist

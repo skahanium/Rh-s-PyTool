@@ -1,18 +1,17 @@
-import pandas as pd
 import numpy as np
-import index_calmeth.NonDimension as icn
+import index_calmeth.non_dimension as icn
 
 
 class Critic:
     """
-    对传入的pd.dataframe类型数据进行critic权重计算
+    对传入的np.ndarray类型数据进行critic权重计算
     """
 
-    def __init__(self, dataframe: pd.DataFrame) -> None:
+    def __init__(self, ndarray: np.ndarray):
         """
         初始化：由原矩阵得到可用的归一化矩阵
         """
-        self.__df = dataframe.dropna()  # 剔除包含空值的观测数据以方便进行权重计算
+        self.__df = ndarray.copy()
         self.__toone = icn.toone(self.__df, mode='0')
 
     def variability(self) -> np.ndarray:
@@ -34,7 +33,7 @@ class Critic:
         获取冲突性数据
         """
         assert isinstance(self.__toone, np.ndarray)
-        corr_matrix = np.array(pd.DataFrame(self.__toone).corr())
+        corr_matrix = np.corrcoef(self.__toone, rowvar=False)
         conflicts = []
         p, q = corr_matrix.shape
         conflicts.extend(
@@ -43,8 +42,10 @@ class Critic:
         return np.array(conflicts)
 
     def weights(self):
-        """
-        通过变异性指标和冲突性指标计算最后权重
+        """通过变异性指标和冲突性指标计算最后权重
+
+        Returns:
+            np.ndarray: critic权重数组
         """
         info1 = self.variability()
         info2 = self.conflict()

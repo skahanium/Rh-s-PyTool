@@ -1,0 +1,18 @@
+[project]
+name = "Rh-s-Tool"
+version = "0.0.1"
+description = "Instruments used in school-project"
+authors = [
+    {name = "skahanium", email = "61221285+skahanium@users.noreply.github.com"},
+]
+dependencies = [
+    "numpy>=1.22.3",
+]
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[tool.pdm]
+
+[build-system]
+requires = ["pdm-pep517>=0.12.0"]
+build-backend = "pdm.pep517.api"

@@ -1,90 +1,31 @@
-# 目录
-
-### cp_lookup
-
-- ###### cp_trans:
-  
-  省级行政区与地级行政区的对应关系
-
-- ###### Inverse_dic( ):
-  
-  反转dic对象的key和value
-
-- ###### ptwoc( ):
-  
-  根据省级行政区域名（及其简称）给出下辖所有地级行政区域名单
-
-- ###### ctwop( ):
-  
-  根据地级行政区域名（及其简称）给出所属省级行政区名
-
-- ###### fiilup_city( ):
-  
-  对单个地级行政区名单进行名称补完
+# Rh-s-PyTool
 
 ---
 
-### add_ll
+Rh-s-PyTool是本人在学校课题中写过的python工具整理后得到的合集。虽然能力有限导致代码写得丑陋，不过思考过后还是决定发出来给自己的成果一个纪念。对我而言这些渣代码的重要性不亚于课题最后的论文。
 
-- ###### pro_info( ):
-  
-  返回两个值：省级行政区的经度与纬度
-
-- ###### city_info( ):
-  
-  返回两个值：地级行政区的经度与纬度
+# 主要功能
 
 ---
 
-### critic
+主要包含了两个大模块，二者各自又包含了若干小模块。前者**cp_lookup**的主要功能包括根据省级行政区名称查询该省所有地级行政单位、根据地级行政单位名称反查所属省级行政区名称、根据区域（地级及以上）名称得到行政中心经纬度、计算两地（地级及以上）球面距离。后者**index_calmeth**的主要功能为指标体系正向化、归一化、计算critic权重、计算rsr得分、计算topsis得分。
 
-- ##### Critic:
-  
-  对pd.dataframe对象进行Critic类的实例化。pd.dataframe对象的前三列不能为指标
-1. **variablity( )**：获取指标变异性数据
-2. **conflict( )**：获取指标冲突性数据
-3. **weights( )**：得到指标critic权重数据
+# 下载
 
 ---
 
-### rsr
+可以从release下载压缩包本地安装，
 
-- ##### Rsr
-  
-  对pd.dataframe对象进行Rsr类的实例化。pd.dataframe对象的前三列不能为指标
-1. **score_matrix1(bv_list)**：计算整次秩和比法得分。bv_list是由各指标正向最佳贡献值构成的列表
+或从PyPI上下载：
 
-2. **score_matrix2(bv_list)**：计算非整次秩和比法得分。bv_list是由各指标正向最佳贡献值构成的列表
-   
-   注：所谓正向最佳贡献值，指的是从正面考虑指标贡献度时的最佳值。比如用不同指标合成金融风险指数(相较于“安全”而言“风险”是一个负面形容)，因此从正面考虑时对于正向指标其最佳值便是最低值，负向指标最佳值是最高值，适度指标由文献或前人研究来确定。
+```
+pip3 install Rh-s-Tool
+```
 
----
+推荐使用pdm包管理系统：
 
-### NonDimension
+```
+pdm add Rh-s-Tool
+```
 
-+ ###### tiny_cinvert(mode, change_list):
-
-将数组中极小值指标转化为极大值指标。change_list为存放需转化指标索引的列表；mode = "0"时采用倒数转换法，mode = "1"时采用被最大值相减的方法。
-
-- ###### middle_convert(change_list, best_value):
-
-将数组中中间型指标转化为极大值指标。change_list为存放需转化指标索引的列表；best_value为存放中间值指标最佳值的列表。
-
-- ###### moderate_convert(change_list, low_limit, high_limit):
-
-将数组中适度型指标转化为极大值指标。change_list为存放需转化指标索引的列表；low_limit与high_limit分别为存放适度下界与上界的列表。
-
-- ###### toone(mode):
-
-将数组矩阵归一化。mode = "0"时进行标准归一化， mode= "1"时进行平均归一化；mode = "2"时进行Z-score规范化；mode = "3"时进行向量归一化。
-
----
-
-### topsis
-
-- ##### **Topsis**
-  
-  对pd.dataframe对象进行Topsis类实例化
-1. **score_matrix(weights)**：计算得分矩阵，weights为权重矩阵。得分越低越优秀。
-
----
+注：由于最后汇总模块的时候使用的是python3.10版本，而本人对python各代版本的差异不甚了解，如果有人想尝试一下这些代码，最好用python3.10以上版本。

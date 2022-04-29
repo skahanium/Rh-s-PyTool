@@ -1,7 +1,5 @@
-import itertools
 import numpy as np
-import pandas as pd
-import index_calmeth.NonDimension as icn
+import index_calmeth.non_dimension as icn
 from typing import Union
 
 
@@ -10,14 +8,14 @@ num = Union[int, float]
 
 class Topsis:
     """
-    对传入对pd.dataframe数据进行topsis打分
+    对传入对np.ndarray数据进行topsis打分
     """
 
-    def __init__(self, dataframe: pd.DataFrame):
+    def __init__(self, ndarray: np.ndarray):
         """
         初始化：得到可用数据矩阵及其长宽数据。
         """
-        self.__df = np.array(dataframe)
+        self.__df = ndarray.copy()
         self.__m, self.__n = self.__df.shape
 
     def score_matrix(self, weights: np.ndarray, bv_list: list[num]) -> np.ndarray | None:
@@ -25,7 +23,7 @@ class Topsis:
 
         Args:
             weights (np.ndarray): 权重数组
-            bv_list (list[float]): 正向最佳值列表
+            bv_list (list[int|float]): 正向最佳值列表
 
         Returns:
             np.ndarray: 若参数无误，返回转化后的数据组，否则返回None
@@ -39,7 +37,7 @@ class Topsis:
                 dist_matrix[:, j] = np.absolute(self.__df[:, j] - bv_list[j])
 
             # 利用距离矩阵进行topsis打分
-            copy_matrix = icn.toone(pd.DataFrame(dist_matrix), mode='0')
+            copy_matrix = icn.toone(dist_matrix, mode='0')
             assert isinstance(copy_matrix, np.ndarray)
             empty_matrix1 = np.empty((self.__m, self.__n))
             empty_matrix2 = np.empty((self.__m, self.__n))
@@ -54,6 +52,7 @@ class Topsis:
 
             d1 = np.sqrt(empty_matrix1.sum(axis=1))
             d2 = np.sqrt(empty_matrix2.sum(axis=1))
-            result = icn.toone(pd.DataFrame(d2/(d1+d2)), mode='0')
-            assert isinstance(result, np.ndarray)
-            return result * 100
+            result = (d2/(d1+d2))
+            result = (result - result.min()) / \
+                (result.max() - result.min())
+            return result.reshape(result.shape[0], 1) * 100
