@@ -4,9 +4,18 @@ version = "1.22.3"
 requires_python = ">=3.8"
 summary = "NumPy is the fundamental package for array computing with Python."
 
+[[package]]
+name = "rh-s-pytool"
+version = "0.0.1"
+requires_python = ">=3.10"
+summary = "Instruments used in school-project"
+dependencies = [
+    "numpy>=1.22.3",
+]
+
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:558dc236a56a05a7f0fd1a830fe61aa01c083aa9c2b14b890d76c8b8fc557e22"
+content_hash = "sha256:eb1e05f64e18eb22e147cd11b2e742c64361632d633005e28213dfbadb7bbc20"
 
 [metadata.files]
 "numpy 1.22.3" = [
@@ -30,4 +39,8 @@ content_hash = "sha256:558dc236a56a05a7f0fd1a830fe61aa01c083aa9c2b14b890d76c8b8f
     {file = "numpy-1.22.3-cp39-cp39-win_amd64.whl", hash = "sha256:639b54cdf6aa4f82fe37ebf70401bbb74b8508fddcf4797f9fe59615b8c5813a"},
     {file = "numpy-1.22.3-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c34ea7e9d13a70bf2ab64a2532fe149a9aced424cd05a2c4ba662fd989e3e45f"},
     {file = "numpy-1.22.3.zip", hash = "sha256:dbc7601a3b7472d559dc7b933b18b4b66f9aa7452c120e87dfb33d02008c8a18"},
+]
+"rh-s-pytool 0.0.1" = [
+    {file = "Rh_s_PyTool-0.0.1-py3-none-any.whl", hash = "sha256:5901377f6256dc602352ab9f43a1547a286add3aea09eb37107f460e5e8ff288"},
+    {file = "Rh-s-PyTool-0.0.1.tar.gz", hash = "sha256:ee942445c3188d9934f94a03641a782744ecd0edc8308175c40885e6607df4d8"},
 ]
