@@ -19,13 +19,13 @@ Rh-s-PyTool是本人在学校课题中写过的python工具整理后得到的合
 或从PyPI上下载：
 
 ```
-pip3 install Rh-s-Tool
+pip3 install Rh-s-PyTool
 ```
 
 推荐使用pdm包管理系统：
 
 ```
-pdm add Rh-s-Tool
+pdm add Rh-s-PyTool
 ```
 
 注：由于最后汇总模块的时候使用的是python3.10版本，而本人对python各代版本的差异不甚了解，如果有人想尝试一下这些代码，最好用python3.10以上版本。
