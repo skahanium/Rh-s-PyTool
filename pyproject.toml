@@ -1,5 +1,5 @@
 [project]
-name = "Rh-s-Tool"
+name = "Rh-s-PyTool"
 version = "0.0.1"
 description = "Instruments used in school-project"
 authors = [
