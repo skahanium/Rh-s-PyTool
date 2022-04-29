@@ -69,7 +69,7 @@ def middle_convert(ndarray: np.ndarray, change_list: list[int], best_value: list
         return copy_matrix
 
 
-def fn2(low: num, high: num, x: num, M: num) -> num:
+def fn2(x: num, low: num, high: num, M: num) -> num:
     """
     辅助函数，用于计算适度性指标转化为极大型指标的公式
     """
@@ -82,7 +82,10 @@ def fn2(low: num, high: num, x: num, M: num) -> num:
         return 1
 
 
-# def moderate_convert(ndarray: np.ndarray, change_list: list[int], low_limit: list[num], high_limit: list[num]) -> np.ndarray | None:
+vfn2 = np.vectorize(fn2)
+
+
+def moderate_convert(ndarray: np.ndarray, change_list: list[int], low_limit: list[num], high_limit: list[num]) -> np.ndarray | None:
     """适度性指标转化为极大型指标
 
     Args:
@@ -100,8 +103,8 @@ def fn2(low: num, high: num, x: num, M: num) -> num:
             a = low_limit[change_list.index(j)]
             b = high_limit[change_list.index(j)]
             assert a <= b
-            M = max(a - min(df2[:, j]), max(df2[:, j] - b))
-            df2[:, j] = df2[:, j].apply(lambda x: fn2(a, b, x, M))
+            M = max(a - min(df2[:, j]), max(df2[:, j]) - b)
+            df2[:, j] = vfn2(df2[:, j], a, b, M)
         return df2
 
     else:

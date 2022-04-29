@@ -1,7 +1,5 @@
 # cp_lookup模块
 
-
-
 ## cp_lookup
 
 ---
@@ -56,8 +54,6 @@
 '成都市'
 ```
 
-
-
 ## add_ll
 
 ---
@@ -83,8 +79,6 @@
 
 (120.15515, 30.27415)
 ```
-
-
 
 ## mygeo
 
@@ -120,13 +114,9 @@
 979.1356992283953
 ```
 
-
-
 # index_calmeth模块
 
-
-
-## NonDimension模块
+## NonDimension
 
 ---
 
@@ -148,13 +138,19 @@
 中间型型指标转化为极大型指标
 
 ```python
-icn.middle_convert(test_data, change_list=[2, 3], best_value=[0.5, 0.5])
+>>>icn.middle_convert(test_data, change_list=[2, 3], best_value=[0.5, 0.5])
+```
+
+区域型指标转化为极大型指标
+
+```python
+>>>icn.moderate_convert(test_data, [0, 1, 2, 3, 4], [0.4, 0.4, 0.4, 0.4, 0.4], [0.6, 0.6, 0.6, 0.6, 0.6])
 ```
 
 指标归一化
 
 ```python
-icn.toone(test_data, mode='0')
+>>>icn.toone(test_data, mode='0')
 ```
 
 ## 
@@ -183,7 +179,7 @@ icn.toone(test_data, mode='0')
 
 
 
-### rsr
+## rsr
 
 ---
 
@@ -211,9 +207,9 @@ icn.toone(test_data, mode='0')
 >>>rsr.score_matrix2(critic.weights(), [0.1, 0.2, 0.3, 0.4, 0.5, 0.6])
 ```
 
+### 
 
-
-### topsis
+## topsis
 
 ---
 
