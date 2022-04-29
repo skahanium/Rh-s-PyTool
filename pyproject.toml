@@ -3,7 +3,7 @@ name = "Rh-s-PyTool"
 version = "0.0.1"
 description = "Instruments used in school-project"
 authors = [
-    {name = "skahanium", email = "61221285+skahanium@users.noreply.github.com"},
+    {name = "skahanium", email = "skahanium@gmail.com"},
 ]
 readme = "README.md"
 dependencies = [
