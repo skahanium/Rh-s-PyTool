@@ -4,19 +4,18 @@ import index_calmeth.non_dimension as icn
 
 class Critic:
     """
-    对传入的np.ndarray类型数据进行critic权重计算
+    将传入的np.ndarray类型数据转换为Critic类。
+    初始化np.ndarray得到可用的归一化矩阵。
     """
 
     def __init__(self, ndarray: np.ndarray):
-        """
-        初始化：由原矩阵得到可用的归一化矩阵
-        """
         self.__df = ndarray.copy()
         self.__toone = icn.toone(self.__df, mode='0')
 
     def variability(self) -> np.ndarray:
         """
-        获取变异性数据
+        Returns:
+            np.ndarray: 指标变异性数据
         """
         assert isinstance(self.__toone, np.ndarray)
         m, n = self.__toone.shape  # 获取归一数据集的形状
@@ -30,7 +29,8 @@ class Critic:
 
     def conflict(self) -> np.ndarray:
         """
-        获取冲突性数据
+        Returns:
+            np.ndarray: 指标冲突性数据
         """
         assert isinstance(self.__toone, np.ndarray)
         corr_matrix = np.corrcoef(self.__toone, rowvar=False)

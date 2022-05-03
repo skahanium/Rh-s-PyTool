@@ -7,15 +7,6 @@ num = Union[int, float]
 
 
 def fn(x: num, y: num) -> num:
-    """toone函数mode='3'时的辅助函数
-
-    Args:
-        x (int|float): 参数1
-        y (int|float): 参数2
-
-    Returns:
-        int|float: 两数平方和
-    """
     return x**2 + y**2
 
 

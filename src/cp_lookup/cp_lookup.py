@@ -34,9 +34,6 @@ zx_cities: list[str] = ['北京市', '天津市', '上海市', '重庆市']
 
 
 def inverse_dic(dictionary: dict[str, tuple[str, ...]]) -> dict[tuple[str, ...], str]:
-    """
-    反转dic对象的key和value
-    """
     return {v: k for k, v in dictionary.items()}
 
 

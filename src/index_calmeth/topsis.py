@@ -8,13 +8,11 @@ num = Union[int, float]
 
 class Topsis:
     """
-    对传入对np.ndarray数据进行topsis打分
+    将传入对np.ndarray数据转换为topsis类。
+    初始化np.ndarray数据得到可用数据矩阵及其长宽数据。
     """
 
     def __init__(self, ndarray: np.ndarray):
-        """
-        初始化：得到可用数据矩阵及其长宽数据。
-        """
         self.__df = ndarray.copy()
         self.__m, self.__n = self.__df.shape
 

@@ -7,13 +7,11 @@ num = Union[int, float]
 
 class Rsr:
     """
-    对传入的np.ndarray数据进行rsr打分
+    将传入的np.ndarray数据转换为rsr类。
+    初始化np.ndarray数据得到其长宽数据。
     """
 
     def __init__(self, ndarray: np.ndarray):
-        """
-        初始化：得到可用数据矩阵及其长宽数据
-        """
         self.__df = ndarray.copy()
         self.__m, self.__n = self.__df.shape
 
