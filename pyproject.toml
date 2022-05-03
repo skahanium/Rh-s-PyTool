@@ -1,6 +1,6 @@
 [project]
 name = "Rh-s-PyTool"
-version = "0.0.2"
+version = "0.0.3"
 description = "Instruments used in school-project"
 authors = [
     {name = "skahanium", email = "skahanium@gmail.com"},
@@ -15,7 +15,7 @@ license = {text = "MIT"}
 
 [project.urls]
 Github = "https://github.com/skahanium/Rh-s-PyTool"
-Document = "https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea"
+Documentation = "https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea"
 
 [tool.pdm]
 
