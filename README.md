@@ -1,8 +1,10 @@
+[![pdm-managed](https://img.shields.io/badge/pdm-managed-blueviolet)](https://pdm.fming.dev)
+
 # Rh-s-PyTool
 
 ---
 
-Rh-s-PyTool是本人在学校课题中写过的python工具整理后得到的合集。虽然能力有限导致代码写得丑陋，不过思考过后还是决定发出来给自己的成果一个纪念。对我而言这些渣代码的重要性不亚于课题最后的论文。
+Rh-s-PyTool是本人在学校课题中写过的python代码整理后得到的合集，包括了一系列使用过的工具和方法。具体内容参见**Documentation**。
 
 # 主要功能
 
@@ -29,3 +31,7 @@ pdm add Rh-s-PyTool
 ```
 
 注：由于最后汇总模块的时候使用的是python3.10版本，而本人对python各代版本的差异不甚了解，如果有人想尝试一下这些代码，最好用python3.10以上版本。
+
+# 文档
+
+Documentation : [Notion]([Notion – The all-in-one workspace for your notes, tasks, wikis, and databases.](https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea))
