@@ -41,8 +41,13 @@ def inverse_dic(dictionary: dict[str, tuple[str, ...]]) -> dict[tuple[str, ...],
 
 
 def ptwoc(prov: str) -> tuple[str, ...] | None:
-    """
-    根据省级行政区域名（及其简称）给出下辖所有地级行政区域名单
+    """根据省级行政区名称获取省级下的所有市级行政区名称
+
+    Args:
+        prov (str): 省级行政区名称
+
+    Returns:
+        tuple[str, ...] | None: 目标省份下辖所有地级行政区的名称。如果没有找到查询的省级行政区，返回None
     """
     for province in cp_trans.keys():
         if prov[:2] == province[:2] or prov[:3] == province[:3]:
@@ -50,8 +55,13 @@ def ptwoc(prov: str) -> tuple[str, ...] | None:
 
 
 def ctwop(city: str) -> str | None:
-    """
-    根据地级行政区域名（及其简称）给出所属省级行政区名
+    """根据地级行政区域名（及其简称）给出所属省级行政区名
+
+    Args:
+        city (str): 地级行政区名称
+
+    Returns:
+        str | None: 目标地市所属省级行政区名称。如果没有找到查询的地级行政区，返回None
     """
     dictionary = inverse_dic(cp_trans)
     for targets, trash in dictionary.items():
@@ -66,6 +76,14 @@ def ctwop(city: str) -> str | None:
 
 
 def fillup_city(city: str) -> str | None:
+    """将地级行政区简称替换为全称
+
+    Args:
+        city (str): 地级行政区的名称（简称或全称）
+
+    Returns:
+        str | None: 地级行政区的全称。如果没有找到查询的地级行政区，返回None
+    """
     cn_length = len(city)
     if cn_length <= 2:
         for zx_city in zx_cities:

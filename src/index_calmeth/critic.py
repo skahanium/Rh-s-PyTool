@@ -28,7 +28,7 @@ class Critic:
             variabilities.append(sum_var ** 0.5)
         return np.array(variabilities)
 
-    def conflict(self):
+    def conflict(self) -> np.ndarray:
         """
         获取冲突性数据
         """
@@ -41,7 +41,7 @@ class Critic:
 
         return np.array(conflicts)
 
-    def weights(self):
+    def weights(self) -> np.ndarray:
         """通过变异性指标和冲突性指标计算最后权重
 
         Returns:

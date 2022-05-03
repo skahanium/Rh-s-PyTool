@@ -365,12 +365,29 @@ cities: dict[str, list[str]] = {
 
 
 def pro_info(province: str) -> tuple[float, float]:
+    """根据省级行政区名称获取经纬度
+
+    Args:
+        province (str): 省级行政区名称
+
+    Returns:
+        tuple[float, float]: 得到的经度和纬度
+    """
     lon = provinces.get(province, [np.nan, ])[0]
     lat = provinces.get(province, [np.nan, ])[1]
     return lon, lat
 
 
 def city_info(city: str) -> tuple[float, float]:
+    """根据市级行政区名称获取经纬度
+
+    Args:
+        city (str): 市级行政区名称
+
+    Returns:
+        tuple[float, float]: 得到的经度和纬度
+
+    """
     lon = cities.get(city, [np.nan, ])[1]
     lat = cities.get(city, [np.nan, ])[2]
     return float(lon), float(lat)

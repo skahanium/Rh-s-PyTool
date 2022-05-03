@@ -1,6 +1,6 @@
 [project]
 name = "Rh-s-PyTool"
-version = "0.0.3"
+version = "0.0.4"
 description = "Instruments used in school-project"
 authors = [
     {name = "skahanium", email = "skahanium@gmail.com"},
@@ -9,6 +9,8 @@ readme = "README.md"
 dependencies = [
     "numpy>=1.22.3",
     "Rh-s-PyTool>=0.0.1",
+    "Novella>=0.2.3",
+    "pydoc-markdown>=4.6.3",
 ]
 requires-python = ">=3.10"
 license = {text = "MIT"}
