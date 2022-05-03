@@ -34,4 +34,6 @@ pdm add Rh-s-PyTool
 
 # 文档
 
-Documentation : [Notion]([Notion – The all-in-one workspace for your notes, tasks, wikis, and databases.](https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea))
+Documentation : [ Notion ]
+
+[Notion]: https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea
