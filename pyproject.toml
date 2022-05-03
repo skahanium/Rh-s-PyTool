@@ -8,7 +8,7 @@ authors = [
 readme = "README.md"
 dependencies = [
     "numpy>=1.22.3",
-    "Rh-s-PyTool>=0.0.1",
+    "Rh-s-PyTool>=0.0.4",
     "Novella>=0.2.3",
     "pydoc-markdown>=4.6.3",
 ]
