@@ -190,7 +190,7 @@ dependencies = [
 [[package]]
 name = "pyyaml"
 version = "5.4.1"
-requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*"
+requires_python = ">=3.6"
 summary = "YAML parser and emitter for Python"
 
 [[package]]
@@ -203,18 +203,6 @@ dependencies = [
     "charset-normalizer~=2.0.0; python_version >= \"3\"",
     "idna<4,>=2.5; python_version >= \"3\"",
     "urllib3<1.27,>=1.21.1",
-]
-
-[[package]]
-name = "rh-s-pytool"
-version = "0.0.4"
-requires_python = ">=3.10"
-summary = "Instruments used in school-project"
-dependencies = [
-    "Novella>=0.2.3",
-    "Rh-s-PyTool>=0.0.4",
-    "numpy>=1.22.3",
-    "pydoc-markdown>=4.6.3",
 ]
 
 [[package]]
@@ -264,7 +252,7 @@ summary = "A formatter for Python code."
 
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:042390cffdb73c1b0bd6fd1bcf808e7c51595a11bbe01735b5f5bcbe7a489f34"
+content_hash = "sha256:9e7fe741210d1c9e3d029aa1260c61cf4665e8e8c0f0306ea36b6dfd51883057"
 
 [metadata.files]
 "astor 0.8.1" = [
@@ -440,10 +428,6 @@ content_hash = "sha256:042390cffdb73c1b0bd6fd1bcf808e7c51595a11bbe01735b5f5bcbe7
 "requests 2.27.1" = [
     {file = "requests-2.27.1-py2.py3-none-any.whl", hash = "sha256:f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"},
     {file = "requests-2.27.1.tar.gz", hash = "sha256:68d7c56fd5a8999887728ef304a6d12edc7be74f1cfa47714fc8b414525c9a61"},
-]
-"rh-s-pytool 0.0.4" = [
-    {file = "Rh_s_PyTool-0.0.4-py3-none-any.whl", hash = "sha256:03b8bfc8fc3ea32fd713370b4bcca2e9dceaa036e5f43cf36e80916b05b4dc3a"},
-    {file = "Rh-s-PyTool-0.0.4.tar.gz", hash = "sha256:3df0fccfcab30ac80bf37c3e4bb3188460040f9fa00016e41c32d2e7edc22050"},
 ]
 "termcolor 1.1.0" = [
     {file = "termcolor-1.1.0.tar.gz", hash = "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"},
