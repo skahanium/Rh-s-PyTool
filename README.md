@@ -11,19 +11,23 @@ Rh-s-PyTool is a collection of python codes I wrote in my school project, includ
 
 # Main function
 
-It mainly contains two large modules, each of which contains several small modules. The main functions of the former **cp_lookup** include querying all the prefecture-level administrative units in the province based on the name of the provincial-level administrative region, reverse-checking the name of the provincial-level administrative region based on the name of the prefecture-level administrative unit, and obtaining the longitude and latitude of the administrative center based on the name of the region (prefecture-level and above) , calculating the spherical distance between two places (ground level and above). The main functions of the latter **index_calmeth** are index system forwardization, normalization, calculation of critic weight, calculation of rsr score, and calculation of topsis score.
+It mainly contains two large modules, each of which contains several small modules. 
+
+The main functions of the former **cp_lookup** include querying all the prefecture-level administrative units in the province based on the name of the provincial-level administrative region, reverse-checking the name of the provincial-level administrative region based on the name of the prefecture-level administrative unit, and obtaining the longitude and latitude of the administrative center based on the name of the region (prefecture-level and above) , calculating the spherical distance between two places (ground level and above). 
+
+The main functions of the latter **index_calmeth** are index system forwardization, normalization, calculation of critic weight, calculation of rsr score, and calculation of topsis score.
 
 # Installing
 
-You can download the compressed package from release and install it locally,
+You can download the compressed package from **release** and install it locally,
 
-or get it from PyPI:
+or get it from **PyPI**:
 
 ```
 pip3 install Rh-s-PyTool
 ```
 
-You can also use the pdm package management system ( recommended ):
+You can also use the **pdm** package management system ( recommended ):
 
 ```
 pdm add Rh-s-PyTool
@@ -38,5 +42,4 @@ English Version : [ Rh-s-PyTool Module ]
 中文文档 : [ Rh-s-PyTool模块 ]
 
 [Rh-s-PyTool Module]: https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea
-
-[ Rh-s-PyTool模块 ]: https://skahanium.notion.site/Rh-s-PyTool-282dfd7a40db42dda0d8323d94a04ee3
+[Rh-s-PyTool模块]: https://skahanium.notion.site/Rh-s-PyTool-282dfd7a40db42dda0d8323d94a04ee3
