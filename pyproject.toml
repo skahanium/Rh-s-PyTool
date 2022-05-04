@@ -1,6 +1,6 @@
 [project]
 name = "Rh-s-PyTool"
-version = "0.0.5"
+version = "0.0.6"
 description = "Instruments used in school-project"
 authors = [
     {name = "skahanium", email = "skahanium@gmail.com"},
