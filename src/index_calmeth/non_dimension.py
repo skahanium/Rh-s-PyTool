@@ -5,11 +5,29 @@ from typing import Union
 
 num = Union[int, float]
 
+############################################################################################
+# 辅助函数区域
+############################################################################################
 
-def fn(x: num, y: num) -> num:
+
+def fn(x: num, y: num) -> num:  # 辅助函数，用于响亮归一化计算
     return x**2 + y**2
 
 
+def fn2(x: num, low: num, high: num, M: num) -> num:  # 辅助函数，用于计算适度性指标转化为极大型指标的公式
+    assert low <= high
+    if x < low:
+        return 1 - (low - x) / M
+    elif x > high:
+        return 1 - (x - high) / M
+    else:
+        return 1
+
+
+vfn2 = np.vectorize(fn2)
+
+
+##############################################################################################
 def tiny_convert(ndarray: np.ndarray, mode: str, change_list: list[int]) -> np.ndarray | None:
     """极小型指标转化为极大型指标
 
@@ -60,22 +78,6 @@ def middle_convert(ndarray: np.ndarray, change_list: list[int], best_value: list
         return copy_matrix
 
 
-def fn2(x: num, low: num, high: num, M: num) -> num:
-    """
-    辅助函数，用于计算适度性指标转化为极大型指标的公式
-    """
-    assert low <= high
-    if x < low:
-        return 1 - (low - x) / M
-    elif x > high:
-        return 1 - (x - high) / M
-    else:
-        return 1
-
-
-vfn2 = np.vectorize(fn2)
-
-
 def moderate_convert(ndarray: np.ndarray, change_list: list[int], low_limit: list[num], high_limit: list[num]) -> np.ndarray | None:
     """适度性指标转化为极大型指标
 
@@ -115,20 +117,14 @@ def toone(origin_array: np.ndarray, mode: str) -> np.ndarray | None:
     ndarray = origin_array.copy()
     m, n = ndarray.shape
     copy_matrix = np.empty((m, n))
-    if mode == '0':
-        """
-        归一化
-        """
+    if mode == '0':  # 归一化
         for j in range(n):
             mmax = ndarray[:, j].max()
             mmin = ndarray[:, j].min()
             copy_matrix[:, j] = (
                 ndarray[:, j] - mmin) / (mmax - mmin)
         return copy_matrix
-    elif mode == '1':
-        """
-        平均归一化
-        """
+    elif mode == '1':  # 平均归一化
         for j in range(n):
             mmean = ndarray[:, j].mean()
             mmax = ndarray[:, j].max()
@@ -136,19 +132,13 @@ def toone(origin_array: np.ndarray, mode: str) -> np.ndarray | None:
             copy_matrix[:, j] = (
                 ndarray[:, j] - mmean) / (mmax - mmin)
         return copy_matrix
-    elif mode == '2':
-        """
-        标准化
-        """
+    elif mode == '2':  # 标准化
         for j in range(n):
             mmean = ndarray[:, j].mean()
             mstd = ndarray[:, j].std()
             copy_matrix[:, j] = (ndarray[:, j] - mmean) / mstd
         return copy_matrix
-    elif mode == '3':
-        """
-        向量归一化
-        """
+    elif mode == '3':  # 向量归一化
         for j in range(n):
             vec_length = np.sqrt(np.array(reduce(fn, ndarray[:, j])))
             copy_matrix[:, j] = ndarray[:, j] / vec_length
