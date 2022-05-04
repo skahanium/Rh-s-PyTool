@@ -39,4 +39,4 @@ English Version : [ Rh-s-PyTool Module ]
 
 [Rh-s-PyTool Module]: https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea
 
-[ Rh-s-PyTool模块 ]: https://www.notion.so/skahanium/Rh-s-PyTool-282dfd7a40db42dda0d8323d94a04ee3
+[ Rh-s-PyTool模块 ]: https://skahanium.notion.site/Rh-s-PyTool-282dfd7a40db42dda0d8323d94a04ee3
