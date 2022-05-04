@@ -7,32 +7,32 @@
 
 # Rh-s-PyTool
 
-Rh-s-PyTool是本人在学校课题中写过的python代码整理后得到的合集，包括了一系列使用过的工具和方法。具体内容参见**Documentation**。
+Rh-s-PyTool is a collection of python codes I wrote in my school project, including a series of used tools and methods. See **Documentation** for details.
 
-# 主要功能
+# Main function
 
-主要包含了两个大模块，二者各自又包含了若干小模块。前者**cp_lookup**的主要功能包括根据省级行政区名称查询该省所有地级行政单位、根据地级行政单位名称反查所属省级行政区名称、根据区域（地级及以上）名称得到行政中心经纬度、计算两地（地级及以上）球面距离。后者**index_calmeth**的主要功能为指标体系正向化、归一化、计算critic权重、计算rsr得分、计算topsis得分。
+It mainly contains two large modules, each of which contains several small modules. The main functions of the former **cp_lookup** include querying all the prefecture-level administrative units in the province based on the name of the provincial-level administrative region, reverse-checking the name of the provincial-level administrative region based on the name of the prefecture-level administrative unit, and obtaining the longitude and latitude of the administrative center based on the name of the region (prefecture-level and above). , Calculate the spherical distance between two places (ground level and above). The main functions of the latter **index_calmeth** are index system forwardization, normalization, calculation of critic weight, calculation of rsr score, and calculation of topsis score.
 
-# 下载
+# Installing
 
-可以从release下载压缩包本地安装，
+You can download the compressed package from release and install it locally,
 
-或从PyPI上下载：
+or get it from PyPI:
 
 ```
 pip3 install Rh-s-PyTool
 ```
 
-也可以使用pdm包管理系统（推荐）：
+You can also use the pdm package management system ( recommended ):
 
 ```
 pdm add Rh-s-PyTool
 ```
 
-注：由于最后汇总模块的时候使用的是python3.10版本，而本人对python各代版本的差异不甚了解，如果想尝试一下这些代码，最好用python3.10以上版本。
+Note: Since the python3.10 version is used when the module is finally aggregated, if you want to try these codes, it is best to use python3.10 or above.
 
-# 文档
+# Documentation
 
-Documentation : [ Notion ]
+Notion page : [ Rh-s-PyTool Module ]
 
-[Notion]: https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea
+[Rh-s-PyTool Module]: https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea
