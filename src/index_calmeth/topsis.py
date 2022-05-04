@@ -12,11 +12,28 @@ class Topsis:
     初始化np.ndarray数据得到可用数据矩阵及其长宽数据。
     """
 
-    def __init__(self, ndarray: np.ndarray):
-        self.__df = ndarray.copy()
-        self.__m, self.__n = self.__df.shape
+    @classmethod
+    def __init__(cls, ndarray: np.ndarray):
+        cls.df = ndarray.copy()
+        cls.m, cls.n = cls.df.shape
 
-    def score_matrix(self, weights: np.ndarray, bv_list: list[num]) -> np.ndarray | None:
+    @classmethod
+    def distance_matrix(cls, bv_list: list[num]) -> np.ndarray | None:
+        """计算距离矩阵
+        Args:
+            bv_list (list[int|float]): 正向最佳值列表
+        Returns:
+            np.ndarray: 若参数无误则返回距离矩阵，否则返回None
+        """
+        if len(bv_list) != cls.n:
+            print("重新考虑最佳贡献值列表元素数量")
+        else:
+            # 计算距离矩阵
+            bv_matrix = np.tile(np.array(bv_list), (cls.m, 1))
+            return np.absolute(cls.df - bv_matrix)
+
+    @classmethod
+    def score_matrix(cls, weights: np.ndarray, bv_list: list[num]) -> np.ndarray | None:
         """计算得分矩阵。weights为权重矩阵,bv_list为正向最佳值列表
 
         Args:
@@ -26,31 +43,23 @@ class Topsis:
         Returns:
             np.ndarray: 若参数无误，返回转化后的数据组，否则返回None
         """
-        if len(bv_list) != self.__n:
-            print("重新考虑最佳贡献值列表元素数量")
-        else:
-            # 计算距离矩阵
-            dist_matrix = np.empty((self.__m, self.__n))
-            for j in range(len(bv_list)):
-                dist_matrix[:, j] = np.absolute(self.__df[:, j] - bv_list[j])
+        dist_matrix = cls.distance_matrix(bv_list)
+        assert isinstance(dist_matrix, np.ndarray)
+        copy_matrix = icn.toone(dist_matrix, mode='0')
+        assert isinstance(copy_matrix, np.ndarray)
 
-            # 利用距离矩阵进行topsis打分
-            copy_matrix = icn.toone(dist_matrix, mode='0')
-            assert isinstance(copy_matrix, np.ndarray)
-            empty_matrix1 = np.empty((self.__m, self.__n))
-            empty_matrix2 = np.empty((self.__m, self.__n))
-            z_max = [copy_matrix[:, j].max() for j in range(self.__n)]
-            z_min = [copy_matrix[:, j].min() for j in range(self.__n)]
+        empty_matrix1 = np.empty((cls.m, cls.n))
+        empty_matrix2 = np.empty((cls.m, cls.n))
+        z_max = [copy_matrix[:, j].max() for j in range(cls.n)]
+        z_min = [copy_matrix[:, j].min() for j in range(cls.n)]
 
-            for j in range(self.__n):
-                empty_matrix1[:, j] = weights[j] * \
-                    (z_max[j] - copy_matrix[:, j]) ** 2
-                empty_matrix2[:, j] = weights[j] * \
-                    (z_min[j] - copy_matrix[:, j]) ** 2
+        for j in range(cls.n):
+            empty_matrix1[:, j] = weights[j] * \
+                (z_max[j] - copy_matrix[:, j]) ** 2
+            empty_matrix2[:, j] = weights[j] * \
+                (z_min[j] - copy_matrix[:, j]) ** 2
 
-            d1 = np.sqrt(empty_matrix1.sum(axis=1))
-            d2 = np.sqrt(empty_matrix2.sum(axis=1))
-            result = (d2/(d1+d2))
-            result = (result - result.min()) / \
-                (result.max() - result.min())
-            return result.reshape(result.shape[0], 1) * 100
+        d1: np.ndarray = np.sqrt(empty_matrix1.sum(axis=1))
+        d2: np.ndarray = np.sqrt(empty_matrix2.sum(axis=1))
+        result: np.ndarray = (d2/(d1+d2))
+        return result.reshape(result.shape[0], 1)
