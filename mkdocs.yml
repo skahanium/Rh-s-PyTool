@@ -1,0 +1,7 @@
+site_name: Rh-s-PyTool
+
+theme:
+  name: material
+
+plugins:
+  - search

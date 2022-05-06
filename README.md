@@ -5,20 +5,17 @@
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/skahanium/Rh-s-PyTool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skahanium/Rh-s-PyTool/context:python)
 [![DOI](https://zenodo.org/badge/392722517.svg)](https://zenodo.org/badge/latestdoi/392722517)
 
-# Rh-s-PyTool
-
+## Rh-s-PyTool
 Rh-s-PyTool is a collection of python codes I wrote in my school project, including a series of used tools and methods. See **Documentation** for details.
 
-# Main function
-
+## Main function
 It mainly contains two large modules, each of which contains several small modules. 
 
 The main functions of the former **cp_lookup** include querying all the prefecture-level administrative units in the province based on the name of the provincial-level administrative region, reverse-checking the name of the provincial-level administrative region based on the name of the prefecture-level administrative unit, and obtaining the longitude and latitude of the administrative center based on the name of the region (prefecture-level and above) , calculating the spherical distance between two places (ground level and above). 
 
 The main functions of the latter **index_calmeth** are index system forwardization, normalization, calculation of critic weight, calculation of rsr score, and calculation of topsis score.
 
-# Installing
-
+## Installing
 You can download the compressed package from **release** and install it locally,
 
 or get it from **PyPI**:
@@ -35,11 +32,7 @@ pdm add Rh-s-PyTool
 
 Note: Since the python3.10 version is used when the module is finally aggregated, if you want to try these codes, it is best to use python3.10 or above.
 
-# Documentation
-
-English Version : [ Rh-s-PyTool Module ]
-
-中文文档 : [ Rh-s-PyTool模块 ]
+## Documentation
+Notion : [ Rh-s-PyTool Module ]
 
 [Rh-s-PyTool Module]: https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea
-[Rh-s-PyTool模块]: https://skahanium.notion.site/Rh-s-PyTool-282dfd7a40db42dda0d8323d94a04ee3
