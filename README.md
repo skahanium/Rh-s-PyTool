@@ -9,11 +9,23 @@
 Rh-s-PyTool is a collection of python codes I wrote in my school project, including a series of used tools and methods. See **Documentation** for details.
 
 ## Main function
-It mainly contains two large modules, each of which contains several small modules. 
 
-The main functions of the former **cp_lookup** include querying all the prefecture-level administrative units in the province based on the name of the provincial-level administrative region, reverse-checking the name of the provincial-level administrative region based on the name of the prefecture-level administrative unit, and obtaining the longitude and latitude of the administrative center based on the name of the region (prefecture-level and above) , calculating the spherical distance between two places (ground level and above). 
+It mainly contains two large modules, each of which contains several small modules.
 
-The main functions of the latter **index_calmeth** are index system forwardization, normalization, calculation of critic weight, calculation of rsr score, and calculation of topsis score.
+The main functions of the former **cp_lookup** include:
+
+- Querying all the prefecture-level administrative units in the province based on the name of the provincial-level administrative region.
+- Reverse-checking the name of the provincial-level administrative region based on the name of the prefecture-level administrative unit.
+- Obtaining the longitude and latitude of the administrative center based on the name of the region (prefecture-level and above).
+- Calculating the spherical distance between two places (ground level and above).
+
+The main functions of the latter **index_calmeth** are:
+
+- Converting non-positive indicators to positive indicators.
+- Making data metrics dimensionless.
+- Calculating indicator weights.
+- Calculating  rsr score of the evaluation objects.
+- Calculating topsis score of the evaluation objects.
 
 ## Installing
 You can download the compressed package from **release** and install it locally,
