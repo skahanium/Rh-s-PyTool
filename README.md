@@ -35,4 +35,4 @@ Note: Since the python3.10 version is used when the module is finally aggregated
 ## Documentation
 Notion : [ Rh-s-PyTool Module ]
 
-[Rh-s-PyTool Module]: https://skahanium.notion.site/Rh-s-PyTool-bf7ab98fba544187b2132c613f0835ea
+[Rh-s-PyTool Module]: https://my-notion-site-coral.vercel.app
