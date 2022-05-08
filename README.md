@@ -42,7 +42,7 @@ You can also use the **pdm** package management system ( recommended ):
 pdm add Rh-s-PyTool
 ```
 
-Note: Since the python3.10 version is used when the module is finally aggregated, if you want to try these codes, it is best to use python3.10 or above.
+Note: Since the python3.10 version is used when the module is finally aggregated, if you want to try these code, it is best to use python3.10 or above.
 
 ## Documentation
 Notion : [ Rh-s-PyTool Module ]
