@@ -16,7 +16,7 @@ def variability(data_origin: np.ndarray) -> np.ndarray:  # 指标变异性数据
     return np.array(variabilities)
 
 
-def conflict(data_origin) -> np.ndarray:  # 指标冲突性数据
+def conflict(data_origin: np.ndarray) -> np.ndarray:  # 指标冲突性数据
     corr_matrix = np.corrcoef(data_origin, rowvar=False)
     conflicts = []
     p, q = corr_matrix.shape
@@ -26,8 +26,8 @@ def conflict(data_origin) -> np.ndarray:  # 指标冲突性数据
     return np.array(conflicts)
 
 
-def critic(data_origin) -> np.ndarray:
-    """通过变异性指标和冲突性指标计算最后权重
+def critic(data_origin: np.ndarray) -> np.ndarray:
+    """通过所提供数据计算critic权重
 
     Returns:
         np.ndarray: critic权重数组
@@ -44,4 +44,25 @@ def critic(data_origin) -> np.ndarray:
     if sum_info == 0:
         return np.ones(q) / q
     weights = [information[c] / sum_info for c in range(q)]
+    return np.array(weights)
+
+
+def ewm(data_origin: np.ndarray) -> np.ndarray:
+    """通过所提供数据计算entropy weight method(ewm)权重
+
+    Returns:
+        np.ndarray: ewm权重数组
+    """
+    data = icn.toone(data_origin.copy(), mode='0')
+    assert isinstance(data, np.ndarray)
+    m, n = data.shape
+    entropy = []
+
+    for j in range(n):
+        data[:, j] = data[:, j] / np.sum(data[:, j])
+        np.place(data[:, j], data[:, j] == 0, 1)
+        ej = -np.log(1/m) * np.sum(data[:, j] * np.log(data[:, j]))
+        entropy.append(ej)
+
+    weights = [(1-entropy[c]) / (m - np.sum(entropy)) for c in range(n)]
     return np.array(weights)
