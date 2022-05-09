@@ -47,4 +47,4 @@ Note: Since the python3.10 version is used when the module is finally aggregated
 ## Documentation
 Notion : [ Rh-s-PyTool Module ]
 
-[Rh-s-PyTool Module]: https://rhs-s-pytool-coral.vercel.app
+[Rh-s-PyTool Module]: https://rh-s-pytool-coral.vercel.app
