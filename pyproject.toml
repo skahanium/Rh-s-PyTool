@@ -7,12 +7,7 @@ authors = [
 ]
 readme = "README.md"
 dependencies = [
-    "numpy>=1.22.3",
-    "novella>=0.2.3",
-    "pydoc-markdown>=4.6.3",
-    "MKDocs>=1.3.0",
-    "MKDocs-material>=8.2.14",
-    "pyyaml>=5.4.1"]
+    "numpy>=1.22.3"]
 requires-python = ">=3.10"
 license = {text = "MIT"}
 
