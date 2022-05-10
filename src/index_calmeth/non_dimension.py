@@ -123,7 +123,7 @@ def toone(origin_array: np.ndarray, mode: str) -> np.ndarray | None:
                 mmax = ndarray[:, j].max()
                 mmin = ndarray[:, j].min()
                 copy_matrix[:, j] = (ndarray[:, j] - mmin) / \
-                    (mmax - mmin) if mmax != mmin else 1 / m
+                    (mmax - mmin) if mmax != mmin else 1
             return copy_matrix
         case '1':
             for j in range(n):
