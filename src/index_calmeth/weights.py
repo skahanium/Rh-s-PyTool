@@ -66,3 +66,13 @@ def ewm(data_origin: np.ndarray) -> np.ndarray:
 
     weights = [(1-entropy[c]) / (m - np.sum(entropy)) for c in range(n)]
     return np.array(weights)
+
+
+def stddev(data_origin: np.ndarray) -> np.ndarray:
+    data = icn.toone(data_origin.copy(), mode='0')
+    assert isinstance(data, np.ndarray)
+    _, n = data.shape
+
+    info = [np.std(data[:, j]) for j in range(m)]
+    weights = [(i / np.sum(info)) for i in info]
+    return np.array(weights)
