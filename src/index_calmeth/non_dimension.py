@@ -39,7 +39,7 @@ def tiny_convert(ndarray: np.ndarray, mode: str, change_list: list[int]) -> np.n
     Returns:
         np.ndarray | None: 若参数无误，返回转化后的数据组，否则返回None
     """
-    df1 = ndarray.copy()
+    df1 = ndarray.copy().astype(float)
     if mode == '0':
         for j in change_list:
             df1[:, j] = 1 / df1[:, j]
@@ -68,7 +68,7 @@ def middle_convert(ndarray: np.ndarray, change_list: list[int], best_value: list
     if len(change_list) != len(best_value):
         print("请检查可变列表和最佳值列表的元素数量")
     else:
-        copy_matrix = ndarray.copy()
+        copy_matrix = ndarray.copy().astype(float)
         for j in change_list:
             M = max(np.abs(copy_matrix[:, j] -
                     best_value[change_list.index(j)]))
@@ -91,7 +91,7 @@ def moderate_convert(ndarray: np.ndarray, change_list: list[int], low_limit: lis
         np.ndarray | None: 若参数无误，返回转化后的数据组，否则返回None
     """
     if len(low_limit) == len(high_limit) == len(change_list):
-        df2 = ndarray.copy()
+        df2 = ndarray.copy().astype(float)
         for j in change_list:
             a = low_limit[change_list.index(j)]
             b = high_limit[change_list.index(j)]
@@ -114,34 +114,34 @@ def toone(origin_array: np.ndarray, mode: str) -> np.ndarray | None:
     Returns:
         np.ndarray | None: 若参数无误，返回转化后的数据组，否则返回None
     """
-    ndarray = origin_array.copy()
+    ndarray = origin_array.copy().astype(float)
     m, n = ndarray.shape
     copy_matrix = np.empty((m, n))
-    if mode == '0':  # 归一化
-        for j in range(n):
-            mmax = ndarray[:, j].max()
-            mmin = ndarray[:, j].min()
-            copy_matrix[:, j] = (
-                ndarray[:, j] - mmin) / (mmax - mmin)
-        return copy_matrix
-    elif mode == '1':  # 平均归一化
-        for j in range(n):
-            mmean = ndarray[:, j].mean()
-            mmax = ndarray[:, j].max()
-            mmin = ndarray[:, j].min()
-            copy_matrix[:, j] = (
-                ndarray[:, j] - mmean) / (mmax - mmin)
-        return copy_matrix
-    elif mode == '2':  # 标准化
-        for j in range(n):
-            mmean = ndarray[:, j].mean()
-            mstd = ndarray[:, j].std()
-            copy_matrix[:, j] = (ndarray[:, j] - mmean) / mstd
-        return copy_matrix
-    elif mode == '3':  # 向量归一化
-        for j in range(n):
-            vec_length = np.sqrt(np.array(reduce(fn, ndarray[:, j])))
-            copy_matrix[:, j] = ndarray[:, j] / vec_length
-        return copy_matrix
-    else:
-        print('输入正确的模式')
+    match mode:
+        case '0':
+            for j in range(n):
+                mmax = ndarray[:, j].max()
+                mmin = ndarray[:, j].min()
+                copy_matrix[:, j] = (ndarray[:, j] - mmin) / \
+                    (mmax - mmin) if mmax != mmin else 1 / m
+            return copy_matrix
+        case '1':
+            for j in range(n):
+                mmean = ndarray[:, j].mean()
+                mmax = ndarray[:, j].max()
+                mmin = ndarray[:, j].min()
+                copy_matrix[:, j] = (
+                    ndarray[:, j] - mmean) / (mmax - mmin) if mmax != mmin else 0
+            return copy_matrix
+        case '2':
+            for j in range(n):
+                mmean = ndarray[:, j].mean()
+                mstd = ndarray[:, j].std()
+                copy_matrix[:, j] = (ndarray[:, j] - mmean) / \
+                    mstd if mstd != 0 else 0
+            return copy_matrix
+        case '3':
+            for j in range(n):
+                vec_length = np.sqrt(np.array(reduce(fn, ndarray[:, j])))
+                copy_matrix[:, j] = ndarray[:, j] / vec_length
+            return copy_matrix

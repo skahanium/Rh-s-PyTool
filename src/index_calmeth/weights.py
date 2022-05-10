@@ -38,9 +38,7 @@ def critic(data_origin: np.ndarray) -> np.ndarray:
     info1 = variability(data_origin)
     info2 = conflict(data_origin)
     information = np.array(info1) * np.array(info2)
-    for i in range(len(information)):
-        if information[i] is np.nan:
-            information[i] = 0
+    np.place(information, information is np.nan, 0)
 
     _, q = data_origin.shape
     sum_info = information.sum()
@@ -88,5 +86,7 @@ def stddev(data_origin: np.ndarray) -> np.ndarray:
     _, n = data.shape
 
     info = [np.std(data[:, j]) for j in range(n)]
+    if np.sum(info) == 0:
+        return np.ones(n) / n
     weights = [(i / np.sum(info)) for i in info]
     return np.array(weights)
