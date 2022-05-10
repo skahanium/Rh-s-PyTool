@@ -22,10 +22,10 @@ The main functions of the former **cp_lookup** include:
 
 The main functions of the latter **index_calmeth** are:
 
-- Converting non-positive index to positive index.
+- Converting non-positive indicators to positive indicators.
 - Making data metrics dimensionless.
-- Calculating index weights.
-- Calculating  rsr score of the evaluation objects.
+- Calculating indicators weights.
+- Calculating rsr score of the evaluation objects.
 - Calculating topsis score of the evaluation objects.
 
 ## Installing
