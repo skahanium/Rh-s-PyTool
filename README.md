@@ -4,6 +4,7 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/skahanium/Rh-s-PyTool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skahanium/Rh-s-PyTool/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/skahanium/Rh-s-PyTool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skahanium/Rh-s-PyTool/context:python)
 [![DOI](https://zenodo.org/badge/392722517.svg)](https://zenodo.org/badge/latestdoi/392722517)
+[![CodeFactor](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool/badge)](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool)
 
 ## Rh-s-PyTool
 Rh-s-PyTool is a collection of python codes I wrote in my school project, including a series of used tools and methods. See **Documentation** for details.
