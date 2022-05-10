@@ -10,7 +10,7 @@ def topsis(data_origin: np.ndarray, weights: np.ndarray) -> np.matrix | None:
         weights (np.ndarray): 权重数组
 
     Returns:
-        np.ndarray: 若参数无误，返回得分数据，否则返回None
+        np.matrix: 若参数无误，返回得分数据，否则返回None
     """
     data = data_origin.copy()
     data = icn.toone(data, mode='3')
@@ -40,7 +40,7 @@ def rsr(data_origin: np.ndarray, weights: np.ndarray) -> np.matrix | None:
         weights (np.ndarray): 权重数组
 
     Returns:
-        np.ndarray: 若参数无误，返回得分数据，否则返回None
+        np.matrix: 若参数无误，返回得分数据，否则返回None
     """
     data = data_origin.copy()
     m, n = data.shape
@@ -49,7 +49,7 @@ def rsr(data_origin: np.ndarray, weights: np.ndarray) -> np.matrix | None:
     for q in range(n):
         compare_list: np.ndarray = np.sort(data[:, q])
         rsr_matrix[:, q] = np.searchsorted(compare_list, data[:, q])
-    return rsr_matrix * np.matrix(weights).T
+    return rsr_matrix * np.matrix(weights).T / m
 
 
 def ni_rsr(data_origin: np.ndarray, weights: np.ndarray) -> np.matrix | None:
@@ -60,7 +60,7 @@ def ni_rsr(data_origin: np.ndarray, weights: np.ndarray) -> np.matrix | None:
         weights (np.ndarray): 权重数组
 
     Returns:
-        np.ndarray: 若参数无误，返回得分数据，否则返回None
+        np.matrix: 若参数无误，返回得分数据，否则返回None
     """
     data = data_origin.copy()
     m, n = data.shape
@@ -71,4 +71,4 @@ def ni_rsr(data_origin: np.ndarray, weights: np.ndarray) -> np.matrix | None:
         min_v = data[:, q].min()
         rsr_matrix[:, q] = 1 + \
             ((m - 1) * (data[:, q] - min_v) / (max_v - min_v))
-    return rsr_matrix * np.matrix(weights).T
+    return rsr_matrix * np.matrix(weights).T / m

@@ -1,7 +1,7 @@
 [project]
 name = "Rh-s-PyTool"
-version = "0.1.0"
-description = "Instruments used in school-project"
+version = "0.1.2"
+description = "Python code instruments that could be used for indicators comprehensive evaluation."
 authors = [
     {name = "skahanium", email = "skahanium@gmail.com"},
 ]

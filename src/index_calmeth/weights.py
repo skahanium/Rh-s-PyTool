@@ -29,15 +29,16 @@ def conflict(data_origin: np.ndarray) -> np.ndarray:  # 指标冲突性数据
 def critic(data_origin: np.ndarray) -> np.ndarray:
     """通过所提供数据计算critic权重
 
+    Args:
+        data_origin (np.ndarray): 待计算权重的数据
+
     Returns:
         np.ndarray: critic权重数组
     """
     info1 = variability(data_origin)
     info2 = conflict(data_origin)
     information = np.array(info1) * np.array(info2)
-    for i in range(len(information)):
-        if information[i] is np.nan:
-            information[i] = 0
+    np.place(information, information is np.nan, 0)
 
     _, q = data_origin.shape
     sum_info = information.sum()
@@ -49,6 +50,9 @@ def critic(data_origin: np.ndarray) -> np.ndarray:
 
 def ewm(data_origin: np.ndarray) -> np.ndarray:
     """通过所提供数据计算entropy weight method(ewm)权重
+
+    Args:
+        data_origin (np.ndarray): 待计算权重的数据
 
     Returns:
         np.ndarray: ewm权重数组
@@ -65,4 +69,24 @@ def ewm(data_origin: np.ndarray) -> np.ndarray:
         entropy.append(ej)
 
     weights = [(1-entropy[c]) / (m - np.sum(entropy)) for c in range(n)]
+    return np.array(weights)
+
+
+def stddev(data_origin: np.ndarray) -> np.ndarray:
+    """通过所提供数据计算standard deviation(stddev)权重
+
+    Args:
+        data_origin (np.ndarray): 待计算权重的数据
+
+    Returns:
+        np.ndarray: stddev权重数组
+    """
+    data = icn.toone(data_origin.copy(), mode='0')
+    assert isinstance(data, np.ndarray)
+    _, n = data.shape
+
+    info = [np.std(data[:, j]) for j in range(n)]
+    if np.sum(info) == 0:
+        return np.ones(n) / n
+    weights = [(i / np.sum(info)) for i in info]
     return np.array(weights)
