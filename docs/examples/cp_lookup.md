@@ -53,7 +53,7 @@ cp_lookup.add_ll是一个与地市级、省级行政区地理位置相关的模�
 ```
 
 
-## cp_loolup.mygeo
+## cp_lookup.mygeo
 cp_loolup.mygeo是一个计算球面距离的模块，可以用于计算不同区域之间的远近。
 
 从模块中导入函数：
