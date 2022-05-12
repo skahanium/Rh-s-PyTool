@@ -7,10 +7,13 @@ edit_uri: ""
 
 nav:
   - Home: index.md
-  - Quick Start: 快速开始.md
+  - Quick Start: quick_start.md
   - Documentation:
       - cp_lookup: modules/cp_lookup.md
-      - index_calmethod: modules/index_calmeth.md
+      - index_calmeth: modules/index_calmeth.md
+  - Examples:
+      - cp_lookup: examples/cp_lookup.md
+      - index_calmeth: examples/index_calmeth.md
 
 theme:
   icon:
