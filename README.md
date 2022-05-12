@@ -53,6 +53,6 @@ pdm add Rh-s-PyTool
 注：本模块适用于python3.10及以上版本。
 
 ## 文档
-中文文档 : [ Rh-s-PyTool Module ]
+中文文档:[ Rh-s-PyTool Module ]
 
-[Rh-s-PyTool Module]: https://skahanium.github.io/Rh-s-PyTool-Documentation/
+[Rh-s-PyTool Module]:https://skahanium.github.io/Rh-s-PyTool/
