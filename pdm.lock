@@ -175,7 +175,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:3c7122452e99613cbeac2baf65bad635cc98f8f7285e242ae7097fbc727365e6"
+content_hash = "sha256:a6292a0d4f3d0ec095b02eb30c0c94b9966a53e3cda9dcc671388d9af4e323db"
 
 [metadata.files]
 "click 8.1.3" = [

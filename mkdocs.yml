@@ -68,3 +68,9 @@ extra:
           note: >-
             Thanks for your feedback! Help us improve this page by
             using our <a href="..." target=_blank>feedback form</a>.
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets

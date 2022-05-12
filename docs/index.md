@@ -28,4 +28,4 @@ Rh-s-PyTool是本人研究生期间在学校项目中自己编写的一系列pyt
 
 # 使用
 
-如果对`Rh-s-PyTool`有一定的兴趣，或者希望尝试使用其中的某些方法，可以从 [Quick Start](快速开始.md) 中得到大致的了解。
+如果对`Rh-s-PyTool`有一定的兴趣，或者希望尝试使用其中的某些方法，可以从 [Quick Start](quick_start.md) 中得到大致的了解。
