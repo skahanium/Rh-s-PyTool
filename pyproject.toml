@@ -13,7 +13,7 @@ license = {text = "MIT"}
 
 [project.urls]
 Github = "https://github.com/skahanium/Rh-s-PyTool"
-Documentation = "https://rh-s-pytool-coral.vercel.app"
+Documentation = "https://skahanium.github.io/Rh-s-PyTool-Documentation/"
 
 [tool.pdm]
 
