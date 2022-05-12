@@ -170,7 +170,7 @@ ewm(origin_array)
   
   返回得到的熵权法权重。
 
-## stddev
+### stddev
 
 ```python
 std(origin_array)
