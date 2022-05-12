@@ -1,16 +1,22 @@
 # index_calmeth模块
 
 ## index_calmeth.non_dimension
-导入必要的模块与函数，（随意）创建一个待转换数据组：
+index_calmeth.non_dimension是一个对数据进行预处理的模块，主要用于进行正向化和无量纲化。
+
+导入必要的模块与函数，（随意）创建一个待转换数据组。假设每一列代表一个指标的观测值，而现在需要对第2、4个数据进行正向化，或者对所有数据进行无量纲化：
 ```python
 >>>from index_calmeth.non_dimension import tiny_convert, middle_convert, moderate_convert, toone
 >>>import numpy as np
 
->>>test_array = np.array([[25.3, 79.2, 21, 41.04, 177.395], [65.65, 57.24, 23.5, 45.5, 45.5], [
-                      0.175, 51.24, 711, 6.28, 65.23], [0.175, 51.24, 711, 6.28, 65.23], [186.4, 357.3, 227, 1.54, 5]])
+>>>test_array = np.array([[25.3, 79.2, 21, 41.04, 177.395], 
+                          [65.65, 57.24, 23.5, 45.5, 45.5], 
+                          [0.175, 51.24, 711, 6.28, 65.23], 
+                          [0.175, 51.24, 711, 6.28, 65.23], 
+                          [186.4, 357.3, 227, 1.54, 5]])
 ```
 
 ### tiny_convert
+假设第2、4个指标为负向指标，现将其转化为正向指标：
 ```python
 >>>print(tiny_convert(test_array, mode='0', change_list=[1, 3]))
 [[2.53000000e+01 1.26262626e-02 2.10000000e+01 2.43664717e-02
@@ -26,6 +32,7 @@
 ```
 
 ### middle_convert
+假设第2、4个指标为中间型指标，现将其转化为正向指标：
 ```python
 >>>print(middle_convert(test_array, change_list=[1, 3], best_value=[88, 20]))
 [[2.53000000e+01 9.67322688e-01 2.10000000e+01 1.74901961e-01
@@ -41,6 +48,7 @@
 ```
 
 ### moderate_convert
+假设第2、4个指标为适度型指标，现将其转化为正向指标：
 ```python
 >>>print(moderate_convert(test_array, change_list=[1, 3], low_limit=[60, 12.5], high_limit=[71.2, 19.63]))
 [[2.53000000e+01 9.72037749e-01 2.10000000e+01 1.72400464e-01
@@ -56,6 +64,7 @@
 ```
 
 ### toone
+对所有数据进行无量纲化（模式”1“代表均值归一化）：
 ```python
 >>>print(toone(test_array, mode='1'))
 [[-0.16238421 -0.13083709 -0.46043478  0.47570519  0.61326605]
@@ -67,35 +76,45 @@
 
 
 ## index_calmeth.weights
+index_calmeth.weights是一个客观赋权的模块，可以用于计算不同指标的权重。
+
 导入必要的模块与函数，（随意）创建一个待转换数据组。以该数据组的每一列作为一个评价指标，计算每个指标的权重：
 ```python
 >>>from index_calmeth.non_dimension import tiny_convert, middle_convert, moderate_convert, toone
 >>>import numpy as np
 
->>>test_array = np.array([[25.3, 79.2, 21, 41.04, 177.395], [65.65, 57.24, 23.5, 45.5, 45.5], [
-                      0.175, 51.24, 711, 6.28, 65.23], [0.175, 51.24, 711, 6.28, 65.23], [186.4, 357.3, 227, 1.54, 5]])
+>>>test_array = np.array([[25.3, 79.2, 21, 41.04, 177.395], 
+                          [65.65, 57.24, 23.5, 45.5, 45.5], 
+                          [0.175, 51.24, 711, 6.28, 65.23], 
+                          [0.175, 51.24, 711, 6.28, 65.23], 
+                          [186.4, 357.3, 227, 1.54, 5]])
 ```
 
 ### critic
+利用critic赋权法计算指标权重
 ```python
 >>>print(critic(test_array))
 [0.16765873, 0.17370798, 0.27164073, 0.22001484, 0.16697772]
 ```
 
 ### ewm
+利用熵权法计算指标权重
 ```python
 >>>print(ewm(test_array))
 [0.19189057 0.1316655  0.21496771 0.21786722 0.243609]
 ```
 
 ### stddev
+利用标准离差法计算指标权重
 ```python
 >>>print(stddev(test_array))
 [0.18866013 0.19684011 0.22877436 0.21825414 0.16747126]
 ```
 
 ## index_calmeth
-导入必要的模块与函数，（随意）创建一个待转换数据组。以该数据组的每一列作为一个评价指标，且假设都已经经过正向化：
+index_calmeth是一个综合评价的模块，可以利用其为多指标数据进行总体评分。
+
+导入必要的模块与函数，（随意）创建一个待转换数据组。以该数据组的每一列作为一个评价指标，且假设都已经过正向化：
 ```python
 >>>from index_calmeth.evaluation import rsr, ni_rsr, topsis
 >>>from index_calmeth.weights import critic
@@ -105,6 +124,7 @@
 ```
 
 ### rsr
+利用整次秩和比方法打分：
 ```python
 >>>print(rsr(test_array, critic(test_array)))
 matrix([[0.47298203],
@@ -117,6 +137,7 @@ matrix([[0.47298203],
 ```
 
 ### ni_rsr
+利用非整次秩和比方法打分：
 ```python
 >>>print(ni_rsr(test_array, critic(test_array)))
 matrix([[0.76082196],
@@ -129,6 +150,7 @@ matrix([[0.76082196],
 ```
 
 ### topsis
+利用优劣解距离方法打分：
 ```python
 >>>print(topsis(test_array, critic(test_array)))
 matrix([[0.74850458],
