@@ -14,7 +14,7 @@ Rh-s-PyTool是本人研究生期间在学校项目中自己编写的一系列pyt
 
 # 主要功能
 
-目前，Rh-s-PyTool主要包含了两个大的模块：[cp_lookup](modules/cp_lookup.md)和[index_calmeth](modules/index_calmeth.md)，二者又分别包含了若干个小模块。前者的功能描述大致描述如下：
+目前，Rh-s-PyTool主要包含了两个大的模块：**cp_lookup**和**index_calmeth**，二者又分别包含了若干个小模块。前者的功能描述大致描述如下：
 
 + 根据省级行政区的名称查询全省所有地级行政单位
 
