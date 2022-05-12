@@ -38,7 +38,6 @@ def critic(data_origin: np.ndarray) -> np.ndarray:
     info1 = variability(data_origin)
     info2 = conflict(data_origin)
     information = np.array(info1) * np.array(info2)
-    np.place(information, information is np.nan, 0)
 
     _, q = data_origin.shape
     sum_info = information.sum()
