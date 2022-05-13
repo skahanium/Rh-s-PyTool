@@ -31,6 +31,11 @@ dependencies = [
 ]
 
 [[package]]
+name = "jieba"
+version = "0.42.1"
+summary = "Chinese Words Segmentation Utilities"
+
+[[package]]
 name = "jinja2"
 version = "3.1.2"
 requires_python = ">=3.7"
@@ -175,7 +180,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:3c7122452e99613cbeac2baf65bad635cc98f8f7285e242ae7097fbc727365e6"
+content_hash = "sha256:557f3b933b4be703254577da8769cf0fe8e0b1b17cc315d1475e3752bf54fb23"
 
 [metadata.files]
 "click 8.1.3" = [
@@ -193,6 +198,9 @@ content_hash = "sha256:3c7122452e99613cbeac2baf65bad635cc98f8f7285e242ae7097fbc7
 "importlib-metadata 4.11.3" = [
     {file = "importlib_metadata-4.11.3-py3-none-any.whl", hash = "sha256:1208431ca90a8cca1a6b8af391bb53c1a2db74e5d1cef6ddced95d4b2062edc6"},
     {file = "importlib_metadata-4.11.3.tar.gz", hash = "sha256:ea4c597ebf37142f827b8f39299579e31685c31d3a438b59f469406afd0f2539"},
+]
+"jieba 0.42.1" = [
+    {file = "jieba-0.42.1.tar.gz", hash = "sha256:055ca12f62674fafed09427f176506079bc135638a14e23e25be909131928db2"},
 ]
 "jinja2 3.1.2" = [
     {file = "Jinja2-3.1.2-py3-none-any.whl", hash = "sha256:6088930bfe239f0e6710546ab9c19c9ef35e29792895fed6e6e31a023a182a61"},

@@ -114,8 +114,6 @@ toone(origin_array, mode)
 
 - `mode` : str
   
-  Conversion mode. Mode='0' is normalized, mode='1' is average normalized, mode='2' is standardized, and mode='3' is vector normalization.
-  
   转换模式。Mode='0'为归一化，Mode='1'为平均归一化，Mode='2'为标准化，Mode='3'为向量归一化。
 
 **Returns**:
