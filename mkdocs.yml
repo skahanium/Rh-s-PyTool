@@ -10,8 +10,10 @@ nav:
       - 简介: index.md
       - 下载: install.md
   - Documentation:
-      - cp_lookup: modules/cp_lookup.md
-      - index_calmeth: modules/index_calmeth.md
+      - Topsis: documentation/TOPSIS.md
+  - API:
+      - cp_lookup: api/cp_lookup.md
+      - index_calmeth: api/index_calmeth.md
   - Examples:
       - cp_lookup: examples/cp_lookup.md
       - index_calmeth: examples/index_calmeth.md
