@@ -90,3 +90,15 @@ def stddev(data_origin: np.ndarray) -> np.ndarray:
         return np.ones(n) / n
     weights = [(i / np.sum(info)) for i in info]
     return np.array(weights)
+
+
+def expert(weights: np.ndarray | list) -> np.ndarray | list:
+    """脱裤子放屁的主观方法，怎么看都意义不大。
+
+    Args:
+        weights (np.ndarray): “专家”主观给出的权重
+
+    Returns:
+        np.ndarray: expert权重数组
+    """
+    return weights.copy()
