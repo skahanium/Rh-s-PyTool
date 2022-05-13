@@ -188,7 +188,25 @@ std(origin_array)
   
   返回得到的标准离差法权重。
 
+### expert
 
+```python
+expert(weights)
+```
+
+脱裤子放屁的专家赋权法。
+
+**Arguments**:
+
+- `weights` : np.ndarray | list
+  
+  “专家”所给权重。
+
+**Returns**:
+
+- `weights` : np.ndarray | list
+  
+  返回expert权重。
 
 ## index_calmeth.rating_method
 
