@@ -6,8 +6,9 @@ repo_name: skahanium/Rh-s-PyTool
 edit_uri: ""
 
 nav:
-  - Home: index.md
-  - Quick Start: quick_start.md
+  - Quick Start:
+      - 简介: start/index.md
+      - 下载: start/install.md
   - Documentation:
       - cp_lookup: modules/cp_lookup.md
       - index_calmeth: modules/index_calmeth.md
@@ -19,16 +20,16 @@ theme:
   icon:
     repo: fontawesome/brands/github
   features:
+    - search.suggest
+    - search.highlight
+    - search.share
     - navigation.tracking
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
     - navigation.instant
-    - navigation.top
     - toc.follow
-    - search.suggest
-    - search.highlight
-    - search.share
+
   name: material
   language: zh
   palette:
@@ -45,7 +46,6 @@ theme:
 
 plugins:
   - search:
-      lang: en
       separator: '[\\s\\u200b\\-]'
 
 extra:
@@ -74,3 +74,19 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.betterem
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - admonition
+  - pymdownx.details
+  - footnotes
+  - abbr
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
