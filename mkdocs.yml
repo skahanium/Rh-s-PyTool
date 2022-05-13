@@ -7,8 +7,8 @@ edit_uri: ""
 
 nav:
   - Quick Start:
-      - 简介: start/index.md
-      - 下载: start/install.md
+      - 简介: index.md
+      - 下载: install.md
   - Documentation:
       - cp_lookup: modules/cp_lookup.md
       - index_calmeth: modules/index_calmeth.md
