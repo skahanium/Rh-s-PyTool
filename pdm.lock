@@ -82,7 +82,7 @@ dependencies = [
 
 [[package]]
 name = "mkdocs-material"
-version = "8.2.14"
+version = "8.2.15"
 requires_python = ">=3.7"
 summary = "Documentation that simply works"
 dependencies = [
@@ -180,7 +180,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:557f3b933b4be703254577da8769cf0fe8e0b1b17cc315d1475e3752bf54fb23"
+content_hash = "sha256:5c97d5639fb687e976c7c76ef3a27ba88eef8e1a7fbf5c55c39cfc178e5161d1"
 
 [metadata.files]
 "click 8.1.3" = [
@@ -260,9 +260,9 @@ content_hash = "sha256:557f3b933b4be703254577da8769cf0fe8e0b1b17cc315d1475e3752b
     {file = "mkdocs-1.3.0-py3-none-any.whl", hash = "sha256:26bd2b03d739ac57a3e6eed0b7bcc86168703b719c27b99ad6ca91dc439aacde"},
     {file = "mkdocs-1.3.0.tar.gz", hash = "sha256:b504405b04da38795fec9b2e5e28f6aa3a73bb0960cb6d5d27ead28952bd35ea"},
 ]
-"mkdocs-material 8.2.14" = [
-    {file = "mkdocs_material-8.2.14-py2.py3-none-any.whl", hash = "sha256:072cbba38f95b1989118b76ad6e3b61f56c4a6215622c960adf2f2c65a613dba"},
-    {file = "mkdocs-material-8.2.14.tar.gz", hash = "sha256:413c349ef531ffe9f2eab6c8a71203fb0a7ebdc301ab9a2529ddd90c173673de"},
+"mkdocs-material 8.2.15" = [
+    {file = "mkdocs_material-8.2.15-py2.py3-none-any.whl", hash = "sha256:9d6c4ca1ceecc00b2e38c214665ed7605d275321dcaa22f38b9d1175edc58955"},
+    {file = "mkdocs-material-8.2.15.tar.gz", hash = "sha256:93b57e53733051431cc83216446e774bdf08bf516a6251ff2f24974f45f98149"},
 ]
 "mkdocs-material-extensions 1.0.3" = [
     {file = "mkdocs_material_extensions-1.0.3-py3-none-any.whl", hash = "sha256:a82b70e533ce060b2a5d9eb2bc2e1be201cf61f901f93704b4acf6e3d5983a44"},
