@@ -80,7 +80,7 @@ index_calmeth.weights是一个客观赋权的模块，可以用于计算不同�
 导入必要的模块与函数，（随意）创建一个待转换数据组。以该数据组的每一列作为一个评价指标，计算每个指标的权重：
 
 ```python
->>>from index_calmeth.non_dimension import tiny_convert, middle_convert, moderate_convert, toone
+>>>from index_calmeth.weights import critic, ewm, stddev, expert
 >>>import numpy as np
 
 >>>test_array = np.array([[25.3, 79.2, 21, 41.04, 177.395], 
