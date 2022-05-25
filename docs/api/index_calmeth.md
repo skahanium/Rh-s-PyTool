@@ -20,7 +20,7 @@ tiny_convert(ndarray, mode, change_list)
 
 - `mode` : str
   
-  转换模式.。Mode='0' 是 *1/x* 模式，而mode='1'属于*max(x)-x*。
+  转换模式。mode='0' 是 *1/x* 模式，而mode='1'为*max(x)-x*模式。
 
 - `change_list` : list[int]
   
@@ -114,7 +114,7 @@ toone(origin_array, mode)
 
 - `mode` : str
   
-  转换模式。Mode='0'为归一化，Mode='1'为平均归一化，Mode='2'为标准化，Mode='3'为向量归一化。
+  转换模式。mode='0'为归一化，mode='1'为平均归一化，mode='2'为标准化，mode='3'为向量归一化。
 
 **Returns**:
 

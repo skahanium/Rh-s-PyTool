@@ -114,7 +114,7 @@ city_info(city)
 haversine(lon1, lat1, lon2, lat2)
 ```
 
-使用两个区域的经度和纬度计算球面距离。
+使用两个区域的经度和纬度计算二者间球面距离。
 
 **Arguments**:
 
@@ -170,7 +170,7 @@ dist(city1, city2)
 dist2(city, lon, lat)
 ```
 
-使用一个地区的城市名称和另一个地区的纬度和经度计算球面距离。
+使用一个地区的城市名称和另一个地区的纬度和经度计算二者间球面距离。
 
 **Arguments**:
 
