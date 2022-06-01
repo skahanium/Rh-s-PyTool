@@ -9,8 +9,8 @@ nav:
   - Quick Start:
       - 简介: index.md
       - 下载: install.md
-  - Documentation:
-      - Topsis: documentation/TOPSIS.md
+  - Methods:
+      - Topsis: methods/TOPSIS.md
   - API:
       - cp_lookup: api/cp_lookup.md
       - index_calmeth: api/index_calmeth.md

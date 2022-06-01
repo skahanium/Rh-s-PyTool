@@ -34,11 +34,11 @@
 （6）假设$c^1_{i,j}$为矩阵$C_1$第$i$行第$j$列的元素，$c^2_{i,j}$为矩阵$C_2$第$i$行第$j$列的元素，利用指标权重$\omega = \{\omega_1,\omega_2,...\omega_n\}$，计算各评价对象与最优方案、最劣方案的接近程度：
 
 $$
-R_i^+ = \sqrt{\sum_{j=1}^m \omega_j*(c^1_{i,j})^2}
+R_i^+ = \sqrt{\sum_{j=1}^n \omega_j*(c^1_{i,j})^2}
 $$
 
 $$
-R_i^- = \sqrt{\sum_{j=1}^m \omega_j*(c^2_{i,j})^2}
+R_i^- = \sqrt{\sum_{j=1}^n \omega_j*(c^2_{i,j})^2}
 $$
 
 （7）结合最优、最劣方案得出TOPSIS值：
