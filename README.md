@@ -5,7 +5,6 @@
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/skahanium/Rh-s-PyTool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skahanium/Rh-s-PyTool/context:python)
 [![DOI](https://zenodo.org/badge/392722517.svg)](https://zenodo.org/badge/latestdoi/392722517)
 [![CodeFactor](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool/badge)](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool)
-
 [![Board Status](https://dev.azure.com/skahanium/0d42bc53-fc70-48b9-b5cf-b804d4c8fac3/dd35fd2d-0700-4db4-b5e1-54a7ff8b8ea6/_apis/work/boardbadge/990e1548-289b-491c-bf1a-de834048d6dd?columnOptions=1)](https://dev.azure.com/skahanium/0d42bc53-fc70-48b9-b5cf-b804d4c8fac3/_boards/board/t/dd35fd2d-0700-4db4-b5e1-54a7ff8b8ea6/Microsoft.RequirementCategory/)
 
 # 关于Rh-s-PyTool
