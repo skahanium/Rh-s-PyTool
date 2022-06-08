@@ -6,6 +6,8 @@
 [![DOI](https://zenodo.org/badge/392722517.svg)](https://zenodo.org/badge/latestdoi/392722517)
 [![CodeFactor](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool/badge)](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool)
 
+[![Board Status](https://dev.azure.com/skahanium/0d42bc53-fc70-48b9-b5cf-b804d4c8fac3/dd35fd2d-0700-4db4-b5e1-54a7ff8b8ea6/_apis/work/boardbadge/990e1548-289b-491c-bf1a-de834048d6dd?columnOptions=1)](https://dev.azure.com/skahanium/0d42bc53-fc70-48b9-b5cf-b804d4c8fac3/_boards/board/t/dd35fd2d-0700-4db4-b5e1-54a7ff8b8ea6/Microsoft.RequirementCategory/)
+
 # 关于Rh-s-PyTool
 
 Rh-s-PyTool是本人研究生期间在学校项目中自己编写的一系列python工具方法的合集，包含了一些有关行政区域名称、坐标查询以及综合指标评价方面的内容。目前而言Rh-s-PyTool还是一个过于简陋的工具库，有待进一步完善和丰富。
