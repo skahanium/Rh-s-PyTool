@@ -1,6 +1,6 @@
 [project]
 name = "Rh-s-PyTool"
-version = "0.1.3"
+version = "0.1.5"
 description = "Python code instruments that could be used for index comprehensive evaluation."
 authors = [
     {name = "skahanium", email = "skahanium@gmail.com"},
@@ -11,6 +11,7 @@ dependencies = [
     "mkdocs>=1.3.0",
     "mkdocs-material>=8.2.15",
     "jieba>=0.42.1",
+    "plum-dispatch>=1.6",
 ]
 requires-python = ">=3.10"
 license = {text = "MIT"}
