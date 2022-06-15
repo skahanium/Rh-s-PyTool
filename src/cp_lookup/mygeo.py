@@ -1,6 +1,6 @@
 from math import radians, cos, sin, asin, sqrt
 import cp_lookup.add_ll as cal
-from multipledispatch import dispatch
+from plum import dispatch
 
 
 def haversine(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
@@ -28,9 +28,20 @@ def haversine(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
     return c * r
 
 
-@dispatch(str, str)
-def dist(city1: str, city2: str) -> float:
-    """    利用两个地区的城市名称计算球面距离
+@dispatch
+def dist(city1: str, city2: str) -> float:  # type: ignore
+    return haversine(float(cal.cities[city1][1]), float(cal.cities[city1][2]), float(cal.cities[city2][1]), float(cal.cities[city2][2]))
+
+
+@dispatch
+def dist(city: str, lon: float, lat: float) -> float:  # type: ignore
+    return haversine(float(cal.cities[city][1]), float(cal.cities[city][2]), lon, lat)
+
+
+@dispatch
+def dist(lon: float, lat: float, city: str) -> float:
+    """
+    (1)利用两个地区的城市名称计算球面距离
 
     Args:
         city1 (str): 地区1的城市名称
@@ -38,13 +49,8 @@ def dist(city1: str, city2: str) -> float:
 
     Returns:
         float: 球面距离，单位：km
-    """
-    return haversine(float(cal.cities[city1][1]), float(cal.cities[city1][2]), float(cal.cities[city2][1]), float(cal.cities[city2][2]))
 
-
-@dispatch(str, float, float)
-def dist(city: str, lon: float, lat: float) -> float:
-    """利用一个地区的城市名和另一个地区的经纬度计算球面距离
+    (2)利用一个地区的城市名和另一个地区的经纬度计算球面距离
 
     Args:
         city (str): 地区1的城市名称
@@ -53,13 +59,8 @@ def dist(city: str, lon: float, lat: float) -> float:
 
     Returns:
         float: 球面距离，单位：km
-    """
-    return haversine(float(cal.cities[city][1]), float(cal.cities[city][2]), lon, lat)
 
-
-@dispatch(float, float, str)
-def dist(lon: float, lat: float, city: str) -> float:
-    """利用一个地区的城市名和另一个地区的经纬度计算球面距离
+    (3)利用一个地区的经纬度和另一个地区的城市名计算球面距离
 
     Args:
         lon (float): 地区1的经度

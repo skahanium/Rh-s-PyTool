@@ -164,27 +164,54 @@ dist(city1, city2)
   
   返回两地之间的球面距离，单位：km
 
-### dist2
 
 ```python
-dist2(city, lon, lat)
+dist(city, lon, lat)
 ```
 
-使用一个地区的城市名称和另一个地区的纬度和经度计算二者间球面距离。
+使用一个地区的城市名称和另一个地区的经度和纬度计算二者间球面距离。
 
 **Arguments**:
 
-- `city1` : str
+- `city` : str
   
   城市1
 
-- `lon2` : float
+- `lon` : float
   
   区域2的经度
 
-- `lat2` : float
+- `lat` : float
   
   区域2的维度
+
+**Returns**:
+
+- `distance` : float
+  
+  返回两地之间的球面距离，单位：km
+
+
+```python
+dist(lon, lat, city)
+```
+
+使用一个地区的经度和纬度和另一个地区的城市名称计算二者间球面距离。
+
+**Arguments**:
+
+
+- `lon` : float
+  
+  区域1的经度
+
+- `lat` : float
+  
+  区域1的维度
+
+- `city` : str
+  
+  城市2
 
 **Returns**:
 
