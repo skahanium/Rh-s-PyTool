@@ -29,7 +29,7 @@ def haversine(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
 
 
 @dispatch(str, str)
-def dist(city1, city2) -> float:
+def dist(city1: str, city2: str) -> float:
     """    利用两个地区的城市名称计算球面距离
 
     Args:
@@ -43,7 +43,7 @@ def dist(city1, city2) -> float:
 
 
 @dispatch(str, float, float)
-def dist(city, lon, lat) -> float:
+def dist(city: str, lon: float, lat: float) -> float:
     """利用一个地区的城市名和另一个地区的经纬度计算球面距离
 
     Args:
@@ -58,7 +58,7 @@ def dist(city, lon, lat) -> float:
 
 
 @dispatch(float, float, str)
-def dist(lon, lat, city) -> float:
+def dist(lon: float, lat: float, city: str) -> float:
     """利用一个地区的城市名和另一个地区的经纬度计算球面距离
 
     Args:
