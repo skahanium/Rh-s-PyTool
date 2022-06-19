@@ -2,7 +2,7 @@ import numpy as np
 import index_calmeth.non_dimension as icn
 
 
-def topsis(data_origin: np.ndarray, weights: list | np.ndarray) -> np.matrix | None:
+def topsis(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.ndarray:
     """计算优劣解距离法得分矩阵，weights为权重矩阵。
 
     Args:
@@ -29,10 +29,10 @@ def topsis(data_origin: np.ndarray, weights: list | np.ndarray) -> np.matrix | N
     d1: np.ndarray = np.sqrt(empty_matrix1.sum(axis=1))
     d2: np.ndarray = np.sqrt(empty_matrix2.sum(axis=1))
     result: np.ndarray = (d2/(d1+d2))
-    return np.matrix(result.reshape(result.shape[0], 1))
+    return result.reshape(result.shape[0], 1)
 
 
-def rsr(data_origin: np.ndarray, weights: list | np.ndarray) -> np.matrix | None:
+def rsr(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.ndarray:
     """计算整次秩和比得分矩阵，weights为权重矩阵。
 
     Args:
@@ -52,7 +52,7 @@ def rsr(data_origin: np.ndarray, weights: list | np.ndarray) -> np.matrix | None
     return rsr_matrix * np.matrix(weights).T / m
 
 
-def ni_rsr(data_origin: np.ndarray, weights: list | np.ndarray) -> np.matrix | None:
+def ni_rsr(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.ndarray:
     """计算非整次秩和比得分矩阵，weights为权重矩阵。
 
     Args:
