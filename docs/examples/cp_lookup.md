@@ -77,7 +77,7 @@ cp_loolup.mygeo是一个计算球面距离的模块，可以用于计算不同�
 从模块中导入函数：
 
 ```python
->>>from cp_lookup.mygeo import haversine, dist, dist2
+>>>from cp_lookup.mygeo import haversine, dist
 ```
 
 ### haversine
