@@ -224,13 +224,13 @@ rsr(data_origin, weights)
   
   正向化之后的指标数据
 
-- `weights` : np.array
+- `weights` : list | np.ndarray
   
   指标权重数据
 
 **Returns**:
 
-- `rsr_score` : np.matrix | None
+- `rsr_score` : np.ndarray
   
   参数无误的情况下，返回rsr评分。
 
@@ -250,13 +250,13 @@ ni_rsr(data_origin, weights)
   
   正向化之后的指标数据
 
-- `weights` : np.array
+- `weights` : list | np.ndarray
   
   指标权重数据
 
 **Returns**:
 
-- `rsr_score` : np.matrix | None
+- `rsr_score` : np.ndarray
   
   参数无误的情况下，返回ni_rsr评分。
 
@@ -274,12 +274,12 @@ topsis(data_origin, weights)
   
   正向化之后的指标数据
 
-- `weights` : np.array
+- `weights` : list | np.ndarray
   
   指标权重数据
 
 **Returns**:
 
-- `topsis_score` : np.matrix | None
+- `topsis_score` : np.ndarray
   
   参数无误的情况下，返回topsis评分。
