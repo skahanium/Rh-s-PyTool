@@ -1,11 +1,10 @@
 .idea
 **/__pycache__
-.vscode
 .DS_Store
 build
 test.py
 test.ipynb
-__pypackages__
+__pypackages__/
 .ipynb_checkpoints
 .pdm.toml
 dist
