@@ -1,3 +1,5 @@
+import re
+
 cp_trans: dict[str, tuple[str, ...]] = {
     '北京市': ('北京市',), '天津市': ('天津市',), '重庆市': ('重庆市',), '上海市': ('上海市',),
     '河北省': ('石家庄市', '唐山市', '邯郸市', '张家口市', '保定市', '沧州市', '秦皇岛市', '邢台市', '廊坊市', '承德市', '衡水市', '雄安新区'),
@@ -30,7 +32,7 @@ cp_trans: dict[str, tuple[str, ...]] = {
 }
 
 
-zx_cities: list[str] = ['北京市', '天津市', '上海市', '重庆市']
+# zx_cities: list[str] = ['北京市', '天津市', '上海市', '重庆市']
 
 
 def inverse_dic(dictionary: dict[str, tuple[str, ...]]) -> dict[tuple[str, ...], str]:
@@ -46,8 +48,9 @@ def ptwoc(prov: str) -> tuple[str, ...] | None:
     Returns:
         tuple[str, ...] | None: 目标省份下辖所有地级行政区的名称。如果没有找到查询的省级行政区，返回None
     """
+    assert len(prov) >= 2
     for province in cp_trans.keys():
-        if prov[:2] == province[:2] or prov[:3] == province[:3]:
+        if re.search(prov, province):
             return cp_trans[province]
 
 
@@ -60,16 +63,12 @@ def ctwop(city: str) -> str | None:
     Returns:
         str | None: 目标地市所属省级行政区名称。如果没有找到查询的地级行政区，返回None
     """
-    dictionary = inverse_dic(cp_trans)
-    for targets, trash in dictionary.items():
-        if targets == trash:
-            if city[:2] == targets[:2] or city[:3] == targets[:3]:
-                return dictionary[targets]
-        else:
-            cn_length = len(city)
-            for target in targets:
-                if city == target[:cn_length]:
-                    return dictionary[targets]
+    assert len(city) >= 2
+    new_dict = inverse_dic(cp_trans)
+    for areas in new_dict.keys():
+        for area in areas:
+            if re.search(city, area):
+                return new_dict[areas]
 
 
 def fillup_city(city: str) -> str | None:
@@ -81,20 +80,8 @@ def fillup_city(city: str) -> str | None:
     Returns:
         str | None: 地级行政区的全称。如果没有找到查询的地级行政区，返回None
     """
-    cn_length = len(city)
-    if cn_length <= 2:
-        for zx_city in zx_cities:
-            if city == zx_city[:cn_length]:
-                return zx_city
-        for fzx_cities in cp_trans.values():
-            for fzx_city in fzx_cities:
-                if city == fzx_city[:cn_length]:
-                    return fzx_city
-    else:
-        for zx_city in zx_cities:
-            if (city == zx_city[:cn_length]) | (city[: cn_length - 1] == zx_city[: cn_length - 1]):
-                return zx_city
-        for fzx_cities in cp_trans.values():
-            for fzx_city in fzx_cities:
-                if (city == fzx_city[:cn_length]) | (city[: cn_length - 1] == fzx_city[: cn_length - 1]):
-                    return fzx_city
+    assert len(city) >= 2
+    for areas in cp_trans.values():
+        for area in areas:
+            if re.search(city, area):
+                return area

@@ -373,8 +373,8 @@ def pro_info(province: str) -> tuple[float, float]:
     Returns:
         tuple[float, float]: 得到的经度和纬度
     """
-    lon = provinces.get(province, [np.nan, ])[0]
-    lat = provinces.get(province, [np.nan, ])[1]
+    lon = provinces.get(province, [np.nan, ]*2)[0]
+    lat = provinces.get(province, [np.nan, ]*2)[1]
     return lon, lat
 
 
@@ -388,6 +388,6 @@ def city_info(city: str) -> tuple[float, float]:
         tuple[float, float]: 得到的经度和纬度
 
     """
-    lon = cities.get(city, [np.nan, ])[1]
-    lat = cities.get(city, [np.nan, ])[2]
+    lon = cities.get(city, [np.nan, ]*3)[1]
+    lat = cities.get(city, [np.nan, ]*3)[2]
     return float(lon), float(lat)

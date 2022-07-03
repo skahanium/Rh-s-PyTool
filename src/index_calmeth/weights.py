@@ -92,13 +92,20 @@ def stddev(data_origin: np.ndarray) -> np.ndarray:
     return np.array(weights)
 
 
-def expert(weights: np.ndarray | list) -> np.ndarray | list:
-    """脱裤子放屁的主观方法，怎么看都意义不大。
+def gini(data_origin: np.ndarray) -> np.ndarray:
+    """通过所提供数据计算基尼系数法权重
 
     Args:
-        weights (np.ndarray): “专家”主观给出的权重
+        data_origin (np.ndarray): 待计算权重的数据
 
     Returns:
-        np.ndarray: expert权重数组
+        np.ndarray: 基尼系数法权重数组
     """
-    return weights.copy()
+    data = data_origin.copy()
+    m, n = data.shape
+    Gini = []
+    for j in range(n):
+        gini_j = [np.abs(data[u, j] - data[v, j])
+                  for u in range(m) for v in range(m)]
+        Gini.append(np.sum(gini_j) / (m**2 - m))
+    return np.array(Gini / np.sum(Gini))
