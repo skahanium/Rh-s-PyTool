@@ -32,7 +32,10 @@
 ```python
 >>>data.head()
 ```
-<img src="pictures/head.png">
+<center>
+
+![原数据前五行](pictures/head.png)
+</center>
 
 # 数据预处理
 ## 补全州市名称
@@ -41,7 +44,10 @@
 >>>data["州市"] = data["州市"].apply(fillup_city)
 >>>data.head()
 ```
-<img src="pictures/new_head.png">
+<center>
+
+![补全后前五行](pictures/new_head.png)
+</center>
 
 ## dataframe转ndarray
 计算过程仅涉及指标数据，暂时无需州市名称、年份等信息，因此暂时排除。同时Rh-s-PyTool出于计算效率和数据结构一致性的考虑，没有使用pandas库。通用的数据结构是numpy的ndarray，因此需要将dataframe类数据进行转换。
@@ -74,7 +80,11 @@
 >>>result = pd.DataFrame(ice.topsis(df, weights), index=data["州市"], columns=["topsis"])
 >>>result.head()
 ```
-<img src="pictures/result_head.png">
+<center>
+
+![风险分值](pictures/result_head.png)
+
+</center>
 
 # 其它
 利用pyecharts模块对计算结果进行可视化
@@ -89,4 +99,7 @@ c = (
 )
 ```
 将得到的html文件在浏览器中打开：
-<img src="pictures/map.png">
+<center>
+
+![风险地图](pictures/map.png)
+</center>
