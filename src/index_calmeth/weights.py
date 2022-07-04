@@ -1,3 +1,4 @@
+import itertools
 import numpy as np
 import index_calmeth.non_dimension as icn
 
@@ -106,6 +107,6 @@ def gini(data_origin: np.ndarray) -> np.ndarray:
     Gini = []
     for j in range(n):
         gini_j = [np.abs(data[u, j] - data[v, j])
-                  for u in range(m) for v in range(m)]
+                  for u, v in itertools.product(range(m), range(m))]
         Gini.append(np.sum(gini_j) / (m**2 - m))
     return np.array(Gini / np.sum(Gini))

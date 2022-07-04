@@ -9,3 +9,4 @@ __pypackages__/
 .pdm.toml
 dist
 .env
+example/

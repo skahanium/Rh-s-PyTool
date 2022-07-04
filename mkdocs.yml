@@ -6,9 +6,9 @@ repo_name: skahanium/Rh-s-PyTool
 edit_uri: ""
 
 nav:
-  - Quick Start:
+  - Start:
       - 简介: index.md
-      - 下载: install.md
+      - 快速开始: start.md
   - Methods:
       - Topsis: methods/TOPSIS.md
   - API:
