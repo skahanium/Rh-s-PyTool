@@ -1,20 +1,17 @@
 from functools import reduce
 import numpy as np
-from typing import Union
 
-
-num = Union[int, float]
 
 ############################################################################################
 # 辅助函数区域
 ############################################################################################
 
 
-def fn(x: num, y: num) -> num:  # 辅助函数，用于向量归一化计算
+def fn(x: int | float, y: int | float) -> int | float:  # 辅助函数，用于向量归一化计算
     return x**2 + y**2
 
 
-def fn2(x: num, low: num, high: num, M: num) -> num:  # 辅助函数，用于计算适度性指标转化为极大型指标的公式
+def fn2(x: int | float, low: int | float, high: int | float, M: int | float) -> int | float:  # 辅助函数，用于计算适度性指标转化为极大型指标的公式
     assert low <= high
     if x < low:
         return 1 - (low - x) / M
@@ -25,9 +22,9 @@ def fn2(x: num, low: num, high: num, M: num) -> num:  # 辅助函数，用于计
 
 
 vfn2 = np.vectorize(fn2)
-
-
 ##############################################################################################
+
+
 def tiny_convert(ndarray: np.ndarray, mode: str, change_list: list[int]) -> np.ndarray | None:
     """极小型指标转化为极大型指标
 
@@ -54,7 +51,7 @@ def tiny_convert(ndarray: np.ndarray, mode: str, change_list: list[int]) -> np.n
         print('请正确地选择模式')
 
 
-def middle_convert(ndarray: np.ndarray, change_list: list[int], best_value: list[num]) -> np.ndarray | None:
+def middle_convert(ndarray: np.ndarray, change_list: list[int], best_value: list[int | float]) -> np.ndarray | None:
     """中间型指标转化为极大型指标
 
     Args:
@@ -78,7 +75,7 @@ def middle_convert(ndarray: np.ndarray, change_list: list[int], best_value: list
         return copy_matrix
 
 
-def moderate_convert(ndarray: np.ndarray, change_list: list[int], low_limit: list[num], high_limit: list[num]) -> np.ndarray | None:
+def moderate_convert(ndarray: np.ndarray, change_list: list[int], low_limit: list[int | float], high_limit: list[int | float]) -> np.ndarray | None:
     """适度性指标转化为极大型指标
 
     Args:
