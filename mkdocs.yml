@@ -19,8 +19,8 @@ nav:
       - index_calmeth: examples/index_calmeth.md
 
 theme:
-  icon:
-    repo: fontawesome/brands/github
+  favicon: assets/icon.svg
+  logo: assets/icon.svg
   features:
     - search.suggest
     - search.highlight

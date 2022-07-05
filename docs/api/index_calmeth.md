@@ -22,15 +22,15 @@ tiny_convert(ndarray, mode, change_list)
   
   转换模式。mode='0' 是 *1/x* 模式，而mode='1'为*max(x)-x*模式。
 
-- `change_list` : list[int]
+- `change_list` : list of ints
   
   待转换指标下标构成的列表。
 
 **Returns**:
 
-- `result_array` : np.ndarray | None
+- `result_array` : np.ndarray
   
-  如果参数输入正确，返回全部转换为正向指标的数据集，否则返回None。
+  返回全部转换为正向指标的数据集。
 
 
 
@@ -48,19 +48,19 @@ middle_convert(ndarray, change_list, best_value)
   
   待转换数据集。
 
-- `change_list` : list[int]
+- `change_list` : list of ints
   
   待转换指标下标构成的列表。
 
-- `best_value` : list[int|float]
+- `best_value` : list of ints or floats
   
   待转换指标的最佳值组成的列表。
 
 **Returns**:
 
-- `result_array` : np.ndarray | None
+- `result_array` : np.ndarray
   
-  如果参数输入正确，返回全部转换为正向指标的数据集，否则返回None。
+  返回全部转换为正向指标的数据集。
 
 
 
@@ -78,23 +78,23 @@ moderate_convert(ndarray, change_list, low_limit, high_limit)
   
   待转换数据集。
 
-- `change_list` : list[int]
+- `change_list` : list of ints
   
   待转换指标下标构成的列表。
 
-- `low_limit` : list[int|float]
+- `low_limit` : list of ints or floats
   
   待转换指标适度区间的下限组成的列表。
 
-- `high_limit` : list[int|float]
+- `high_limit` : list of ints or floats
   
   待转换指标适度区间的上限组成的列表。
 
 **Returns**:
 
-- `result_array` : np.ndarray | None
+- `result_array` : np.ndarray
   
-  如果参数输入正确，返回全部转换为正向指标的数据集，否则返回None。
+  返回全部转换为正向指标的数据集。
 
 
 
@@ -118,9 +118,9 @@ toone(origin_array, mode)
 
 **Returns**:
 
-- `result_array` : np.ndarray | None
+- `result_array` : np.ndarray
   
-  如果参数输入正确，返回归一化的数据集，否则返回None。
+  返回归一化的数据集。
 
 
 
@@ -205,7 +205,7 @@ rsr(data_origin, weights)
   
   正向化之后的指标数据
 
-- `weights` : list | np.ndarray
+- `weights` : list(np.ndarray) of ints or floats
   
   指标权重数据
 
@@ -231,7 +231,7 @@ ni_rsr(data_origin, weights)
   
   正向化之后的指标数据
 
-- `weights` : list | np.ndarray
+- `weights` : list(np.ndarray) of ints or floats
   
   指标权重数据
 
@@ -255,7 +255,7 @@ topsis(data_origin, weights)
   
   正向化之后的指标数据
 
-- `weights` : list | np.ndarray
+- `weights` : list(np.ndarray) of ints or floats
   
   指标权重数据
 
