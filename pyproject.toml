@@ -1,6 +1,6 @@
 [project]
 name = "Rh-s-PyTool"
-version = "0.1.6alpha"
+version = "0.1.6"
 description = "Python code instruments that could be used for index comprehensive evaluation."
 authors = [
     {name = "skahanium", email = "skahanium@gmail.com"},

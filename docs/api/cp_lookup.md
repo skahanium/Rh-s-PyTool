@@ -20,9 +20,9 @@ ptwoc(province)
 
 **Returns**:
 
-- `cities` : tuple[str, ...] | None
+- `cities` : tuple of strings
   
-  目标省份所有地级行政区的名称。如果没有找到查询的省辖区，返回None。
+  目标省份所有地级行政区的名称。
 
 ### ctwop
 
@@ -40,9 +40,9 @@ ctwop(city)
 
 **Returns**:
 
-- `province` : str | None
+- `province` : str
   
-  目标城市所属的省级行政区名称。如果没有找到查询的地级行政区域，返回None。
+  目标城市所属的省级行政区名称。
 
 ### fillup_city
 
@@ -60,9 +60,9 @@ fillup_city(city)
 
 **Returns**:
 
-- `city` : str | None
+- `city` : str
   
-  地级行政区的全名。如果查询的名称有误，则返回None。
+  地级行政区的全名。
 
 ## cp_lookup.add_ll
 
@@ -82,7 +82,7 @@ pro_info(province)
 
 **Returns**:
 
-- `coordinate` : tuple[float, float]
+- `coordinate` : tuple of floats
   
   目标省份行政中心的经纬度
 
@@ -102,7 +102,7 @@ city_info(city)
 
 **Returns**:
 
-- `coordinate` : tuple[float, float]
+- `coordinate` : tuple of floats
   
   目标城市行政中心的经纬度
 
