@@ -1,5 +1,5 @@
 import numpy as np
-import index_calmeth.non_dimension as icn
+from .non_dimension import toone
 
 
 def topsis(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.ndarray:
@@ -13,7 +13,7 @@ def topsis(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> 
         np.matrix: 若参数无误，返回得分数据，否则返回None
     """
     data = data_origin.copy()
-    data = icn.toone(data, mode='3')
+    data = toone(data, mode='3')
     assert isinstance(data, np.ndarray)
     m, n = data.shape
 

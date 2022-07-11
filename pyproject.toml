@@ -8,7 +8,11 @@ authors = [
 readme = "README.md"
 dependencies = [
     "numpy>=1.22.3",
-    "plum-dispatch>=1.6"]
+    "plum-dispatch>=1.6",
+    "pandas>=1.4.3",
+    "openpyxl>=3.2.0b1",
+    "cpca>=0.5.5",
+]
 requires-python = ">=3.10, <3.11"
 license = {text = "MIT"}
 
@@ -28,7 +32,7 @@ build-backend = "pdm.pep517.api"
 
 
 [project.optional-dependencies]
-others = ["pandas", "openpyxl", "pyecharts", "notebook"]
+others = ["pyecharts", "notebook"]
 
 
 [tool.pdm.dev-dependencies]
