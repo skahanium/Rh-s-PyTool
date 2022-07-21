@@ -1,137 +1,115 @@
-import pandas as pd
-import numpy as np
-import re
 from math import radians, cos, sin, asin, sqrt
-
-data = np.array(pd.read_csv("src/attachment/adcodes.csv"))
-areas = np.unique(data[:, 1])
-
-
-def _level_judge(adcode: int) -> int:
-    """根据adcode对地区行政等级进行判断。
-
-    Args:
-        adcode (int): 12位adcode
-
-    Returns:
-        int: 1：省级行政区；2:地级行政区；3:县级行政区
-    """
-    if str.endswith(str(adcode), "0"*10):
-        return 1
-    elif str.endswith(str(adcode), "0"*8):
-        return 2
-    else:
-        return 3
+from jieba import lcut
+import pandas as pd
 
 
-def _father_code(adcode: int) -> int:
-    """对于地级或县级行政区会根据adcode返回上级行政区的adcode，对于升级行政区会返回自身的adcode。
-
-    Args:
-        adcode (int): 12位adcode
-
-    Returns:
-        int: 返回的上级行政区adcode或自身的adcode。
-    """
-    if _level_judge(adcode) == 1:
-        return adcode
-    elif _level_judge(adcode) == 2:
-        return adcode // (10**10) * (10**10)
-    else:
-        return adcode // (10**8) * (10**8)
+data = pd.read_csv("src/attachment/adcodes.csv").set_index("adcode")
+data.sort_index(inplace=True)
 
 
-class Addr_info():
-    """
-    根据行政区名称或adcode创建的类，包含了行政区名称、adcode、坐标、行政等级、上级行政区adcode、上级行政区名称等属性，以及一个判断行政区是否属于另一个行政区的方法。
-    """
+class Addr():
+    """以区域名构建一个地区的类，包含该地区的adcode、区域名、经纬度等信息。"""
 
-    def __init__(self, name: str, adcode=None):
-        obj = data[data[:, 1] ==
-                   name] if adcode is None else data[data[:, 0] == adcode]
-        _m, _ = obj.shape
-        if _m == 1:
-            self.info = obj
-            self.name = name
-            self.adcode = self.info[0, 0]
-            self.longitude = self.info[0, 2]
-            self.latitude = self.info[0, 3]
-            self.level = _level_judge(self.adcode)
-            self.fcode = _father_code(self.adcode)
-            self.father = data[data[:, 0] == self.fcode][0, 1]
-        elif _m == 0:
-            print("请输入正确地名或adcode")
+    def __init__(self, name: str, adcode: int | None = None):
+        if adcode:
+            self.addr = data.loc[data.index == adcode]
         else:
-            print("区域名称存在重复对象，请另输入adcode")
+            info = lcut(name)
+            levels = len(info)
+            match levels:
+                case 1:
+                    addr = info[-1]
+                    if len(data.loc[data["name"].str.match(addr)]) != 1:
+                        print("地名重复或有误！")
+                    else:
+                        self.addr = data.loc[data["name"].str.match(addr)]
+                case 2:
+                    addr = info[-1]
+                    father = info[0]
+                    if len(data.loc[data["name"].str.match(addr)]) != 1:
+                        fcode = data.loc[data["name"].str.match(father)].index
+                        for code in data.loc[data["name"].str.match(addr)].index.to_list():
+                            if (code//10**8 == fcode//10**8) | (code//10**10 == fcode//10**10):  # type: ignore
+                                self.addr = data.loc[data.index == code]
+                    else:
+                        self.addr = data.loc[data["name"].str.match(addr)]
+                case 3:
+                    addr = info[-1]
+                    father = info[1]
+                    gdfather = info[0]
+                    if len(data.loc[data["name"].str.match(addr)]) != 1:
+                        fcode = data.loc[data["name"].str.match(father)].index
+                        gfcode = data.loc[data["name"].str.match(
+                            gdfather)].index
+                        for code in data.loc[data["name"].str.match(addr)].index.to_list():
+                            if code//10**10 == fcode//10**10 == gfcode//10**10:  # type: ignore
+                                self.addr = data.loc[data.index == code]
+                    else:
+                        self.addr = data.loc[data["name"].str.match(addr)]
 
-    def belongs_to(self, another: str) -> bool:
-        """判断行政区是否属于另一个行政区的方法。
+    def _belongs_to(self) -> str | None:
+        code = self.addr.index.to_list()[0]
+        fcode = code // 10**8 * 10**8 if code % 10**8 != 0 else code // 10**10 * 10**10
+        return data.at[fcode, "name"]
 
-        Args:
-            another (str): 另一个行政区的名称
-
-        Returns:
-            bool: 判断的结果
-        """
-        return self.father == another
+    def _coordinate(self) -> tuple[float, float]:
+        code = self.addr.index.to_list()[0]
+        return data.at[code, "latitude"], data.at[code, "longitude"]
 
 
-def fillup(name: str) -> list | None:
-    """根据行政区简称进行补全，并返回所有符合的对象。
+def lookup(name: str) -> str | None:
+    """根据地名简称查找全称
 
     Args:
-        name (str): 行政区简称（当然，非要用全称也可以）
+        name (str): 待查找地名
 
     Returns:
-        list | None: 全部补全结果。
+        str | None: 地名全称
     """
-    if len(name) >= 3:
-        result = [area for area in areas if re.search(name, area)]
-        if not result:
-            result = [area for area in areas if re.search(name[:-1], area)]
-        return result
-    elif len(name) == 2:
-        result = []
-        result.extend(area for area in areas if re.search(name, area))
-        return result
-    else:
-        print("单个字无法查询")
+    code = Addr(name).addr.index.to_list()[0]
+    return data.at[code, "name"]
 
 
-def lookup(name: str, level: int, adcode: int | None = None, add_father: bool = True) -> str | None:
-    """根据行政区名称（或简称）、行政等级或adcode精确查找。考虑到某些区域会重名，可以调节add_father参数来决定是否要添加上级行政区名作为前缀以进行区分。
+def belongs_to(name: str) -> str | None:
+    """根据地名查找其上级行政区名称
 
     Args:
-        name (str): 行政区名称（或简称）
-        level (int): 行政等级。1：省级行政区；2:地级行政区；3:县级行政区
-        adcode (int | None, optional): 12位adcode
-        add_father (bool, optional): 是否要添加上级行政区名作为前缀，默认为True。
+        name (str): 待查找地名
 
     Returns:
-        str | None: 查找结果
+        str | None: 上级行政区全称
     """
-    objs = fillup(name)
-    assert objs is not None
-    for obj in objs:
-        if Addr_info(obj, adcode=adcode).level == level:
-            return Addr_info(obj, adcode=adcode).father + obj if add_father else obj
+    return Addr(name)._belongs_to()
 
 
-def haversine(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
+def coordinate(name: str) -> tuple[float, float]:
+    """根据区域名得到其行政中心的坐标
+
+    Args:
+        name (str): 行政区名称
+
+    Returns:
+        tuple[float, float]: 行政中心经纬度
+    """
+    lat, lon = Addr(name)._coordinate()
+    return lat, lon
+
+
+def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     """利用两个地点的经纬度计算球面距离
 
     Args:
-        lon1 (float): 地区1的经度
         lat1 (float): 地区1的纬度
-        lon2 (float): 地区2的经度
+        lon1 (float): 地区1的经度
         lat2 (float): 地区2的纬度
+        lon2 (float): 地区2的经度
 
     Returns:
         float: 球面距离，单位：km
     """
     # 将十进制度数转化为弧度
-    lon1, lat1, lon2, lat2 = map(
-        radians, [lon1, lat1, lon2, lat2])  # radians：将角度转化为弧度
+    lat1, lon1, lat2, lon2 = map(
+        radians, [lat1, lon1, lat2, lon2])  # radians：将角度转化为弧度
 
     # haversine（半正矢）公式
     dlon = lon2 - lon1
@@ -142,7 +120,7 @@ def haversine(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
     return c * r
 
 
-def dist(city1: str, city2: str) -> float:  # type: ignore
+def dist(city1: str, city2: str) -> float:
     """利用两个地区的城市名称计算球面距离
 
     Args:
@@ -152,4 +130,6 @@ def dist(city1: str, city2: str) -> float:  # type: ignore
     Returns:
         float: 球面距离，单位：km
     """
-    return haversine(Addr_info(city1).longitude, Addr_info(city1).latitude, Addr_info(city2).longitude, Addr_info(city2).latitude)
+    city1_lat, city1_lon = coordinate(city1)
+    city2_lat, city2_lon = coordinate(city2)
+    return haversine(city1_lat, city1_lon, city2_lat, city2_lon)

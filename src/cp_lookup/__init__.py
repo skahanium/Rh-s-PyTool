@@ -1,1 +1,1 @@
-from .main import Addr_info, fillup, lookup, dist
+from .main import Addr, belongs_to, lookup, dist, coordinate, haversine
