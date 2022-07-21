@@ -6,7 +6,7 @@
 
 ## 导入必要模块
 ```python
->>>from cp_lookup.cp_lookup import fillup_city   # 区域名处理模块
+>>>from cp_lookup import lookup                  # 区域名处理模块
 >>>import index_calmeth.non_dimension as icn     # 无量纲化模块
 >>>import index_calmeth.weights as icw           # 权重计算模块
 >>>import index_calmeth.evaluation as ice        # 评价打分模块
@@ -41,7 +41,7 @@
 ### 补全州市名称
 这一步本不是必要，但各个数据平台的数据中地区名有的是简称，有的是全称，像黔西南、凉山等地区简称和全称差距不小。为了研究的方便，最好还是统一为全称。
 ```python
->>>data["州市"] = data["州市"].apply(fillup_city)
+>>>data["州市"] = data["州市"].apply(lookup)
 >>>data.head()
 ```
 <center>
