@@ -183,6 +183,28 @@ std(origin_array)
 
 ---
 
+### gini
+
+```python
+gini(origin_array)
+```
+
+对于给定指标数据使用基尼系数法计算各指标权重，具体用法参照[示例](../examples/index_calmeth.md#gini)。
+
+**Arguments**:
+
+- `origin_array` : np.ndarray
+  
+  给定指标数据。
+
+**Returns**:
+
+- `stddev_weights` : np.ndarray
+  
+  返回得到的基尼系数法权重。
+
+---
+
 ---
 ## index_calmeth.rating_method
 ### rsr
