@@ -1,9 +1,9 @@
 from math import radians, cos, sin, asin, sqrt
 from jieba import lcut
 import pandas as pd
+from attachment import csv_dir
 
-
-data = pd.read_csv("src/attachment/adcodes.csv").set_index("adcode")
+data = pd.read_csv(csv_dir).set_index("adcode")
 data.sort_index(inplace=True)
 
 
