@@ -1,10 +1,10 @@
 import itertools
 import numpy as np
-import index_calmeth.non_dimension as icn
+from .non_dimension import toone
 
 
-def variability(data_origin: np.ndarray) -> np.ndarray:  # 指标变异性数据
-    data = icn.toone(data_origin.copy(), mode='0')
+def __variability(data_origin: np.ndarray) -> np.ndarray:  # critic方法指标变异性数据
+    data = toone(data_origin.copy(), mode='0')
     assert isinstance(data, np.ndarray)
     m, n = data.shape
 
@@ -17,7 +17,7 @@ def variability(data_origin: np.ndarray) -> np.ndarray:  # 指标变异性数据
     return np.array(variabilities)
 
 
-def conflict(data_origin: np.ndarray) -> np.ndarray:  # 指标冲突性数据
+def __conflict(data_origin: np.ndarray) -> np.ndarray:  # critic方法指标冲突性数据
     corr_matrix = np.corrcoef(data_origin, rowvar=False)
     conflicts = []
     p, q = corr_matrix.shape
@@ -36,8 +36,8 @@ def critic(data_origin: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: critic权重数组
     """
-    info1 = variability(data_origin)
-    info2 = conflict(data_origin)
+    info1 = __variability(data_origin)
+    info2 = __conflict(data_origin)
     information = np.array(info1) * np.array(info2)
     information[np.isnan(information)] = 0
 
@@ -58,7 +58,7 @@ def ewm(data_origin: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: ewm权重数组
     """
-    data = icn.toone(data_origin.copy(), mode='0')
+    data = toone(data_origin.copy(), mode='0')
     assert isinstance(data, np.ndarray)
     m, n = data.shape
     entropy = []
@@ -82,7 +82,7 @@ def stddev(data_origin: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: stddev权重数组
     """
-    data = icn.toone(data_origin.copy(), mode='0')
+    data = toone(data_origin.copy(), mode='0')
     assert isinstance(data, np.ndarray)
     _, n = data.shape
 

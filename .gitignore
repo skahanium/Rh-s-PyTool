@@ -8,5 +8,7 @@ __pypackages__/
 .ipynb_checkpoints
 .pdm.toml
 dist
+.venv
 .env
 example/
+.pytest_cache

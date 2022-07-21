@@ -1,8 +1,8 @@
 import numpy as np
-import index_calmeth.non_dimension as icn
+from .non_dimension import toone
 
 
-def topsis(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.ndarray:
+def topsis(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.matrix:
     """计算优劣解距离法得分矩阵，weights为权重矩阵。
 
     Args:
@@ -13,7 +13,7 @@ def topsis(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> 
         np.matrix: 若参数无误，返回得分数据，否则返回None
     """
     data = data_origin.copy()
-    data = icn.toone(data, mode='3')
+    data = toone(data, mode='3')
     assert isinstance(data, np.ndarray)
     m, n = data.shape
 
@@ -29,10 +29,10 @@ def topsis(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> 
     d1: np.ndarray = np.sqrt(empty_matrix1.sum(axis=1))
     d2: np.ndarray = np.sqrt(empty_matrix2.sum(axis=1))
     result: np.ndarray = (d2/(d1+d2))
-    return result.reshape(result.shape[0], 1)
+    return np.mat(result.reshape(result.shape[0], 1))
 
 
-def rsr(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.ndarray:
+def rsr(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.matrix:
     """计算整次秩和比得分矩阵，weights为权重矩阵。
 
     Args:
@@ -49,10 +49,10 @@ def rsr(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.
     for q in range(n):
         compare_list: np.ndarray = np.sort(data[:, q])
         rsr_matrix[:, q] = np.searchsorted(compare_list, data[:, q])
-    return rsr_matrix * np.matrix(weights).T / m
+    return rsr_matrix * np.mat(weights).T / m   # type: ignore
 
 
-def ni_rsr(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.ndarray:
+def ni_rsr(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> np.matrix:
     """计算非整次秩和比得分矩阵，weights为权重矩阵。
 
     Args:
@@ -71,4 +71,4 @@ def ni_rsr(data_origin: np.ndarray, weights: list[int | float] | np.ndarray) -> 
         min_v = data[:, q].min()
         rsr_matrix[:, q] = 1 + \
             ((m - 1) * (data[:, q] - min_v) / (max_v - min_v))
-    return rsr_matrix * np.matrix(weights).T / m
+    return rsr_matrix * np.mat(weights).T / m  # type: ignore

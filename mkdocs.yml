@@ -37,11 +37,13 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
+      primary: indigo
       toggle:
         icon: material/weather-sunny
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
+      primary: indigo
       toggle:
         icon: material/weather-night
         name: Switch to light mode
@@ -49,13 +51,6 @@ theme:
 plugins:
   - search:
       separator: '[\\s\\u200b\\-]'
-
-extra:
-  version:
-    provider: mike
-  analytics:
-    provider: google
-    property: G-XXXXXXXXXX
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -73,6 +68,14 @@ markdown_extensions:
   - pymdownx.details
   - footnotes
   - abbr
+  - toc:
+      permalink: true
+      title: 目录
+
+extra:
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
 
 extra_javascript:
   - javascripts/mathjax.js
