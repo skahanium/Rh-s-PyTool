@@ -1,0 +1,1075 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/skahanium/Rh-s-PyTool-Documentation/examples/index_calmeth/">
+      
+      <link rel="icon" href="../../assets/icon.svg">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>index_calmeth - Rh-s-PyTool</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-XXXXXXXXXX"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&gtag("event","search",{search_term:this.value})}),"undefined"!=typeof location$&&location$.subscribe(function(e){gtag("config","G-XXXXXXXXXX",{page_path:e.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#index_calmethnon_dimension" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="Rh-s-PyTool" class="md-header__button md-logo" aria-label="Rh-s-PyTool" data-md-component="logo">
+      
+  <img src="../../assets/icon.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rh-s-PyTool
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              index_calmeth
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/skahanium/Rh-s-PyTool" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    skahanium/Rh-s-PyTool
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Start
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../methods/TOPSIS/" class="md-tabs__link">
+        Methods
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/cp_lookup/" class="md-tabs__link">
+        API
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cp_lookup/" class="md-tabs__link md-tabs__link--active">
+        Examples
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Rh-s-PyTool" class="md-nav__button md-logo" aria-label="Rh-s-PyTool" data-md-component="logo">
+      
+  <img src="../../assets/icon.svg" alt="logo">
+
+    </a>
+    Rh-s-PyTool
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/skahanium/Rh-s-PyTool" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    skahanium/Rh-s-PyTool
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Start
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Start" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Start
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/" class="md-nav__link">
+        快速开始
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Methods
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Methods" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Methods
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../methods/TOPSIS/" class="md-nav__link">
+        Topsis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/cp_lookup/" class="md-nav__link">
+        cp_lookup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/index_calmeth/" class="md-nav__link">
+        index_calmeth
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Examples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cp_lookup/" class="md-nav__link">
+        cp_lookup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          index_calmeth
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        index_calmeth
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index_calmethnon_dimension" class="md-nav__link">
+    index_calmeth.non_dimension
+  </a>
+  
+    <nav class="md-nav" aria-label="index_calmeth.non_dimension">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tiny_convert" class="md-nav__link">
+    tiny_convert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middle_convert" class="md-nav__link">
+    middle_convert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moderate_convert" class="md-nav__link">
+    moderate_convert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toone" class="md-nav__link">
+    toone
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index_calmethweights" class="md-nav__link">
+    index_calmeth.weights
+  </a>
+  
+    <nav class="md-nav" aria-label="index_calmeth.weights">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#critic" class="md-nav__link">
+    critic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ewm" class="md-nav__link">
+    ewm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stddev" class="md-nav__link">
+    stddev
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gini" class="md-nav__link">
+    gini
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index_calmethevaluation" class="md-nav__link">
+    index_calmeth.evaluation
+  </a>
+  
+    <nav class="md-nav" aria-label="index_calmeth.evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rsr" class="md-nav__link">
+    rsr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ni_rsr" class="md-nav__link">
+    ni_rsr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topsis" class="md-nav__link">
+    topsis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index_calmethnon_dimension" class="md-nav__link">
+    index_calmeth.non_dimension
+  </a>
+  
+    <nav class="md-nav" aria-label="index_calmeth.non_dimension">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tiny_convert" class="md-nav__link">
+    tiny_convert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middle_convert" class="md-nav__link">
+    middle_convert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moderate_convert" class="md-nav__link">
+    moderate_convert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toone" class="md-nav__link">
+    toone
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index_calmethweights" class="md-nav__link">
+    index_calmeth.weights
+  </a>
+  
+    <nav class="md-nav" aria-label="index_calmeth.weights">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#critic" class="md-nav__link">
+    critic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ewm" class="md-nav__link">
+    ewm
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stddev" class="md-nav__link">
+    stddev
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gini" class="md-nav__link">
+    gini
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index_calmethevaluation" class="md-nav__link">
+    index_calmeth.evaluation
+  </a>
+  
+    <nav class="md-nav" aria-label="index_calmeth.evaluation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rsr" class="md-nav__link">
+    rsr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ni_rsr" class="md-nav__link">
+    ni_rsr
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topsis" class="md-nav__link">
+    topsis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>index_calmeth</h1>
+
+<h2 id="index_calmethnon_dimension">index_calmeth.non_dimension<a class="headerlink" href="#index_calmethnon_dimension" title="Permanent link">&para;</a></h2>
+<p>index_calmeth.non_dimension是一个对数据进行预处理的模块，主要用于进行正向化和无量纲化。</p>
+<p>导入必要的模块与函数，（随意）创建一个待转换数据组。假设每一列代表一个指标的观测值，而现在需要对第2、4个数据进行正向化，或者对所有数据进行无量纲化：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span><span class="kn">from</span> <span class="nn">index_calmeth.non_dimension</span> <span class="kn">import</span> <span class="n">tiny_convert</span><span class="p">,</span> <span class="n">middle_convert</span><span class="p">,</span> <span class="n">moderate_convert</span><span class="p">,</span> <span class="n">toone</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="o">&gt;&gt;&gt;</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">&gt;&gt;&gt;</span><span class="n">test_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">25.3</span><span class="p">,</span> <span class="mf">79.2</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mf">41.04</span><span class="p">,</span> <span class="mf">177.395</span><span class="p">],</span> 
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                          <span class="p">[</span><span class="mf">65.65</span><span class="p">,</span> <span class="mf">57.24</span><span class="p">,</span> <span class="mf">23.5</span><span class="p">,</span> <span class="mf">45.5</span><span class="p">,</span> <span class="mf">45.5</span><span class="p">],</span> 
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                          <span class="p">[</span><span class="mf">0.175</span><span class="p">,</span> <span class="mf">51.24</span><span class="p">,</span> <span class="mi">711</span><span class="p">,</span> <span class="mf">6.28</span><span class="p">,</span> <span class="mf">65.23</span><span class="p">],</span> 
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                          <span class="p">[</span><span class="mf">0.175</span><span class="p">,</span> <span class="mf">51.24</span><span class="p">,</span> <span class="mi">711</span><span class="p">,</span> <span class="mf">6.28</span><span class="p">,</span> <span class="mf">65.23</span><span class="p">],</span> 
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                          <span class="p">[</span><span class="mf">186.4</span><span class="p">,</span> <span class="mf">357.3</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span> <span class="mf">1.54</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+</code></pre></div>
+<h3 id="tiny_convert">tiny_convert<a class="headerlink" href="#tiny_convert" title="Permanent link">&para;</a></h3>
+<p>假设第2、4个指标为负向指标，现将其转化为正向指标，接口说明参照<a href="../../api/index_calmeth/#tiny_convert">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">tiny_convert</span><span class="p">(</span><span class="n">test_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">change_list</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">[[</span><span class="mf">2.53000000e+01</span> <span class="mf">1.26262626e-02</span> <span class="mf">2.10000000e+01</span> <span class="mf">2.43664717e-02</span> <span class="mf">1.77395000e+02</span><span class="p">]</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> <span class="p">[</span><span class="mf">6.56500000e+01</span> <span class="mf">1.74703005e-02</span> <span class="mf">2.35000000e+01</span> <span class="mf">2.19780220e-02</span> <span class="mf">4.55000000e+01</span><span class="p">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> <span class="p">[</span><span class="mf">1.75000000e-01</span> <span class="mf">1.95160031e-02</span> <span class="mf">7.11000000e+02</span> <span class="mf">1.59235669e-01</span> <span class="mf">6.52300000e+01</span><span class="p">]</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a> <span class="p">[</span><span class="mf">1.75000000e-01</span> <span class="mf">1.95160031e-02</span> <span class="mf">7.11000000e+02</span> <span class="mf">1.59235669e-01</span> <span class="mf">6.52300000e+01</span><span class="p">]</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a> <span class="p">[</span><span class="mf">1.86400000e+02</span> <span class="mf">2.79876854e-03</span> <span class="mf">2.27000000e+02</span> <span class="mf">6.49350649e-01</span> <span class="mf">5.00000000e+00</span><span class="p">]]</span>
+</code></pre></div>
+<hr />
+<h3 id="middle_convert">middle_convert<a class="headerlink" href="#middle_convert" title="Permanent link">&para;</a></h3>
+<p>假设第2、4个指标为中间型指标，现将其转化为正向指标，接口说明参照<a href="../../api/index_calmeth/#middle_convert">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">middle_convert</span><span class="p">(</span><span class="n">test_array</span><span class="p">,</span> <span class="n">change_list</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">best_value</span><span class="o">=</span><span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">20</span><span class="p">]))</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">[[</span><span class="mf">2.53000000e+01</span> <span class="mf">9.67322688e-01</span> <span class="mf">2.10000000e+01</span> <span class="mf">1.74901961e-01</span> <span class="mf">1.77395000e+02</span><span class="p">]</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a> <span class="p">[</span><span class="mf">6.56500000e+01</span> <span class="mf">8.85777943e-01</span> <span class="mf">2.35000000e+01</span> <span class="mf">0.00000000e+00</span> <span class="mf">4.55000000e+01</span><span class="p">]</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a> <span class="p">[</span><span class="mf">1.75000000e-01</span> <span class="mf">8.63497958e-01</span> <span class="mf">7.11000000e+02</span> <span class="mf">4.61960784e-01</span> <span class="mf">6.52300000e+01</span><span class="p">]</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a> <span class="p">[</span><span class="mf">1.75000000e-01</span> <span class="mf">8.63497958e-01</span> <span class="mf">7.11000000e+02</span> <span class="mf">4.61960784e-01</span> <span class="mf">6.52300000e+01</span><span class="p">]</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a> <span class="p">[</span><span class="mf">1.86400000e+02</span> <span class="mf">0.00000000e+00</span> <span class="mf">2.27000000e+02</span> <span class="mf">2.76078431e-01</span> <span class="mf">5.00000000e+00</span><span class="p">]]</span>
+</code></pre></div>
+<hr />
+<h3 id="moderate_convert">moderate_convert<a class="headerlink" href="#moderate_convert" title="Permanent link">&para;</a></h3>
+<p>假设第2、4个指标为适度型指标，现将其转化为正向指标，接口说明参照<a href="../../api/index_calmeth/#moderate_convert">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">moderate_convert</span><span class="p">(</span><span class="n">test_array</span><span class="p">,</span> <span class="n">change_list</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">low_limit</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mf">12.5</span><span class="p">],</span> <span class="n">high_limit</span><span class="o">=</span><span class="p">[</span><span class="mf">71.2</span><span class="p">,</span> <span class="mf">19.63</span><span class="p">]))</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">[[</span><span class="mf">2.53000000e+01</span> <span class="mf">9.72037749e-01</span> <span class="mf">2.10000000e+01</span> <span class="mf">1.72400464e-01</span> <span class="mf">1.77395000e+02</span><span class="p">]</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a> <span class="p">[</span><span class="mf">6.56500000e+01</span> <span class="mf">9.90353023e-01</span> <span class="mf">2.35000000e+01</span> <span class="mf">0.00000000e+00</span> <span class="mf">4.55000000e+01</span><span class="p">]</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a> <span class="p">[</span><span class="mf">1.75000000e-01</span> <span class="mf">9.69381335e-01</span> <span class="mf">7.11000000e+02</span> <span class="mf">7.59567066e-01</span> <span class="mf">6.52300000e+01</span><span class="p">]</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a> <span class="p">[</span><span class="mf">1.75000000e-01</span> <span class="mf">9.69381335e-01</span> <span class="mf">7.11000000e+02</span> <span class="mf">7.59567066e-01</span> <span class="mf">6.52300000e+01</span><span class="p">]</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a> <span class="p">[</span><span class="mf">1.86400000e+02</span> <span class="mf">0.00000000e+00</span> <span class="mf">2.27000000e+02</span> <span class="mf">5.76343255e-01</span> <span class="mf">5.00000000e+00</span><span class="p">]]</span>
+</code></pre></div>
+<hr />
+<h3 id="toone">toone<a class="headerlink" href="#toone" title="Permanent link">&para;</a></h3>
+<p>对所有数据进行无量纲化（模式”1“代表均值归一化），接口说明参照<a href="../../api/index_calmeth/#toone">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">toone</span><span class="p">(</span><span class="n">test_array</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">))</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">[[</span><span class="o">-</span><span class="mf">0.16238421</span> <span class="o">-</span><span class="mf">0.13083709</span> <span class="o">-</span><span class="mf">0.46043478</span>  <span class="mf">0.47570519</span>  <span class="mf">0.61326605</span><span class="p">]</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a> <span class="p">[</span> <span class="mf">0.05428917</span> <span class="o">-</span><span class="mf">0.20258773</span> <span class="o">-</span><span class="mf">0.45681159</span>  <span class="mf">0.57716106</span> <span class="o">-</span><span class="mf">0.15180835</span><span class="p">]</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a> <span class="p">[</span><span class="o">-</span><span class="mf">0.29730165</span> <span class="o">-</span><span class="mf">0.22219173</span>  <span class="mf">0.53956522</span> <span class="o">-</span><span class="mf">0.31501365</span> <span class="o">-</span><span class="mf">0.03736187</span><span class="p">]</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a> <span class="p">[</span><span class="o">-</span><span class="mf">0.29730165</span> <span class="o">-</span><span class="mf">0.22219173</span>  <span class="mf">0.53956522</span> <span class="o">-</span><span class="mf">0.31501365</span> <span class="o">-</span><span class="mf">0.03736187</span><span class="p">]</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a> <span class="p">[</span> <span class="mf">0.70269835</span>  <span class="mf">0.77780827</span> <span class="o">-</span><span class="mf">0.16188406</span> <span class="o">-</span><span class="mf">0.42283894</span> <span class="o">-</span><span class="mf">0.38673395</span><span class="p">]]</span>
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="index_calmethweights">index_calmeth.weights<a class="headerlink" href="#index_calmethweights" title="Permanent link">&para;</a></h2>
+<p>index_calmeth.weights是一个客观赋权的模块，可以用于计算不同指标的权重。</p>
+<p>导入必要的模块与函数，（随意）创建一个待转换数据组。以该数据组的每一列作为一个评价指标，计算每个指标的权重：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">&gt;&gt;&gt;</span><span class="kn">from</span> <span class="nn">index_calmeth.weights</span> <span class="kn">import</span> <span class="n">critic</span><span class="p">,</span> <span class="n">ewm</span><span class="p">,</span> <span class="n">stddev</span><span class="p">,</span> <span class="n">expert</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">&gt;&gt;&gt;</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="o">&gt;&gt;&gt;</span><span class="n">test_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">25.3</span><span class="p">,</span> <span class="mf">79.2</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mf">41.04</span><span class="p">,</span> <span class="mf">177.395</span><span class="p">],</span> 
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>                          <span class="p">[</span><span class="mf">65.65</span><span class="p">,</span> <span class="mf">57.24</span><span class="p">,</span> <span class="mf">23.5</span><span class="p">,</span> <span class="mf">45.5</span><span class="p">,</span> <span class="mf">45.5</span><span class="p">],</span> 
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>                          <span class="p">[</span><span class="mf">0.175</span><span class="p">,</span> <span class="mf">51.24</span><span class="p">,</span> <span class="mi">711</span><span class="p">,</span> <span class="mf">6.28</span><span class="p">,</span> <span class="mf">65.23</span><span class="p">],</span> 
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>                          <span class="p">[</span><span class="mf">0.175</span><span class="p">,</span> <span class="mf">51.24</span><span class="p">,</span> <span class="mi">711</span><span class="p">,</span> <span class="mf">6.28</span><span class="p">,</span> <span class="mf">65.23</span><span class="p">],</span> 
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>                          <span class="p">[</span><span class="mf">186.4</span><span class="p">,</span> <span class="mf">357.3</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span> <span class="mf">1.54</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+</code></pre></div>
+<h3 id="critic">critic<a class="headerlink" href="#critic" title="Permanent link">&para;</a></h3>
+<p>利用critic赋权法计算指标权重，接口说明参照<a href="../../api/index_calmeth/#critic">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">critic</span><span class="p">(</span><span class="n">test_array</span><span class="p">))</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">[</span><span class="mf">0.16765873</span><span class="p">,</span> <span class="mf">0.17370798</span><span class="p">,</span> <span class="mf">0.27164073</span><span class="p">,</span> <span class="mf">0.22001484</span><span class="p">,</span> <span class="mf">0.16697772</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h3 id="ewm">ewm<a class="headerlink" href="#ewm" title="Permanent link">&para;</a></h3>
+<p>利用熵权法计算指标权重，接口说明参照<a href="../../api/index_calmeth/#ewm">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">ewm</span><span class="p">(</span><span class="n">test_array</span><span class="p">))</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">[</span><span class="mf">0.19189057</span> <span class="mf">0.1316655</span>  <span class="mf">0.21496771</span> <span class="mf">0.21786722</span> <span class="mf">0.243609</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h3 id="stddev">stddev<a class="headerlink" href="#stddev" title="Permanent link">&para;</a></h3>
+<p>利用标准离差法计算指标权重，接口说明参照<a href="../../api/index_calmeth/#stddev">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">stddev</span><span class="p">(</span><span class="n">test_array</span><span class="p">))</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">[</span><span class="mf">0.18866013</span> <span class="mf">0.19684011</span> <span class="mf">0.22877436</span> <span class="mf">0.21825414</span> <span class="mf">0.16747126</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h3 id="gini">gini<a class="headerlink" href="#gini" title="Permanent link">&para;</a></h3>
+<p>利用基尼系数法计算指标权重，接口说明参照<a href="../../api/index_calmeth/#gini">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">gini</span><span class="p">(</span><span class="n">test_array</span><span class="p">))</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">[</span><span class="mf">0.12055066</span><span class="p">,</span> <span class="mf">0.17619928</span><span class="p">,</span> <span class="mf">0.56913512</span><span class="p">,</span> <span class="mf">0.03377098</span><span class="p">,</span> <span class="mf">0.10034396</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<hr />
+<h2 id="index_calmethevaluation">index_calmeth.evaluation<a class="headerlink" href="#index_calmethevaluation" title="Permanent link">&para;</a></h2>
+<p>index_calmeth.evaluation是一个综合评价的模块，可以利用其为多指标数据进行总体评分。</p>
+<p>导入必要的模块与函数，（随意）创建一个待转换数据组。以该数据组的每一列作为一个评价指标，且假设都已经过正向化：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="o">&gt;&gt;&gt;</span><span class="kn">from</span> <span class="nn">index_calmeth.evaluation</span> <span class="kn">import</span> <span class="n">rsr</span><span class="p">,</span> <span class="n">ni_rsr</span><span class="p">,</span> <span class="n">topsis</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="o">&gt;&gt;&gt;</span><span class="kn">from</span> <span class="nn">index_calmeth.weights</span> <span class="kn">import</span> <span class="n">critic</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="o">&gt;&gt;&gt;</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="o">&gt;&gt;&gt;</span><span class="n">test_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="rsr">rsr<a class="headerlink" href="#rsr" title="Permanent link">&para;</a></h3>
+<p>利用整次秩和比方法打分，接口说明参照<a href="../../api/index_calmeth/#rsr">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">rsr</span><span class="p">(</span><span class="n">test_array</span><span class="p">,</span> <span class="n">critic</span><span class="p">(</span><span class="n">test_array</span><span class="p">)))</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">[[</span><span class="mf">0.47298203</span><span class="p">],</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a> <span class="p">[</span><span class="mf">0.59557394</span><span class="p">],</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a> <span class="p">[</span><span class="mf">0.20102693</span><span class="p">],</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a> <span class="p">[</span><span class="mf">0.5231342</span> <span class="p">],</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a> <span class="p">[</span><span class="mf">0.55658626</span><span class="p">],</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a> <span class="p">[</span><span class="mf">0.39855278</span><span class="p">],</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a> <span class="p">[</span><span class="mf">0.25214386</span><span class="p">]]</span>
+</code></pre></div>
+<hr />
+<h3 id="ni_rsr">ni_rsr<a class="headerlink" href="#ni_rsr" title="Permanent link">&para;</a></h3>
+<p>利用非整次秩和比方法打分，接口说明参照<a href="../../api/index_calmeth/#ni_rsr">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">ni_rsr</span><span class="p">(</span><span class="n">test_array</span><span class="p">,</span> <span class="n">critic</span><span class="p">(</span><span class="n">test_array</span><span class="p">)))</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">[[</span><span class="mf">0.76082196</span><span class="p">],</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a> <span class="p">[</span><span class="mf">0.7836682</span> <span class="p">],</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a> <span class="p">[</span><span class="mf">0.36186168</span><span class="p">],</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a> <span class="p">[</span><span class="mf">0.64729533</span><span class="p">],</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a> <span class="p">[</span><span class="mf">0.68807074</span><span class="p">],</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a> <span class="p">[</span><span class="mf">0.6014031</span> <span class="p">],</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a> <span class="p">[</span><span class="mf">0.48593302</span><span class="p">]]</span>
+</code></pre></div>
+<hr />
+<h3 id="topsis">topsis<a class="headerlink" href="#topsis" title="Permanent link">&para;</a></h3>
+<p>利用优劣解距离方法打分，接口说明参照<a href="../../api/index_calmeth/#topsis">api</a>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">&gt;&gt;&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">topsis</span><span class="p">(</span><span class="n">test_array</span><span class="p">,</span> <span class="n">critic</span><span class="p">(</span><span class="n">test_array</span><span class="p">)))</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">[[</span><span class="mf">0.74850458</span><span class="p">],</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a> <span class="p">[</span><span class="mf">0.41476565</span><span class="p">],</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a> <span class="p">[</span><span class="mf">0.07367268</span><span class="p">],</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a> <span class="p">[</span><span class="mf">0.54296688</span><span class="p">],</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a> <span class="p">[</span><span class="mf">0.48512108</span><span class="p">],</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a> <span class="p">[</span><span class="mf">0.45568626</span><span class="p">],</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a> <span class="p">[</span><span class="mf">0.39804066</span><span class="p">]]</span>
+</code></pre></div>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../cp_lookup/" class="md-footer__link md-footer__link--prev" aria-label="上一页: cp_lookup" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              cp_lookup
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 Skahanium
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "search.highlight", "search.share", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.instant", "toc.follow"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
