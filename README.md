@@ -3,7 +3,8 @@
 [![pdm-managed](https://img.shields.io/badge/pdm-managed-blueviolet)](https://pdm.fming.dev)
 [![DOI](https://zenodo.org/badge/392722517.svg)](https://zenodo.org/badge/latestdoi/392722517)
 [![CodeFactor](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool/badge)](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool)
-
+[![PyPI - License](https://img.shields.io/pypi/l/Rh-s-PyTool)](https://github.com/skahanium/Rh-s-PyTool/blob/main/LICENSE)
+[![Docs](https://img.shields.io/badge/Docs-passing-brightgreen)](https://skahanium.github.io/Rh-s-PyTool/)
 # 关于Rh-s-PyTool
 
 Rh-s-PyTool是一系列python工具方法的合集，包含了一些有关行政区域名称查询与补全、坐标查询以及综合指标评价方法等方面的内容。
