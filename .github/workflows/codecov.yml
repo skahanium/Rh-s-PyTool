@@ -19,7 +19,7 @@ jobs:
         run: |
           pip install pytest
           pip install pytest-cov
-          pip install -i https://test.pypi.org/simple/ rh-s-pytool == 0.2.1.1
+          pip install -i https://test.pypi.org/simple/ rh-s-pytool
           pytest --cov=./ --cov-report=xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
