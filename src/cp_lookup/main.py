@@ -1,8 +1,10 @@
+import os
 from math import radians, cos, sin, asin, sqrt
 from jieba import lcut
 import pandas as pd
-from attachment import csv_dir
+import index_calmeth
 
+csv_dir = f"{os.path.dirname(index_calmeth.__file__)[:-13]}cp_lookup/attachment/adcodes.csv"
 data = pd.read_csv(csv_dir).set_index("adcode")
 data.sort_index(inplace=True)
 
@@ -18,14 +20,13 @@ class Addr():
             levels = len(info)
             match levels:
                 case 1:
-                    addr = info[-1]
+                    addr = info[0]
                     if len(data.loc[data["name"].str.match(addr)]) != 1:
                         print("地名重复或有误！")
                     else:
                         self.addr = data.loc[data["name"].str.match(addr)]
                 case 2:
-                    addr = info[-1]
-                    father = info[0]
+                    father, addr = info
                     if len(data.loc[data["name"].str.match(addr)]) != 1:
                         fcode = data.loc[data["name"].str.match(father)].index
                         for code in data.loc[data["name"].str.match(addr)].index.to_list():
@@ -34,9 +35,7 @@ class Addr():
                     else:
                         self.addr = data.loc[data["name"].str.match(addr)]
                 case 3:
-                    addr = info[-1]
-                    father = info[1]
-                    gdfather = info[0]
+                    gdfather, father, addr = info
                     if len(data.loc[data["name"].str.match(addr)]) != 1:
                         fcode = data.loc[data["name"].str.match(father)].index
                         gfcode = data.loc[data["name"].str.match(

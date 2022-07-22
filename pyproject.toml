@@ -1,6 +1,6 @@
 [project]
 name = "Rh-s-PyTool"
-version = "0.2.1.1"
+version = "0.2.1.2"
 description = "Python code instruments that could be used for index comprehensive evaluation."
 authors = [
     {name = "skahanium", email = "skahanium@gmail.com"},
@@ -17,6 +17,9 @@ license = {text = "MIT"}
 [tool.pdm]
 allow_prereleases = true
 
+[project.urls]
+Github = "https://github.com/skahanium/Rh-s-PyTool"
+Documentation = "https://skahanium.github.io/Rh-s-PyTool/"
 
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
