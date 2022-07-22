@@ -1,14 +1,12 @@
 [![PyPI](https://img.shields.io/pypi/v/Rh-s-PyTool)](https://pypi.org/project/Rh-s-PyTool/)
 [![CodeQL](https://github.com/skahanium/Rh-s-PyTool/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/skahanium/Rh-s-PyTool/actions/workflows/codeql-analysis.yml)
 [![pdm-managed](https://img.shields.io/badge/pdm-managed-blueviolet)](https://pdm.fming.dev)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/skahanium/Rh-s-PyTool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skahanium/Rh-s-PyTool/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/skahanium/Rh-s-PyTool.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/skahanium/Rh-s-PyTool/context:python)
 [![DOI](https://zenodo.org/badge/392722517.svg)](https://zenodo.org/badge/latestdoi/392722517)
 [![CodeFactor](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool/badge)](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool)
 
 # 关于Rh-s-PyTool
 
-Rh-s-PyTool是本人在学校课题中自己编写的一系列python工具方法的合集，包含了一些有关行政区域名称查询与补全、坐标查询以及综合指标评价方法等方面的内容。
+Rh-s-PyTool是一系列python工具方法的合集，包含了一些有关行政区域名称查询与补全、坐标查询以及综合指标评价方法等方面的内容。
 # 主要功能
 
 目前，Rh-s-PyTool主要包含了两个大的模块：**cp_lookup**和**index_calmeth**，二者又分别包含了若干个小模块。前者的功能描述大致描述如下：
