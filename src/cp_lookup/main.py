@@ -5,58 +5,173 @@ import pandas as pd
 import index_calmeth
 
 csv_dir = f"{os.path.dirname(index_calmeth.__file__)[:-13]}cp_lookup/attachment/adcodes.csv"
-data = pd.read_csv(csv_dir).set_index("adcode")
-data.sort_index(inplace=True)
+data = pd.read_csv(csv_dir)
+data["adcode"] = data["adcode"].astype(str)
+data.sort_values("adcode", inplace=True)
+
+
+class AreaNameError(Exception):
+    """自定义异常类"""
+
+    def __init__(self, error_info):
+        super().__init__(self)
+        self.error_info = error_info
+
+    def __str__(self):
+        return self.error_info
+
+
+ZXCITIES: dict = {
+    "北京": "北京市",
+    "天津": "天津市",
+    "上海": "上海市",
+    "重庆": "重庆市",
+}
+
+SAMENAMES: dict = {
+    "吉林": ("吉林市", "吉林市"),
+    "承德": ("承德市", "承德县"),
+    "铁岭": ("铁岭市", "铁岭县"),
+    "抚顺": ("抚顺市", "抚顺县"),
+    "辽阳": ("辽阳市", "辽阳县"),
+    "朝阳": ("朝阳市", "朝阳县"),
+    "阜新": ("阜新市", "阜新蒙古族自治县"),
+    "本溪": ("本溪市", "本溪满族自治县"),
+    "通化": ("通化市", "通化县"),
+    "南昌": ("南昌市", "南昌县"),
+    "吉安": ("吉安市", "吉安县"),
+    "安阳": ("安阳市", "安阳县"),
+    "新乡": ("新乡市", "新乡县"),
+    "濮阳": ("濮阳市", "濮阳县"),
+    "长沙": ("长沙市", "长沙县"),
+    "湘潭": ("湘潭市", "湘潭县"),
+    "邵阳": ("邵阳市", "邵阳县"),
+    "岳阳": ("岳阳市", "岳阳县"),
+    "衡阳": ("衡阳市", "衡阳县"),
+    "临夏": ("临夏回族自治州", "临夏市"),
+    "乌鲁木齐": ("乌鲁木齐市", "乌鲁木齐县"),
+    "和田": ("和田市", "和田县"),
+    "伊宁": ("伊宁市", "伊宁县"),
+}
+
+
+def _prov_codes() -> list[str]:
+    adcodes = data["adcode"]
+    return [code for code in adcodes if str.endswith(code, "0"*10)]
+
+
+def _city_codes() -> list[str]:
+    adcodes = data["adcode"]
+    prov_codes = _prov_codes()
+    return [code for code in adcodes if (str.endswith(code, "0" * 8)) & (code not in prov_codes)]
+
+
+def _county_codes() -> list[str]:
+    adcodes = data["adcode"]
+    prov_codes = _prov_codes()
+    city_codes = _city_codes()
+    return [code for code in adcodes if (code not in prov_codes) & (code not in city_codes)]
+
+
+PROVINCECODE: list[str] = _prov_codes()
+CITYCODE: list[str] = _city_codes()
+COUNTYCODE: list[str] = _county_codes()
+NOTPROVINCE: list[str] = CITYCODE + COUNTYCODE
+NOTCOUNTY: list[str] = PROVINCECODE + CITYCODE
+
+
+def _level_choose(level: str | None) -> pd.DataFrame:
+    options = ["province", "city", "county",
+               "not province", "not county", None]
+    assert level in options, "错误的等级选项！！！"
+    match level:
+        case "province":
+            return data.loc[data["adcode"].isin(PROVINCECODE)]
+        case "city":
+            return data.loc[data["adcode"].isin(CITYCODE)]
+        case "county":
+            return data.loc[data["adcode"].isin(COUNTYCODE)]
+        case "not province":
+            return data.loc[data["adcode"].isin(NOTPROVINCE)]
+        case "not county":
+            return data.loc[data["adcode"].isin(NOTCOUNTY)]
+        case _:
+            return data
+
+
+def _num_one(info: list[str], level_data: pd.DataFrame):
+    addr = info[0]
+    if len(level_data.loc[level_data["name"].str.match(addr)]) != 1:
+        raise AreaNameError("地名重复或有误！！！")
+    else:
+        return level_data.loc[level_data["name"].str.match(addr)]
+
+
+def _num_two(info: list[str], level_data: pd.DataFrame):
+    father, addr = info
+    if father == addr:
+        addr_name = SAMENAMES[addr][1]
+        return data.loc[data["name"] == addr_name]
+    else:
+        fdata = _level_choose("not county")
+        fcode = fdata.loc[fdata["name"].str.match(
+            father)]["adcode"].to_list()[0]
+        addr_codes = level_data.loc[level_data["name"].str.match(
+            addr)]["adcode"].to_list()
+        for code in addr_codes:
+            if (code[:4] == fcode[:4]) | (code[:2] == fcode[:2]):
+                return level_data.loc[level_data["adcode"] == code]
+
+
+def _num_three(info: list[str], level_data: pd.DataFrame):
+    gdfather, father, addr = info
+    gddata = _level_choose("province")
+    fdata = _level_choose("city")
+    ldata = _level_choose("county")
+    if len(level_data.loc[level_data["name"].str.match(addr)]) == 1:
+        return level_data.loc[level_data["name"].str.match(addr)]
+    gdcode = gddata.loc[gddata["name"].str.match(
+        gdfather)]["adcode"].to_list()[0]
+    fdcode = fdata.loc[fdata["name"].str.match(father)]["adcode"].to_list()[0]
+    addr_codes = ldata.loc[ldata["name"].str.match(addr)]["adcode"]
+    for code in addr_codes:
+        if code[:2] == fdcode[:2] == gdcode[:2]:
+            return level_data.loc[level_data["adcode"] == code]
 
 
 class Addr():
     """以区域名构建一个地区的类，包含该地区的adcode、区域名、经纬度等信息。"""
 
-    def __init__(self, name: str, adcode: int | None = None):
+    def __init__(self, name: str, adcode: int | None = None, level: str | None = None):
         if adcode:
-            self.addr = data.loc[data.index == adcode]
+            self.addr = data.loc[data["adcode"] == adcode]
         else:
+            obj_area_data = _level_choose(level) if level else data
             info = lcut(name)
-            levels = len(info)
-            match levels:
+            nums = len(info)
+            match nums:
                 case 1:
-                    addr = info[0]
-                    if len(data.loc[data["name"].str.match(addr)]) != 1:
-                        print("地名重复或有误！")
-                    else:
-                        self.addr = data.loc[data["name"].str.match(addr)]
+                    self.addr = _num_one(info, obj_area_data)
                 case 2:
-                    father, addr = info
-                    if len(data.loc[data["name"].str.match(addr)]) != 1:
-                        fcode = data.loc[data["name"].str.match(father)].index
-                        for code in data.loc[data["name"].str.match(addr)].index.to_list():
-                            if (code//10**8 == fcode//10**8) | (code//10**10 == fcode//10**10):  # type: ignore
-                                self.addr = data.loc[data.index == code]
-                    else:
-                        self.addr = data.loc[data["name"].str.match(addr)]
+                    self.addr = _num_two(info, obj_area_data)
                 case 3:
-                    gdfather, father, addr = info
-                    if len(data.loc[data["name"].str.match(addr)]) != 1:
-                        fcode = data.loc[data["name"].str.match(father)].index
-                        gfcode = data.loc[data["name"].str.match(
-                            gdfather)].index
-                        for code in data.loc[data["name"].str.match(addr)].index.to_list():
-                            if code//10**10 == fcode//10**10 == gfcode//10**10:  # type: ignore
-                                self.addr = data.loc[data.index == code]
-                    else:
-                        self.addr = data.loc[data["name"].str.match(addr)]
+                    self.addr = _num_three(info, obj_area_data)
 
     def _belongs_to(self) -> str | None:
-        code = self.addr.index.to_list()[0]
-        fcode = code // 10**8 * 10**8 if code % 10**8 != 0 else code // 10**10 * 10**10
-        return data.at[fcode, "name"]
+        assert isinstance(self.addr, pd.DataFrame)
+        code = self.addr["adcode"].to_list()[0]
+        fcode = code[:2] + "0" * \
+            10 if str.endswith(code, "0"*8) else (code[:4] + "0"*8)
+        findex = data.loc[data["adcode"] == fcode].index.to_list()[0]
+        return data.at[findex, "name"]
 
     def _coordinate(self) -> tuple[float, float]:
-        code = self.addr.index.to_list()[0]
-        return data.at[code, "latitude"], data.at[code, "longitude"]
+        assert isinstance(self.addr, pd.DataFrame)
+        area_index = self.addr.index.to_list()[0]
+        return data.at[area_index, "latitude"], data.at[area_index, "longitude"]
 
 
-def lookup(name: str) -> str | None:
+def lookup(name: str, level: str | None = None) -> str | None:
     """根据地名简称查找全称
 
     Args:
@@ -65,11 +180,17 @@ def lookup(name: str) -> str | None:
     Returns:
         str | None: 地名全称
     """
-    code = Addr(name).addr.index.to_list()[0]
-    return data.at[code, "name"]
+    if name in ZXCITIES.keys():
+        new_name = ZXCITIES[name]
+        obj_area = Addr(new_name, level="province").addr
+    else:
+        obj_area = Addr(name, level=level).addr
+    assert obj_area is not None
+    area_index = obj_area.index.to_list()[0]
+    return data.at[area_index, "name"]
 
 
-def belongs_to(name: str) -> str | None:
+def belongs_to(name: str, level: str | None = None) -> str | None:
     """根据地名查找其上级行政区名称
 
     Args:
@@ -78,10 +199,15 @@ def belongs_to(name: str) -> str | None:
     Returns:
         str | None: 上级行政区全称
     """
-    return Addr(name)._belongs_to()
+    if name in ZXCITIES.keys():
+        new_name = ZXCITIES[name]
+        obj_area = Addr(new_name, level="province")
+    else:
+        obj_area = Addr(name, level=level)
+    return obj_area._belongs_to()
 
 
-def coordinate(name: str) -> tuple[float, float]:
+def coordinate(name: str, level: str | None = None) -> tuple[float, float]:
     """根据区域名得到其行政中心的坐标
 
     Args:
@@ -90,7 +216,12 @@ def coordinate(name: str) -> tuple[float, float]:
     Returns:
         tuple[float, float]: 行政中心经纬度
     """
-    lat, lon = Addr(name)._coordinate()
+    if name in ZXCITIES.keys():
+        new_name = ZXCITIES[name]
+        obj_area = Addr(new_name, level="province")
+    else:
+        obj_area = Addr(name, level=level)
+    lat, lon = obj_area._coordinate()
     return lat, lon
 
 
@@ -119,7 +250,7 @@ def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return c * r
 
 
-def dist(city1: str, city2: str) -> float:
+def dist(city1: str, city2: str, level1: str | None = None, level2: str | None = None) -> float:
     """利用两个地区的城市名称计算球面距离
 
     Args:
@@ -129,6 +260,6 @@ def dist(city1: str, city2: str) -> float:
     Returns:
         float: 球面距离，单位：km
     """
-    city1_lat, city1_lon = coordinate(city1)
-    city2_lat, city2_lon = coordinate(city2)
+    city1_lat, city1_lon = coordinate(city1, level=level1)
+    city2_lat, city2_lon = coordinate(city2, level=level2)
     return haversine(city1_lat, city1_lon, city2_lat, city2_lon)
