@@ -1,6 +1,6 @@
 [project]
 name = "Rh-s-PyTool"
-version = "0.2.2"
+version = "0.2.3preview"
 description = "一系列Python工具的合集，用于中国省、市、区县三级行政区域的名称查询和补全、行政中心的经纬度查询、球面距离计算，同时也包含了综合指标评价方法的各种构成方法。"
 authors = [
     {name = "skahanium", email = "skahanium@gmail.com"},
@@ -9,6 +9,7 @@ dependencies = [
     "jieba>=0.42.1",
     "numpy>=1.23.1",
     "pandas>=1.4.3",
+    "polars>=0.13.56",
 ]
 requires-python = ">=3.10, <3.11"
 readme = "README.md"
