@@ -1,9 +1,11 @@
+import imp
 import os
 from math import radians, cos, sin, asin, sqrt
 from jieba import lcut
 import jieba
 import polars as pl
 import index_calmeth
+from .similar import SIMILAR_NAMES, ZXCITIES, SAMENAMES
 
 csv_dir = (
     f"{os.path.dirname(index_calmeth.__file__)[:-13]}cp_lookup/attachment/adcodes.csv"
@@ -11,8 +13,8 @@ csv_dir = (
 data = pl.read_csv(csv_dir)
 data["adcode"] = data["adcode"].apply(str)
 
-special_words = [area for area in data["name"] if len(lcut(area)) != 1]
-for word in special_words:
+SPECIAL_WORDS = [area for area in data["name"] if len(lcut(area)) != 1]
+for word in SPECIAL_WORDS:
     jieba.add_word(word)
 
 
@@ -25,42 +27,6 @@ class AreaNameError(Exception):
 
     def __str__(self):
         return self.error_info
-
-
-ZXCITIES: dict = {
-    "北京": "北京市",
-    "天津": "天津市",
-    "上海": "上海市",
-    "重庆": "重庆市",
-}
-
-SAMENAMES: dict = {
-    "吉林": ("吉林市", "吉林市"),
-    "承德": ("承德市", "承德县"),
-    "铁岭": ("铁岭市", "铁岭县"),
-    "抚顺": ("抚顺市", "抚顺县"),
-    "辽阳": ("辽阳市", "辽阳县"),
-    "朝阳": ("朝阳市", "朝阳县"),
-    "阜新": ("阜新市", "阜新蒙古族自治县"),
-    "本溪": ("本溪市", "本溪满族自治县"),
-    "通化": ("通化市", "通化县"),
-    "南昌": ("南昌市", "南昌县"),
-    "吉安": ("吉安市", "吉安县"),
-    "安阳": ("安阳市", "安阳县"),
-    "新乡": ("新乡市", "新乡县"),
-    "濮阳": ("濮阳市", "濮阳县"),
-    "长沙": ("长沙市", "长沙县"),
-    "湘潭": ("湘潭市", "湘潭县"),
-    "邵阳": ("邵阳市", "邵阳县"),
-    "岳阳": ("岳阳市", "岳阳县"),
-    "衡阳": ("衡阳市", "衡阳县"),
-    "临夏": ("临夏回族自治州", "临夏市"),
-    "乌鲁木齐": ("乌鲁木齐市", "乌鲁木齐县"),
-    "和田": ("和田市", "和田县"),
-    "伊宁": ("伊宁市", "伊宁县"),
-    "黄山": ("黄山市", "黄山区"),
-    "文山": ("文山壮族苗族自治州", "文山市"),
-}
 
 
 def _prov_codes() -> list[str]:
@@ -155,6 +121,8 @@ class Addr:
     def __init__(self, name: str, adcode: int | None = None, level: str | None = None):
         if adcode:
             self.addr = data[data["adcode"] == adcode]
+        elif name in SIMILAR_NAMES.keys():
+            self.addr = data[data["adcode"] == SIMILAR_NAMES.get(name)]
         else:
             obj_area_data = _level_choose(level) if level else data
             info = lcut(name)
