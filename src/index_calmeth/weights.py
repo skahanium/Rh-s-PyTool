@@ -12,8 +12,8 @@ def __variability(data_origin: np.ndarray) -> np.ndarray:  # critic方法指标�
     for j in range(n):
         ave_x = data[:, j].mean()
         diff = np.array(data[:, j] - ave_x)
-        sum_var = np.sum(diff ** 2 / (m - 1))
-        variabilities.append(sum_var ** 0.5)
+        sum_var = np.sum(diff**2 / (m - 1))
+        variabilities.append(sum_var**0.5)
     return np.array(variabilities)
 
 
@@ -21,8 +21,7 @@ def __conflict(data_origin: np.ndarray) -> np.ndarray:  # critic方法指标冲�
     corr_matrix = np.corrcoef(data_origin, rowvar=False)
     conflicts = []
     p, q = corr_matrix.shape
-    conflicts.extend(
-        sum((1 - corr_matrix[i, j]) for i in range(p)) for j in range(q))
+    conflicts.extend(sum((1 - corr_matrix[i, j]) for i in range(p)) for j in range(q))
 
     return np.array(conflicts)
 
@@ -66,10 +65,10 @@ def ewm(data_origin: np.ndarray) -> np.ndarray:
     for j in range(n):
         data[:, j] = data[:, j] / np.sum(data[:, j])
         np.place(data[:, j], data[:, j] == 0, 1)
-        ej = -np.log(1/m) * np.sum(data[:, j] * np.log(data[:, j]))
+        ej = -np.log(1 / m) * np.sum(data[:, j] * np.log(data[:, j]))
         entropy.append(ej)
 
-    weights = [(1-entropy[c]) / (m - np.sum(entropy)) for c in range(n)]
+    weights = [(1 - entropy[c]) / (m - np.sum(entropy)) for c in range(n)]
     return np.array(weights)
 
 
@@ -106,7 +105,9 @@ def gini(data_origin: np.ndarray) -> np.ndarray:
     m, n = data.shape
     Gini = []
     for j in range(n):
-        gini_j = [np.abs(data[u, j] - data[v, j])
-                  for u, v in itertools.product(range(m), range(m))]
+        gini_j = [
+            np.abs(data[u, j] - data[v, j])
+            for u, v in itertools.product(range(m), range(m))
+        ]
         Gini.append(np.sum(gini_j) / (m**2 - m))
     return np.array(Gini / np.sum(Gini))

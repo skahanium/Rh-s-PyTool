@@ -5,13 +5,14 @@ import jieba
 import polars as pl
 import index_calmeth
 
-csv_dir = f"{os.path.dirname(index_calmeth.__file__)[:-13]}cp_lookup/attachment/adcodes.csv"
+csv_dir = (
+    f"{os.path.dirname(index_calmeth.__file__)[:-13]}cp_lookup/attachment/adcodes.csv"
+)
 data = pl.read_csv(csv_dir)
 data["adcode"] = data["adcode"].apply(str)
 
-new_words = ['山南市', '林芝市', '昌都市', '普洱市', '海东市',
-             '陇南市', '巴彦淖尔市', '襄阳市', '三沙市', '乌兰察布市']
-for word in new_words:
+special_words = [area for area in data["name"] if len(lcut(area)) != 1]
+for word in special_words:
     jieba.add_word(word)
 
 
@@ -64,20 +65,26 @@ SAMENAMES: dict = {
 
 def _prov_codes() -> list[str]:
     adcodes = data["adcode"]
-    return [code for code in adcodes if str.endswith(code, "0"*10)]
+    return [code for code in adcodes if str.endswith(code, "0" * 10)]
 
 
 def _city_codes() -> list[str]:
     adcodes = data["adcode"]
     prov_codes = _prov_codes()
-    return [code for code in adcodes if (str.endswith(code, "0" * 8)) & (code not in prov_codes)]
+    return [
+        code
+        for code in adcodes
+        if (str.endswith(code, "0" * 8)) & (code not in prov_codes)
+    ]
 
 
 def _county_codes() -> list[str]:
     adcodes = data["adcode"]
     prov_codes = _prov_codes()
     city_codes = _city_codes()
-    return [code for code in adcodes if (code not in prov_codes) & (code not in city_codes)]
+    return [
+        code for code in adcodes if (code not in prov_codes) & (code not in city_codes)
+    ]
 
 
 PROVINCECODE: list[str] = _prov_codes()
@@ -88,8 +95,7 @@ NOTCOUNTY: list[str] = PROVINCECODE + CITYCODE
 
 
 def _level_choose(level: str | None) -> pl.DataFrame:
-    options = ["province", "city", "county",
-               "not province", "not county", None]
+    options = ["province", "city", "county", "not province", "not county", None]
     assert level in options, "错误的等级选项！！！"
     match level:
         case "province":
@@ -122,8 +128,7 @@ def _num_two(info: list[str], level_data: pl.DataFrame):
     else:
         fdata = _level_choose("not county")
         fcode = fdata[fdata["name"].str.contains(father)][0, "adcode"]
-        addr_codes = level_data[level_data["name"].str.contains(
-            addr)]["adcode"]
+        addr_codes = level_data[level_data["name"].str.contains(addr)]["adcode"]
         for code in addr_codes:
             if (code[:4] == fcode[:4]) | (code[:2] == fcode[:2]):
                 return level_data[level_data["adcode"] == code]
@@ -144,7 +149,7 @@ def _num_three(info: list[str], level_data: pl.DataFrame):
             return level_data[level_data["adcode"] == code]
 
 
-class Addr():
+class Addr:
     """以区域名构建一个地区的类，包含该地区的adcode、区域名、经纬度等信息。"""
 
     def __init__(self, name: str, adcode: int | None = None, level: str | None = None):
@@ -165,9 +170,9 @@ class Addr():
     def _belongs_to(self) -> str | None:
         assert isinstance(self.addr, pl.DataFrame)
         code = self.addr[0, "adcode"]
-        fcode = code[:2] + "0" * \
-            10 if str.endswith(
-                code, "0"*8) else (code[:4] + "0"*8)  # type: ignore
+        fcode = (
+            code[:2] + "0" * 10 if str.endswith(code, "0" * 8) else (code[:4] + "0" * 8)  # type: ignore
+        )
         fdata = data[data["adcode"] == fcode]
         return fdata[0, "name"]  # type: ignore
 
@@ -242,8 +247,7 @@ def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
         float: 球面距离，单位：km
     """
     # 将十进制度数转化为弧度
-    lat1, lon1, lat2, lon2 = map(
-        radians, [lat1, lon1, lat2, lon2])  # radians：将角度转化为弧度
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])  # radians：将角度转化为弧度
 
     # haversine（半正矢）公式
     dlon = lon2 - lon1
@@ -254,7 +258,9 @@ def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return c * r
 
 
-def dist(city1: str, city2: str, level1: str | None = None, level2: str | None = None) -> float:
+def dist(
+    city1: str, city2: str, level1: str | None = None, level2: str | None = None
+) -> float:
     """利用两个地区的城市名称计算球面距离
 
     Args:

@@ -11,7 +11,9 @@ def fn(x: int | float, y: int | float) -> int | float:  # 辅助函数，用于�
     return x**2 + y**2
 
 
-def fn2(x: int | float, low: int | float, high: int | float, M: int | float) -> int | float:  # 辅助函数，用于计算适度性指标转化为极大型指标的公式
+def fn2(
+    x: int | float, low: int | float, high: int | float, M: int | float
+) -> int | float:  # 辅助函数，用于计算适度性指标转化为极大型指标的公式
     assert low <= high
     if x < low:
         return 1 - (low - x) / M
@@ -25,7 +27,9 @@ vfn2 = np.vectorize(fn2)
 ##############################################################################################
 
 
-def tiny_convert(ndarray: np.ndarray, mode: str, change_list: list[int]) -> np.ndarray | None:
+def tiny_convert(
+    ndarray: np.ndarray, mode: str, change_list: list[int]
+) -> np.ndarray | None:
     """极小型指标转化为极大型指标
 
     Args:
@@ -51,7 +55,9 @@ def tiny_convert(ndarray: np.ndarray, mode: str, change_list: list[int]) -> np.n
         print('请正确地选择模式')
 
 
-def middle_convert(ndarray: np.ndarray, change_list: list[int], best_value: list[int | float]) -> np.ndarray | None:
+def middle_convert(
+    ndarray: np.ndarray, change_list: list[int], best_value: list[int | float]
+) -> np.ndarray | None:
     """中间型指标转化为极大型指标
 
     Args:
@@ -67,15 +73,19 @@ def middle_convert(ndarray: np.ndarray, change_list: list[int], best_value: list
     else:
         copy_matrix = ndarray.copy().astype(float)
         for j in change_list:
-            M = max(np.abs(copy_matrix[:, j] -
-                    best_value[change_list.index(j)]))
-            copy_matrix[:, j] = 1 - \
-                np.abs(copy_matrix[:, j] -
-                       best_value[change_list.index(j)]) / M
+            M = max(np.abs(copy_matrix[:, j] - best_value[change_list.index(j)]))
+            copy_matrix[:, j] = (
+                1 - np.abs(copy_matrix[:, j] - best_value[change_list.index(j)]) / M
+            )
         return copy_matrix
 
 
-def moderate_convert(ndarray: np.ndarray, change_list: list[int], low_limit: list[int | float], high_limit: list[int | float]) -> np.ndarray | None:
+def moderate_convert(
+    ndarray: np.ndarray,
+    change_list: list[int],
+    low_limit: list[int | float],
+    high_limit: list[int | float],
+) -> np.ndarray | None:
     """适度性指标转化为极大型指标
 
     Args:
@@ -119,8 +129,9 @@ def toone(origin_array: np.ndarray, mode: str) -> np.ndarray | None:
             for j in range(n):
                 mmax = ndarray[:, j].max()
                 mmin = ndarray[:, j].min()
-                copy_matrix[:, j] = (ndarray[:, j] - mmin) / \
-                    (mmax - mmin) if mmax != mmin else 1
+                copy_matrix[:, j] = (
+                    (ndarray[:, j] - mmin) / (mmax - mmin) if mmax != mmin else 1
+                )
             return copy_matrix
         case '1':
             for j in range(n):
@@ -128,14 +139,14 @@ def toone(origin_array: np.ndarray, mode: str) -> np.ndarray | None:
                 mmax = ndarray[:, j].max()
                 mmin = ndarray[:, j].min()
                 copy_matrix[:, j] = (
-                    ndarray[:, j] - mmean) / (mmax - mmin) if mmax != mmin else 0
+                    (ndarray[:, j] - mmean) / (mmax - mmin) if mmax != mmin else 0
+                )
             return copy_matrix
         case '2':
             for j in range(n):
                 mmean = ndarray[:, j].mean()
                 mstd = ndarray[:, j].std()
-                copy_matrix[:, j] = (ndarray[:, j] - mmean) / \
-                    mstd if mstd != 0 else 0
+                copy_matrix[:, j] = (ndarray[:, j] - mmean) / mstd if mstd != 0 else 0
             return copy_matrix
         case '3':
             for j in range(n):
