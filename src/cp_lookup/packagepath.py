@@ -8,8 +8,4 @@ def root_path():
 
 
 def full_path():
-    return (
-        "src/cp_lookup/attachment/adcodes.csv"
-        if __name__ == "__main__"
-        else "/".join([root_path(), "cp_lookup/attachment/adcodes.csv"])  # type: ignore
-    )
+    return "/".join([root_path(), "cp_lookup/attachment/adcodes.csv"])  # type: ignore
