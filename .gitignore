@@ -1,9 +1,8 @@
-.idea
 **/__pycache__
 .DS_Store
 build
 test.py
-test.ipynb
+*.ipynb
 __pypackages__/
 .ipynb_checkpoints
 .pdm.toml
@@ -12,3 +11,4 @@ dist
 .env
 example/
 .pytest_cache
+*.csv
