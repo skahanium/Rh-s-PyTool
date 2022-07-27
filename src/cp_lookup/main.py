@@ -1,16 +1,12 @@
 import imp
-import os
 from math import radians, cos, sin, asin, sqrt
 from jieba import lcut
 import jieba
 import polars as pl
-import index_calmeth
-from .similar import SIMILAR_NAMES, ZXCITIES, SAMENAMES
+from .special import SIMILAR_NAMES, ZXCITIES, SAMENAMES
+from .packagepath import full_path
 
-csv_dir = (
-    f"{os.path.dirname(index_calmeth.__file__)[:-13]}cp_lookup/attachment/adcodes.csv"
-)
-data = pl.read_csv(csv_dir)
+data = pl.read_csv(full_path())
 data["adcode"] = data["adcode"].apply(str)
 
 SPECIAL_WORDS = [area for area in data["name"] if len(lcut(area)) != 1]
