@@ -8,6 +8,7 @@ def lookup(name: str, level: str | None = None) -> str | None:
 
     Args:
         name (str): 待查找地名
+        level (str | None): 查询区域的行政等级，包括province、city、county三级。默认值为None，当为None时不区分查找范围，因此很可能出现重名错误
 
     Returns:
         str | None: 地名全称
@@ -25,6 +26,7 @@ def belongs_to(name: str, level: str | None = None) -> str | None:
 
     Args:
         name (str): 待查找地名
+        level (str | None): 查询区域的行政等级，包括province、city、county三级。默认值为None，当为None时不区分查找范围，因此很可能出现重名错误
 
     Returns:
         str | None: 上级行政区全称
@@ -42,6 +44,7 @@ def coordinate(name: str, level: str | None = None) -> tuple[float, float]:
 
     Args:
         name (str): 行政区名称
+        level (str | None): 查询区域的行政等级，包括province、city、county三级。默认值为None，当为None时不区分查找范围，因此很可能出现重名错误
 
     Returns:
         tuple[float, float]: 行政中心经纬度
@@ -87,9 +90,14 @@ def dist(
     Args:
         city1 (str): 地区1的城市名称
         city2 (str): 地区2的城市名称
+        level1 (str | None): 查询地区1的行政等级，包括province、city、county三级。
+        level2 (str | None): 查询地区2的行政等级，包括province、city、county三级。
 
     Returns:
         float: 球面距离，单位：km
+
+    Note:
+        level1、level2默认值为None，当为None时不区分查找范围，因此很可能出现重名错误。
     """
     city1_lat, city1_lon = coordinate(city1, level=level1)
     city2_lat, city2_lon = coordinate(city2, level=level2)

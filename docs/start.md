@@ -34,19 +34,19 @@
 ```
 <center>
 
-![原数据前五行](assets/head.png)
+![原数据前五行](assets/start/head.png)
 </center>
 
 ## 数据预处理
 ### 补全州市名称
-这一步本不是必要，但各个数据平台的数据中地区名有的是简称，有的是全称，像黔西南、凉山等地区简称和全称差距不小。为了研究的方便，最好还是统一为全称。
+这一步本不是必要，但各个数据平台的数据中有的地区名是简称，有的地区名是全称，例如黔西南、凉山等。这些地区名简称和全称差距不小，为了研究的方便，最好还是统一为全称。
 ```python
->>>data["州市"] = data["州市"].apply(lookup)
+>>>data["州市"] = data["州市"].apply(lookup, level="city")
 >>>data.head()
 ```
 <center>
 
-![补全后前五行](assets/new_head.png)
+![补全后前五行](assets/start/new_head.png)
 </center>
 
 ### dataframe转ndarray
@@ -82,7 +82,7 @@
 ```
 <center>
 
-![风险分值](assets/result_head.png)
+![风险分值](assets/start/result_head.png)
 
 </center>
 
@@ -101,5 +101,5 @@ c = (
 将得到的html文件在浏览器中打开：
 <center>
 
-![风险地图](assets/map.png)
+![风险地图](assets/start/map.png)
 </center>

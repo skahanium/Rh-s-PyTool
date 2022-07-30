@@ -1,6 +1,6 @@
 <center>
 
-![logo](assets/logo.svg)
+![logo](assets/icon_logo/logo.svg)
 </center>
 ## 关于Rh-s-PyTool
 

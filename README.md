@@ -5,6 +5,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool/badge)](https://www.codefactor.io/repository/github/skahanium/rh-s-pytool)
 [![PyPI - License](https://img.shields.io/pypi/l/Rh-s-PyTool)](https://github.com/skahanium/Rh-s-PyTool/blob/main/LICENSE)
 [![Docs](https://img.shields.io/badge/Docs-passing-brightgreen)](https://skahanium.github.io/Rh-s-PyTool/)
+![PythonVersion](https://img.shields.io/badge/python->=3.10-brightgreen)
 # 关于Rh-s-PyTool
 
 Rh-s-PyTool是一系列python工具方法的合集，包含了一些有关行政区域名称查询与补全、坐标查询以及综合指标评价方法等方面的内容。
@@ -12,7 +13,9 @@ Rh-s-PyTool是一系列python工具方法的合集，包含了一些有关行政
 
 目前，Rh-s-PyTool主要包含了两个大的模块：**cp_lookup**和**index_calmeth**，二者又分别包含了若干个小模块。前者的功能描述大致描述如下：
 
-+ 将区域简称补完为全称
++ 将区域（省、市、区县）简称补充为全称
+
++ 根据区域名（市、区县）查询其上级行政区域的名称
 
 + 根据地区（省、市、区县）名称获取行政中心的经度和纬度
 
@@ -44,7 +47,6 @@ pip3 install Rh-s-PyTool
 pdm add Rh-s-PyTool
 ```
 
-注：本模块适用于python3.10及以上版本。
 
 ## 文档
 中文文档:[ Rh-s-PyTool Module ]

@@ -15,7 +15,7 @@
 ```python
 >>>print(lookup("凉山"))
 
-'凉山彝族自治州'
+凉山彝族自治州
 ```
 
 如果区域名简称存在重复，比如承德市和承德县、铁岭市和铁岭县，以及海南省、海南区、海南藏族自治州，直接查询“承德”、“铁岭”或“海南”会报错。
@@ -23,15 +23,21 @@
 ```python
 >>>print(lookup("海南"))
 
-地名重复或有误！
-AttributeError: 'Addr' object has no attribute 'addr'
+AreaNameError: 地名重复或有误！！！
 ```
 
-对于非省一级的行政区，可以在前面加上上级行政区的全称或简称以进行区分。
+可以使用`level`参数从行政等级上对查询范围进行区分。
+```python
+>>>print(lookup("海南", level="city"))
+
+海南藏族自治州
+```
+
+对于非省一级的行政区，也可以在前面加上上级行政区的全称或简称以进行区分。
 ```python
 >>>print(lookup("青海海南"))
 
-'海南藏族自治州'
+海南藏族自治州
 ```
 
 ---
@@ -44,11 +50,29 @@ AttributeError: 'Addr' object has no attribute 'addr'
 
 四川省
 ```
+同样，面对可能重复的区域简称，使用`level`参数或上级行政区名称进行区分。
+```python
+>>>print(belongs_to("长沙"))
+
+AreaNameError: 地名重复或有误！！！
+
+>>>print(belongs_to("长沙", level="city"))
+
+湖南省
+
+>>>print(belongs_to("长沙", level="county"))
+
+长沙市
+
+>>>print(belongs_to("长沙长沙")) # 注：“长沙长沙会被解析为长沙市的长沙县，因此其上级行政区为长沙市”
+
+长沙市
+```
 
 ---
 ### coordinate
 
-已知区域名，得到其行政中心的坐标，接口说明参照[api](../api/cp_lookup.md#coordinate)。
+已知区域名，得到其行政中心的坐标，遇到重复的区域名简称处理方式同上，接口说明参照[api](../api/cp_lookup.md#coordinate)。
 
 ```python
 >>>print(coordinate("绵阳"))
@@ -57,20 +81,9 @@ AttributeError: 'Addr' object has no attribute 'addr'
 ```
 
 ---
-### haversine
-
-半正矢函数，利用两个地点的经纬度计算球面距离，接口说明参照[api](../api/cp_lookup.md#haversine)。
-
-```python
->>>print(haversine(118.355160, 28.553910, 102.199890, 20.044220))
-
-1821.5130815647258
-```
-
----
 ### dist
 
-利用区域名或地区经纬度计算两地间的球面距离，接口说明参照[api](../api/cp_lookup.md#dist)。
+利用区域名或地区经纬度计算两地间的球面距离，遇到重复的区域名简称处理方式同上，接口说明参照[api](../api/cp_lookup.md#dist)。
 
 ```python
 >>>print(dist("益阳市", "海口市"))
