@@ -6,21 +6,24 @@ repo_name: skahanium/Rh-s-PyTool
 edit_uri: ""
 
 nav:
-  - Start:
+  - 概览:
       - 简介: index.md
       - 快速开始: start.md
-  - Methods:
+  - 包含方法:
       - Topsis: methods/TOPSIS.md
-  - API:
+  - 模块接口:
       - cp_lookup: api/cp_lookup.md
       - index_calmeth: api/index_calmeth.md
-  - Examples:
+  - 示例:
       - cp_lookup: examples/cp_lookup.md
       - index_calmeth: examples/index_calmeth.md
+  - 博客:
+      - 更新日志: development/changelog.md
+      - 基准测试: development/benchmark.md
 
 theme:
-  favicon: assets/icon.svg
-  logo: assets/icon.svg
+  favicon: assets/icon_logo/icon.svg
+  logo: assets/icon_logo/icon.svg
   features:
     - search.suggest
     - search.highlight

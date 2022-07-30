@@ -455,7 +455,7 @@ dependencies = [
 
 [[package]]
 name = "mkdocs-material"
-version = "8.3.9"
+version = "8.4.0rc1"
 requires_python = ">=3.7"
 summary = "Documentation that simply works"
 dependencies = [
@@ -624,7 +624,7 @@ summary = "plugin and hook calling mechanisms for python"
 
 [[package]]
 name = "polars"
-version = "0.13.56"
+version = "0.13.58"
 requires_python = ">=3.7"
 summary = "Blazingly fast DataFrame library"
 
@@ -1317,9 +1317,9 @@ content_hash = "sha256:bfc5736bdc8247cfd6423b183b332d963e3a9f11b59dafd61fcc99977
     {url = "https://files.pythonhosted.org/packages/52/16/2c2de8fac0437fb81d8f31558111fddcedf56eb56d90dea6ec922fcd588a/mkdocs-1.3.1.tar.gz", hash = "sha256:a41a2ff25ce3bbacc953f9844ba07d106233cd76c88bac1f59cb1564ac0d87ed"},
     {url = "https://files.pythonhosted.org/packages/e4/96/6b9d87ee8a11e6d2483e3767999d4aeb8d5478d2059cfb3e21404beae470/mkdocs-1.3.1-py3-none-any.whl", hash = "sha256:fda92466393127d2da830bc6edc3a625a14b436316d1caf347690648e774c4f0"},
 ]
-"mkdocs-material 8.3.9" = [
-    {url = "https://files.pythonhosted.org/packages/3e/4b/ea3acabc619dcf1fd8047fdb806d167e7785d6d3e4ad43404e8de6704263/mkdocs_material-8.3.9-py2.py3-none-any.whl", hash = "sha256:263f2721f3abe533b61f7c8bed435a0462620912742c919821ac2d698b4bfe67"},
-    {url = "https://files.pythonhosted.org/packages/82/68/24fd0698479ff3ad1b222454b21996176f323c6aa07b92b7abac8d92cbc3/mkdocs-material-8.3.9.tar.gz", hash = "sha256:dc82b667d2a83f0de581b46a6d0949732ab77e7638b87ea35b770b33bc02e75a"},
+"mkdocs-material 8.4.0rc1" = [
+    {url = "https://files.pythonhosted.org/packages/0b/89/1d57ba8b3850b1c0b598bf08a7de4af1d8720024ea4ced4f1387be5aefde/mkdocs-material-8.4.0rc1.tar.gz", hash = "sha256:1ee635cfe5cd96926b6175591ffc186bdca195fbc245aa9921bc07d90487ec33"},
+    {url = "https://files.pythonhosted.org/packages/27/06/1d5cdf41bee1909d66dafd0520fe2d6ff9d2bbe0c9bd907685283c18936d/mkdocs_material-8.4.0rc1-py2.py3-none-any.whl", hash = "sha256:ff23bb9f9bf3f346dcaca2fc2093019b63f4fc504c2268aed6e8d6978a4c72fa"},
 ]
 "mkdocs-material-extensions 1.0.3" = [
     {url = "https://files.pythonhosted.org/packages/c1/6f/20b60ac8b314fd080dbab77b7a70ac3a283641a23914cb2346178875f501/mkdocs-material-extensions-1.0.3.tar.gz", hash = "sha256:bfd24dfdef7b41c312ede42648f9eb83476ea168ec163b613f9abd12bbfddba2"},
@@ -1431,6 +1431,14 @@ content_hash = "sha256:bfc5736bdc8247cfd6423b183b332d963e3a9f11b59dafd61fcc99977
 "pluggy 1.0.0" = [
     {url = "https://files.pythonhosted.org/packages/9e/01/f38e2ff29715251cf25532b9082a1589ab7e4f571ced434f98d0139336dc/pluggy-1.0.0-py2.py3-none-any.whl", hash = "sha256:74134bbf457f031a36d68416e1509f34bd5ccc019f0bcc952c7b909d06b37bd3"},
     {url = "https://files.pythonhosted.org/packages/a1/16/db2d7de3474b6e37cbb9c008965ee63835bba517e22cdb8c35b5116b5ce1/pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
+]
+"polars 0.13.58" = [
+    {url = "https://files.pythonhosted.org/packages/54/c6/eec4f5d347415b2df4822b7b28b3cc9f43d7ee0db382a1fbdd909a648c97/polars-0.13.58-cp37-abi3-macosx_11_0_arm64.whl", hash = "sha256:6043c6531cd6b5c52c5656335fb9117cd2887f2e5c77cab1b3b2bb0fd3547a7c"},
+    {url = "https://files.pythonhosted.org/packages/93/99/b88953b60a4c31aa9f5135d3f8b4c3cd5dd9a409e3e43903912aed8075f2/polars-0.13.58.tar.gz", hash = "sha256:e5d3bf9ddef54372906839c0ffbe5c86cb198c4f16d7b01054dc959d28949bd4"},
+    {url = "https://files.pythonhosted.org/packages/be/41/2c44283bcf48ccb8f1c42e2fcd58c06f994a7082abe36d1fa434a769adf7/polars-0.13.58-cp37-abi3-win_amd64.whl", hash = "sha256:d25cbe117e0cef353e0e82d0d402004bdae74eb4e8b0d7fde1c71cc1282ae4e2"},
+    {url = "https://files.pythonhosted.org/packages/d1/64/8856d8dab03437c31e30b40cca9be7e2919e32859248de91f81da54e5c13/polars-0.13.58-cp37-abi3-manylinux_2_24_aarch64.whl", hash = "sha256:b4fd0bf01fe9997c6748ee26a15bfb977c633343beb713b9d84961a75b589eed"},
+    {url = "https://files.pythonhosted.org/packages/e8/24/6b03becbf73a5e2afdd204563483a82bf2928ecb9957963775fd0cf28e30/polars-0.13.58-cp37-abi3-macosx_10_7_x86_64.whl", hash = "sha256:b2265928586c0748ecc1fbc2e087b2ff92657e53cbdcb1a4ce936a5174d32ba9"},
+    {url = "https://files.pythonhosted.org/packages/e9/2c/a2371545eeb7c02f1f11d3a5e63713122257f52899f40834a5df653edb9c/polars-0.13.58-cp37-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:225b24d80965a994f5b07e6ae0ecf6f430c22192d8433136abbef910241eaba8"},
 ]
 "prometheus-client 0.14.1" = [
     {url = "https://files.pythonhosted.org/packages/19/e5/7d4b4b3b0d8d2fdc55395cdb4271c6dbfde3c3ff7d6a6dbe63d19c4e2288/prometheus_client-0.14.1-py3-none-any.whl", hash = "sha256:522fded625282822a89e2773452f42df14b5a8e84a86433e3f8a189c1d54dc01"},

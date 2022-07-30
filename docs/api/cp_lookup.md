@@ -12,6 +12,10 @@ lookup(name)
   
   待查找地名
 
+- `level` : str | None
+
+  查询区域的行政等级，包括province、city、county三级。默认值为None，当为None时不区分查找范围，因此很可能出现重名错误
+
 **Returns**:
 
 - `fullname` : str
@@ -32,6 +36,10 @@ belongs_to(name)
 
   待查找地名
 
+- `level` : str | None
+
+  查询区域的行政等级，包括province、city、county三级。默认值为None，当为None时不区分查找范围，因此很可能出现重名错误
+
 **Returns**:
 
 - `father_area` : str
@@ -51,44 +59,15 @@ coordinate(name)
 
   待查找地名
 
+- `level` : str | None
+
+  查询区域的行政等级，包括province、city、county三级。默认值为None，当为None时不区分查找范围，因此很可能出现重名错误
+
 **Returns**:
 
 - `coordinate` : tuple[float, float]
 
   行政中心经纬度
-
----
-### haversine
-
-```python
-haversine(lat1, lon1, lat2, lon2)
-```
-
-使用两个区域的经度和纬度计算二者间球面距离，具体用法参照[示例](../examples/cp_lookup.md#haversine)。
-
-**Arguments**:
-
-- `lat1` : float
-  
-  区域1纬度
-
-- `lon1` : float
-  
-  区域1经度
-
-- `lat2` : float
-  
-  区域2纬度
-
-- `lon2` : float
-  
-  区域2经度
-
-**Returns**:
-
-- `distance` : float
-  
-  两地之间的球面距离，单位：km
 
 ---
 ### dist
@@ -109,8 +88,20 @@ dist(city1, city2)
   
   城市2
 
+- `level1` : str | None
+
+  查询区域的行政等级，包括province、city、county三级。
+
+- `level2` : str | None
+
+  查询区域的行政等级，包括province、city、county三级。
+
 **Returns**:
 
 - `distance` : float
   
   两地之间的球面距离，单位：km
+
+**Note**:
+
+  level1、level2默认值为None，当为None时不区分查找范围，因此很可能出现重名错误
