@@ -1,7 +1,7 @@
 ### lookup
 
 ```python
-lookup(name)
+lookup(name, level=None)
 ```
 
 根据地名简称查找全称，具体用法参照[示例](../examples/cp_lookup.md#lookup)。
@@ -26,7 +26,7 @@ lookup(name)
 ### belongs_to
 
 ```python
-belongs_to(name)
+belongs_to(name, level=None)
 ```
 根据地名查找其上级行政区名称，具体用法参照[示例](../examples/cp_lookup.md#belongs_to)。
 
@@ -49,7 +49,7 @@ belongs_to(name)
 ---
 ### coordinate
 ```python
-coordinate(name)
+coordinate(name, level=None)
 ```
 根据区域名全称得到其行政中心的坐标，具体用法参照[示例](../examples/cp_lookup.md#coordinate)。
 
@@ -73,28 +73,28 @@ coordinate(name)
 ### dist
 
 ```python
-dist(city1, city2)
+dist(name1, name2,  level1=None, level2=None)
 ```
 
 使用两个城市的名称计算二者间的球面距离，具体用法参照[示例](../examples/cp_lookup.md#dist)
 
 **Arguments**:
 
-- `city1` : str
+- `name1` : str
   
-  城市1
+  查询区域1
 
-- `city2` : str
+- `name2` : str
   
-  城市2
+  查询区域2
 
 - `level1` : str | None
 
-  查询区域的行政等级，包括province、city、county三级。
+  查询区域1的行政等级，包括province、city、county三级。
 
 - `level2` : str | None
 
-  查询区域的行政等级，包括province、city、county三级。
+  查询区域2的行政等级，包括province、city、county三级。
 
 **Returns**:
 

@@ -23,8 +23,7 @@
 ```python
 >>>print(lookup("海南"))
 
-地名重复或有误！
-AttributeError: 'Addr' object has no attribute 'addr'
+AreaNameError: 地名重复或有误！！！
 ```
 
 可以使用`level`参数从行政等级上对查询范围进行区分。

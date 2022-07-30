@@ -1,4 +1,4 @@
-## Version 0.2.3
+## Version 0.2.3 (2022.7.30)
 
 ### 彻底重构cp_lookup模块
 
