@@ -1,11 +1,5 @@
-import sys
-
-
-def root_path():
-    for path in sys.path:
-        if str.endswith(path, "site-packages"):
-            return path
+import numpy
 
 
 def full_path():
-    return "/".join([root_path(), "cp_lookup/attachment/adcodes.csv"])  # type: ignore
+    return "/".join([numpy.__file__[:-18], "cp_lookup/attachment/adcodes.csv"])  # type: ignore
