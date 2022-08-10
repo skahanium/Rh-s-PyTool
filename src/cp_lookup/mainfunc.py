@@ -83,13 +83,13 @@ def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
 
 
 def dist(
-    city1: str, city2: str, level1: str | None = None, level2: str | None = None
+    name1: str, name2: str, level1: str | None = None, level2: str | None = None
 ) -> float:
     """利用两个地区的城市名称计算球面距离
 
     Args:
-        city1 (str): 地区1的城市名称
-        city2 (str): 地区2的城市名称
+        name1 (str): 地区1的城市名称
+        name2 (str): 地区2的城市名称
         level1 (str | None): 查询地区1的行政等级，包括province、city、county三级。
         level2 (str | None): 查询地区2的行政等级，包括province、city、county三级。
 
@@ -99,6 +99,6 @@ def dist(
     Note:
         level1、level2默认值为None，当为None时不区分查找范围，因此很可能出现重名错误。
     """
-    city1_lat, city1_lon = coordinate(city1, level=level1)
-    city2_lat, city2_lon = coordinate(city2, level=level2)
+    city1_lat, city1_lon = coordinate(name1, level=level1)
+    city2_lat, city2_lon = coordinate(name2, level=level2)
     return haversine(city1_lat, city1_lon, city2_lat, city2_lon)
