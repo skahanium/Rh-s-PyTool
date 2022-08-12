@@ -1,5 +1,5 @@
-import numpy
+import index_calmeth as icl
 
 
 def full_path():
-    return "/".join([numpy.__file__[:-18], "cp_lookup/attachment/adcodes.csv"])  # type: ignore
+    return "/".join([icl.__file__[:-26], "cp_lookup/attachment/adcodes.csv"])

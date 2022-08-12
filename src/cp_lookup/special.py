@@ -12,7 +12,7 @@ ZXCITIES: dict[str, str] = {
     "重庆": "重庆市",
 }
 
-SAMENAMES: dict = {
+SAME_NAMES: dict[str, tuple[str, str]] = {
     "吉林": ("吉林市", "吉林市"),
     "承德": ("承德市", "承德县"),
     "铁岭": ("铁岭市", "铁岭县"),
