@@ -94,7 +94,7 @@ def _num_two(info: list[str], level_data: pl.DataFrame):
     else:
         fdata = _level_choose("not county")
         fcode = fdata.filter(pl.col("name").str.contains(father))[0, "adcode"]
-        addr_codes = level_data.filter(pl.col("name").str.contains(father))["adcode"]
+        addr_codes = level_data.filter(pl.col("name").str.contains(addr))["adcode"]
         for code in addr_codes:
             if (code[:4] == fcode[:4]) | (code[:2] == fcode[:2]):
                 return level_data.filter(pl.col("adcode") == code)
