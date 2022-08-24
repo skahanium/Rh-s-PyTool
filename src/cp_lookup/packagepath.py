@@ -1,5 +1,5 @@
-import index_calmeth as icl
+import os
 
 
 def full_path():
-    return "/".join([icl.__file__[:-26], "cp_lookup/attachment/adcodes.csv"])
+    return "/".join([os.path.dirname(__file__), "/attachment/adcodes.csv"])

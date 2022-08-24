@@ -2,17 +2,11 @@
 name = "Rh-s-PyTool"
 version = "0.2.5"
 description = "一系列Python工具的合集，用于中国省、市、区县三级行政区域的名称查询和补全、行政中心的经纬度查询、球面距离计算，同时也包含了综合指标评价方法的各种构成方法。"
-authors = [
-    {name = "skahanium", email = "skahanium@gmail.com"},
-]
-dependencies = [
-    "jieba>=0.42.1",
-    "numpy>=1.23.1",
-    "polars==0.14.0",
-]
+authors = [{ name = "skahanium", email = "skahanium@gmail.com" }]
+dependencies = ["jieba>=0.42.1", "numpy>=1.23.1", "polars>=0.14.0"]
 requires-python = ">=3.10, <3.11"
 readme = "README.md"
-license = {text = "MIT"}
+license = { text = "MIT" }
 
 [tool.pdm]
 allow_prereleases = true
@@ -26,23 +20,12 @@ requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
 
 [project.optional-dependencies]
-others=[
-    "notebook",
-    "pandas>=1.4.3",
-]
+others = ["notebook", "pandas>=1.4.3"]
 
 [tool.pdm.dev-dependencies]
-lint = [
-    "black>=22.6.0",
-]
-test = [
-    "pytest>=7.1.2",
-    "pytest-cov>=3.0.0",
-]
-docs = [
-    "mkdocs-material>=8.3.9",
-    "mkdocs>=1.3.1",
-]
+lint = ["black>=22.6.0"]
+test = ["pytest>=7.1.2", "pytest-cov>=3.0.0"]
+docs = ["mkdocs-material>=8.3.9", "mkdocs>=1.3.1"]
 
 [tool.pdm.build]
 package-dir = "src"
