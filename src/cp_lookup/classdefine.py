@@ -62,9 +62,9 @@ class Addr:
 
     def __init__(self, name: str, adcode: int | None = None, level: str | None = None):
         if adcode:
-            self.addr = data[data["adcode"] == adcode]
+            self.addr = data.filter(pl.col("adcode").is_in([adcode]))
         elif name in SIMILAR_NAMES.keys():
-            self.addr = data[data["adcode"] == SIMILAR_NAMES.get(name)]
+            self.addr = data.filter(pl.col("adcode").is_in([SIMILAR_NAMES.get(name)]))
         else:
             obj_area_data = Addr.__level_choose(level) if level else data
             info = lcut(name)
