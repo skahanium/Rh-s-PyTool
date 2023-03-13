@@ -8,13 +8,25 @@ import numpy as np
 
 
 def fn(
-    # 辅助函数，用于计算适度性指标转化为极大型指标的公式
     x: int | float,
     low: int | float,
     high: int | float,
     M: int | float,
 ) -> int | float:
-    assert low <= high
+    if not isinstance(x, (int, float)):
+        raise TypeError("x must be a number")
+    if not isinstance(low, (int, float)):
+        raise TypeError("low must be a number")
+    if not isinstance(high, (int, float)):
+        raise TypeError("high must be a number")
+    if not isinstance(M, (int, float)):
+        raise TypeError("M must be a number")
+
+    if low > high:
+        raise ValueError("low must be less than or equal to high")
+    if M < 0:
+        raise ValueError("M must be a positive number")
+
     if x < low:
         return 1 - (low - x) / M
     elif x > high:
@@ -41,6 +53,13 @@ def tiny_convert(
         np.ndarray | None: 若参数无误，返回转化后的数据组，否则返回None
     """
     df1 = ndarray.copy().astype(float)
+    if mode not in ('0', '1'):
+        raise ValueError('请正确地选择模式')
+    if not all(isinstance(i, int) for i in change_list):
+        raise TypeError('change_list的元素必须为整数')
+    if not all(i < df1.shape[1] for i in change_list):
+        raise IndexError('change_list的元素必须小于数据组的列数')
+
     if mode == '0':
         for j in change_list:
             df1[:, j] = 1 / df1[:, j]
@@ -50,9 +69,6 @@ def tiny_convert(
         for j in change_list:
             df1[:, j] = df1[:, j].max() - df1[:, j]
         return df1
-
-    else:
-        print('请正确地选择模式')
 
 
 def middle_convert(
@@ -70,6 +86,13 @@ def middle_convert(
     """
     if len(change_list) != len(best_value):
         print("请检查可变列表和最佳值列表的元素数量")
+        return None
+    elif not all(isinstance(i, int) for i in change_list):
+        print("请检查可变列表的元素是否为整数")
+        return None
+    elif not all(isinstance(i, int) or isinstance(i, float) for i in best_value):
+        print("请检查最佳值列表的元素是否为数值")
+        return None
     else:
         copy_matrix = ndarray.copy().astype(float)
         for j in change_list:
@@ -102,13 +125,17 @@ def moderate_convert(
         for j in change_list:
             a = low_limit[change_list.index(j)]
             b = high_limit[change_list.index(j)]
-            assert a <= b
             M = max(a - min(df2[:, j]), max(df2[:, j]) - b)
-            df2[:, j] = vfn(df2[:, j], a, b, M)
+            if a <= b:
+                df2[:, j] = vfn(df2[:, j], a, b, M)
+            else:
+                print("最优区间下限必须小于等于最优区间上限")
+                return None
         return df2
 
     else:
         print("请检查可变列表与上下界列表的元素数量")
+        return None
 
 
 def toone(origin_array: np.ndarray, mode: str) -> np.ndarray | None:
