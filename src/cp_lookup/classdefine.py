@@ -76,6 +76,8 @@ class Addr:
                     self.addr = Addr.__num_two(info, obj_area_data)
                 case 3:
                     self.addr = Addr.__num_three(info, obj_area_data)
+                case _:
+                    raise Exception(f"Error: {name} is a bad name.")
 
     @staticmethod
     def __level_choose(level: str | None) -> pl.DataFrame:
@@ -98,10 +100,12 @@ class Addr:
     @staticmethod
     def __num_one(info: list[str], level_data: pl.DataFrame):
         addr = info[0]
-        if len(level_data.filter(pl.col("name").str.contains(addr))) != 1:
-            raise AreaNameError("地名重复或有误！！！")
-        else:
+        if len(level_data.filter(pl.col("name").str.contains(addr))) == 1:
             return level_data.filter(pl.col("name").str.contains(addr))
+        elif len(level_data.filter(pl.col("name").str.contains(addr))) == 0:
+            raise AreaNameError("地名错误！！！")
+        else:
+            raise AreaNameError("地名重复！！！")
 
     @staticmethod
     def __num_two(info: list[str], level_data: pl.DataFrame):
@@ -116,6 +120,7 @@ class Addr:
             for code in addr_codes:
                 if (code[:4] == fcode[:4]) | (code[:2] == fcode[:2]):
                     return level_data.filter(pl.col("adcode") == code)
+            return Addr.__num_one(addr, level_data)
 
     @staticmethod
     def __num_three(info: list[str], level_data: pl.DataFrame):
@@ -125,9 +130,11 @@ class Addr:
         ldata = Addr.__level_choose("county")
         if len(level_data.filter(pl.col("name").str.contains(addr))) == 1:
             return level_data.filter(pl.col("name").str.contains(addr))
+
         gdcode = gddata.filter(pl.col("name").str.contains(gdfather))[0, "adcode"]
         fcode = fdata.filter(pl.col("name").str.contains(father))[0, "adcode"]
         addr_codes = ldata.filter(pl.col("name").str.contains(gdfather))["adcode"]
+
         for code in addr_codes:
             if code[:2] == fcode[:2] == gdcode[:2]:
                 return level_data.filter(pl.col("adcode") == code)
@@ -135,14 +142,20 @@ class Addr:
     def _belongs_to(self) -> str | None:
         assert isinstance(self.addr, pl.DataFrame)
         code = self.addr[0, "adcode"]
-        fcode = (
-            code[:2] + "0" * 10 if str.endswith(code, "0" * 8) else (code[:4] + "0" * 8)
-        )
+        if str.endswith(code, "0" * 8):
+            fcode = code[:2] + "0" * 10
+        elif str.endswith(code, "0" * 4):
+            fcode = code[:4] + "0" * 8
+        else:
+            fcode = code
         fdata = data.filter(pl.col("adcode") == fcode)
-        return fdata[0, "name"]
+        if len(fdata) > 0:
+            return fdata[0, "name"]
 
     def _coordinate(self) -> tuple[float, float]:
         assert isinstance(self.addr, pl.DataFrame)
+        if self.addr.shape[0] == 0:
+            raise ValueError("No coordinates found")
         lat = self.addr[0, "latitude"]
         lon = self.addr[0, "longitude"]
         return lat, lon

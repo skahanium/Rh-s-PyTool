@@ -1,5 +1,5 @@
-import os
+from pathlib import Path
 
 
 def full_path():
-    return "/".join([os.path.dirname(__file__), "/attachment/adcodes.csv"])
+    return str(Path(__file__).resolve().parent / "attachment" / "adcodes.csv")

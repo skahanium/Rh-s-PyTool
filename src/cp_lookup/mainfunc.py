@@ -18,7 +18,7 @@ def lookup(name: str, level: str | None = None) -> str | None:
         obj_area = Addr(new_name, level="province").addr
     else:
         obj_area = Addr(name, level=level).addr
-    return obj_area[0, "name"]  # type: ignore
+    return None if len(obj_area) == 0 else obj_area[0, "name"]
 
 
 def belongs_to(name: str, level: str | None = None) -> str | None:
@@ -35,11 +35,14 @@ def belongs_to(name: str, level: str | None = None) -> str | None:
         new_name = ZXCITIES[name]
         obj_area = Addr(new_name, level="province")
     else:
-        obj_area = Addr(name, level=level)
+        try:
+            obj_area = Addr(name, level=level)
+        except Exception as e:
+            return None
     return obj_area._belongs_to()
 
 
-def coordinate(name: str, level: str | None = None) -> tuple[float, float]:
+def coordinate(name: str, level: str | None = None) -> tuple[float, float] | None:
     """根据区域名得到其行政中心的坐标
 
     Args:
@@ -49,13 +52,16 @@ def coordinate(name: str, level: str | None = None) -> tuple[float, float]:
     Returns:
         tuple[float, float]: 行政中心经纬度
     """
-    if name in ZXCITIES.keys():
-        new_name = ZXCITIES[name]
-        obj_area = Addr(new_name, level="province")
-    else:
-        obj_area = Addr(name, level=level)
-    lat, lon = obj_area._coordinate()
-    return lat, lon
+    try:
+        if name in ZXCITIES.keys():
+            new_name = ZXCITIES[name]
+            obj_area = Addr(new_name, level="province")
+        else:
+            obj_area = Addr(name, level=level)
+        lat, lon = obj_area._coordinate()
+        return lat, lon
+    except Exception as e:
+        print(e)
 
 
 def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -99,6 +105,13 @@ def dist(
     Note:
         level1、level2默认值为None，当为None时不区分查找范围，因此很可能出现重名错误。
     """
-    city1_lat, city1_lon = coordinate(name1, level=level1)
-    city2_lat, city2_lon = coordinate(name2, level=level2)
-    return haversine(city1_lat, city1_lon, city2_lat, city2_lon)
+    try:
+        city1_lat: float
+        city1_lon: float
+        city1_lat, city1_lon = coordinate(name1, level=level1)
+        city2_lat: float
+        city2_lon: float
+        city2_lat, city2_lon = coordinate(name2, level=level2)
+        return haversine(city1_lat, city1_lon, city2_lat, city2_lon)
+    except Exception as e:
+        raise ValueError(f"无法计算{name1}与{name2}之间的球面距离") from e

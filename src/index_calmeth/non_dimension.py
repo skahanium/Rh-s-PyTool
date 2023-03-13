@@ -7,13 +7,13 @@ import numpy as np
 ############################################################################################
 
 
-def fn(x: int | float, y: int | float) -> int | float:  # 辅助函数，用于向量归一化计算
-    return x**2 + y**2
-
-
-def fn2(
-    x: int | float, low: int | float, high: int | float, M: int | float
-) -> int | float:  # 辅助函数，用于计算适度性指标转化为极大型指标的公式
+def fn(
+    # 辅助函数，用于计算适度性指标转化为极大型指标的公式
+    x: int | float,
+    low: int | float,
+    high: int | float,
+    M: int | float,
+) -> int | float:
     assert low <= high
     if x < low:
         return 1 - (low - x) / M
@@ -23,7 +23,7 @@ def fn2(
         return 1
 
 
-vfn2 = np.vectorize(fn2)
+vfn = np.vectorize(fn)
 ##############################################################################################
 
 
@@ -104,7 +104,7 @@ def moderate_convert(
             b = high_limit[change_list.index(j)]
             assert a <= b
             M = max(a - min(df2[:, j]), max(df2[:, j]) - b)
-            df2[:, j] = vfn2(df2[:, j], a, b, M)
+            df2[:, j] = vfn(df2[:, j], a, b, M)
         return df2
 
     else:
@@ -150,6 +150,6 @@ def toone(origin_array: np.ndarray, mode: str) -> np.ndarray | None:
             return copy_matrix
         case '3':
             for j in range(n):
-                vec_length = np.sqrt(np.array(reduce(fn, ndarray[:, j])))
+                vec_length = np.sqrt(np.sum(np.square(ndarray[:, j])))
                 copy_matrix[:, j] = ndarray[:, j] / vec_length
             return copy_matrix
