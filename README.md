@@ -46,9 +46,3 @@ pip3 install Rh-s-PyTool
 ```
 pdm add Rh-s-PyTool
 ```
-
-
-## 文档
-中文文档:[ Rh-s-PyTool Module ]
-
-[Rh-s-PyTool Module]:https://skahanium.github.io/Rh-s-PyTool/

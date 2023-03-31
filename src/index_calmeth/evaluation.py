@@ -3,7 +3,7 @@ from .non_dimension import toone
 from .check_func import array_check
 
 
-def topsis_opt(
+def topsis(
     data_origin: np.ndarray, weights: list[int | float] | np.ndarray
 ) -> np.matrix | None:
     """计算优劣解距离法得分矩阵，weights为权重矩阵。
@@ -53,19 +53,10 @@ def rsr(
     data = data_origin.copy()
     m, n = data.shape
 
-    try:
-        weights = np.mat(weights)
-        if weights.shape[1] != 1:
-            print("weights必须是一维数组或列表")
-            return None
-    except AttributeError:
-        print("weights必须是一维数组或列表")
-        return None
-
-    rsr_matrix = np.empty((m, n))
-    for q in range(n):
-        compare_list: np.ndarray = np.sort(data[:, q])
-        rsr_matrix[:, q] = np.searchsorted(compare_list, data[:, q])
+    assert isinstance(weights, (list, np.ndarray)), "weights必须是一维数组或列表"
+    weights = np.mat(weights)
+    compare_indices = np.argsort(data, axis=0)
+    rsr_matrix = np.argsort(compare_indices, axis=0)
     return rsr_matrix * weights / m
 
 
@@ -85,25 +76,8 @@ def ni_rsr(
     data = data_origin.copy()
     m, n = data.shape
 
-    if not isinstance(weights, (list, np.ndarray)):
-        raise TypeError("weights should be list or ndarray.")
-
-    if isinstance(weights, list) and not all(
-        isinstance(w, (int, float)) for w in weights
-    ):
-        raise TypeError("weights should be list of int or float.")
-
-    if isinstance(weights, np.ndarray) and not all(
-        isinstance(w, (np.int, np.int_, np.float, np.float_)) for w in weights
-    ):
-        raise TypeError("weights should be ndarray of int or float.")
-
-    if len(weights) != n:
-        raise ValueError("weights should be the same length as data.")
-
-    rsr_matrix = np.empty((m, n))
-    for q in range(n):
-        max_v = data[:, q].max()
-        min_v = data[:, q].min()
-        rsr_matrix[:, q] = 1 + ((m - 1) * (data[:, q] - min_v) / (max_v - min_v))
+    assert isinstance(weights, (list, np.ndarray)), "weights必须是一维数组或列表"
+    max_value = np.max(data, axis=0)
+    min_value = np.min(data, axis=0)
+    rsr_matrix = 1 + ((m - 1) * (data - min_value) / (max_value - min_value))
     return rsr_matrix * np.mat(weights).T / m
