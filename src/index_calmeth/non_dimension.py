@@ -14,18 +14,18 @@ def fn(
     M: int | float,
 ) -> int | float:
     if not isinstance(x, (int, float)):
-        raise TypeError("x must be a number")
+        raise TypeError("x必须是个数")
     if not isinstance(low, (int, float)):
-        raise TypeError("low must be a number")
+        raise TypeError("low必须是个数")
     if not isinstance(high, (int, float)):
-        raise TypeError("high must be a number")
+        raise TypeError("high必须是个数")
     if not isinstance(M, (int, float)):
-        raise TypeError("M must be a number")
+        raise TypeError("M必须是个数")
 
     if low > high:
-        raise ValueError("low must be less than or equal to high")
+        raise ValueError("low必须小于等于high")
     if M < 0:
-        raise ValueError("M must be a positive number")
+        raise ValueError("M必须大于0")
 
     if x < low:
         return 1 - (low - x) / M
@@ -57,7 +57,7 @@ def tiny_convert(
         raise ValueError('请正确地选择模式')
     if not all(isinstance(i, int) for i in change_list):
         raise TypeError('change_list的元素必须为整数')
-    if not all(i < df1.shape[1] for i in change_list):
+    if any(i >= df1.shape[1] for i in change_list):
         raise IndexError('change_list的元素必须小于数据组的列数')
 
     if mode == '0':
@@ -90,7 +90,7 @@ def middle_convert(
     elif not all(isinstance(i, int) for i in change_list):
         print("请检查可变列表的元素是否为整数")
         return None
-    elif not all(isinstance(i, int) or isinstance(i, float) for i in best_value):
+    elif not all(isinstance(i, (int, float)) for i in best_value):
         print("请检查最佳值列表的元素是否为数值")
         return None
     else:
@@ -153,30 +153,30 @@ def toone(origin_array: np.ndarray, mode: str) -> np.ndarray | None:
     copy_matrix = np.empty((m, n))
     match mode:
         case '0':
-            for j in range(n):
-                mmax = ndarray[:, j].max()
-                mmin = ndarray[:, j].min()
-                copy_matrix[:, j] = (
-                    (ndarray[:, j] - mmin) / (mmax - mmin) if mmax != mmin else 1
-                )
-            return copy_matrix
+            col_max = ndarray.max(axis=0)
+            col_min = ndarray.min(axis=0)
+            copy_matrix = (ndarray - col_min) / np.where(
+                col_max == col_min, 1, col_max - col_min
+            )
+
         case '1':
-            for j in range(n):
-                mmean = ndarray[:, j].mean()
-                mmax = ndarray[:, j].max()
-                mmin = ndarray[:, j].min()
-                copy_matrix[:, j] = (
-                    (ndarray[:, j] - mmean) / (mmax - mmin) if mmax != mmin else 0
-                )
-            return copy_matrix
+            col_mean = ndarray.mean(axis=0)
+            col_max = ndarray.max(axis=0)
+            col_min = ndarray.min(axis=0)
+            copy_matrix = (ndarray - col_mean) / np.where(
+                col_max == col_min, 1, col_max - col_min
+            )
+
         case '2':
-            for j in range(n):
-                mmean = ndarray[:, j].mean()
-                mstd = ndarray[:, j].std()
-                copy_matrix[:, j] = (ndarray[:, j] - mmean) / mstd if mstd != 0 else 0
-            return copy_matrix
+            col_std = np.std(ndarray, axis=0)
+            col_mean = np.mean(ndarray, axis=0)
+            copy_matrix = (ndarray - col_mean) / np.where(col_std != 0, col_std, 1)
+
         case '3':
-            for j in range(n):
-                vec_length = np.sqrt(np.sum(np.square(ndarray[:, j])))
-                copy_matrix[:, j] = ndarray[:, j] / vec_length
-            return copy_matrix
+            copy_matrix = ndarray / np.sqrt(np.sum(ndarray**2, axis=0))
+
+        case _:
+            print("请正确选择模式")
+            copy_matrix = None
+
+    return copy_matrix

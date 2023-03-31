@@ -1,33 +1,35 @@
 import numpy as np
 from .non_dimension import toone
+from .check_func import array_check
 
 
-def topsis(
+def topsis_opt(
     data_origin: np.ndarray, weights: list[int | float] | np.ndarray
 ) -> np.matrix | None:
     """计算优劣解距离法得分矩阵，weights为权重矩阵。
 
     Args:
         data_origin (np.ndarray): 待计算数据
-        weights (np.ndarray): 权重数组
+    weights (np.ndarray): 权重数组
 
     Returns:
         np.matrix: 若参数无误，返回得分数据，否则返回None
     """
+    array_check(data=data_origin)
     data = data_origin.copy()
     data = toone(data, mode='3')
-    if data is None:
-        return None
     m, n = data.shape
 
-    empty_matrix1 = np.empty((m, n))
-    empty_matrix2 = np.empty((m, n))
-    z_max = [data[:, j].max() for j in range(n)]
-    z_min = [data[:, j].min() for j in range(n)]
+    empty_matrix1 = np.empty_like(data)
+    empty_matrix2 = np.empty_like(data)
+    z_max = data.max(axis=0)
+    z_min = data.min(axis=0)
 
-    for j in range(n):
-        empty_matrix1[:, j] = weights[j] * (z_max[j] - data[:, j]) ** 2
-        empty_matrix2[:, j] = weights[j] * (z_min[j] - data[:, j]) ** 2
+    empty_matrix1 = np.multiply(np.square(np.subtract(z_max, data)), np.square(weights))
+    empty_matrix2 = np.multiply(np.square(np.subtract(z_min, data)), np.square(weights))
+
+    empty_matrix1 *= weights
+    empty_matrix2 *= weights
 
     d1: np.ndarray = np.sqrt(empty_matrix1.sum(axis=1))
     d2: np.ndarray = np.sqrt(empty_matrix2.sum(axis=1))
@@ -47,20 +49,17 @@ def rsr(
     Returns:
         np.matrix: 若参数无误，返回得分数据，否则返回None
     """
-    try:
-        data = data_origin.copy()
-        m, n = data.shape
-    except AttributeError:
-        print("data_origin must be a np.ndarray")
-        return None
+    array_check(data=data_origin)
+    data = data_origin.copy()
+    m, n = data.shape
 
     try:
         weights = np.mat(weights)
         if weights.shape[1] != 1:
-            print("weights must be a 1D array")
+            print("weights必须是一维数组或列表")
             return None
     except AttributeError:
-        print("weights must be a 1D array")
+        print("weights必须是一维数组或列表")
         return None
 
     rsr_matrix = np.empty((m, n))
@@ -82,6 +81,7 @@ def ni_rsr(
     Returns:
         np.matrix: 若参数无误，返回得分数据，否则返回None
     """
+    array_check(data=data_origin)
     data = data_origin.copy()
     m, n = data.shape
 
