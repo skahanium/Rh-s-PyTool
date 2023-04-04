@@ -1,6 +1,7 @@
+from math import radians, cos, sin, asin, sqrt
 from .classdefine import Addr
 from .special import ZXCITIES
-from math import radians, cos, sin, asin, sqrt
+
 
 
 def lookup(name: str, level: str | None = None) -> str | None:
@@ -17,7 +18,10 @@ def lookup(name: str, level: str | None = None) -> str | None:
         new_name = ZXCITIES[name]
         obj_area = Addr(new_name, level="province").addr
     else:
-        obj_area = Addr(name, level=level).addr
+        try:
+            obj_area = Addr(name, level=level).addr
+        except Exception as e:
+            raise ValueError(f"无法找到{name}的全称") from e
     return None if len(obj_area) == 0 else obj_area[0, "name"]
 
 
@@ -38,7 +42,7 @@ def belongs_to(name: str, level: str | None = None) -> str | None:
         try:
             obj_area = Addr(name, level=level)
         except Exception as e:
-            return None
+            raise ValueError(f"无法找到{name}的上级行政区") from e
     return obj_area._belongs_to()
 
 
@@ -52,16 +56,16 @@ def coordinate(name: str, level: str | None = None) -> tuple[float, float] | Non
     Returns:
         tuple[float, float]: 行政中心经纬度
     """
-    try:
-        if name in ZXCITIES.keys():
-            new_name = ZXCITIES[name]
-            obj_area = Addr(new_name, level="province")
-        else:
+    if name in ZXCITIES.keys():
+        new_name = ZXCITIES[name]
+        obj_area = Addr(new_name, level="province")
+    else:
+        try:
             obj_area = Addr(name, level=level)
-        lat, lon = obj_area._coordinate()
-        return lat, lon
-    except Exception as e:
-        print(e)
+            lat, lon = obj_area._coordinate()
+        except Exception as e:
+            raise ValueError(f"无法找到{name}的坐标") from e
+    return lat, lon
 
 
 def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
@@ -77,14 +81,14 @@ def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
         float: 球面距离，单位：km
     """
     # 将十进制度数转化为弧度
-    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])  # radians：将角度转化为弧度
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
 
     # haversine（半正矢）公式
     dlon = lon2 - lon1
     dlat = lat2 - lat1
     a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
     c = 2 * asin(sqrt(a))
-    r = 6371  # 地球平均半径，单位为公里
+    r = 6371 
     return c * r
 
 

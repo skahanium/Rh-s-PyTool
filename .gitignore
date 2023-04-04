@@ -12,3 +12,4 @@ dist
 example/
 .pytest_cache
 *.csv
+.coverage

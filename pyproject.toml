@@ -3,7 +3,12 @@ name = "Rh-s-PyTool"
 version = "0.3.0"
 description = "一系列Python工具的合集，用于中国省、市、区县三级行政区域的名称查询和补全、行政中心的经纬度查询、球面距离计算，同时也包含了综合指标评价方法的各种构成方法。"
 authors = [{ name = "skahanium", email = "skahanium@gmail.com" }]
-dependencies = ["jieba>=0.42.1", "numpy>=1.23.1", "polars>=0.14.0"]
+dependencies = [
+    "jieba>=0.42.1",
+    "numpy>=1.23.1",
+    "polars>=0.14.0",
+    "numba>=0.56.4",
+]
 requires-python = ">=3.10"
 readme = "README.md"
 license = { text = "MIT" }
@@ -23,7 +28,10 @@ build-backend = "pdm.pep517.api"
 others = ["notebook", "pandas>=1.4.3"]
 
 [tool.pdm.dev-dependencies]
-lint = ["black>=22.6.0"]
+lint = [
+    "ruff>=0.0.260",
+    "pylint>=2.17.1",
+]
 test = ["pytest>=7.1.2", "pytest-cov>=3.0.0"]
 
 [tool.pdm.build]
