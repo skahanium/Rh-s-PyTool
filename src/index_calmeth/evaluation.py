@@ -54,7 +54,7 @@ def rsr(
     weights = np.mat(weights)
     compare_indices = np.argsort(data, axis=0)
     rsr_matrix = np.argsort(compare_indices, axis=0)
-    return rsr_matrix * weights / length
+    return rsr_matrix * np.mat(weights).T/ length
 
 
 def ni_rsr(
