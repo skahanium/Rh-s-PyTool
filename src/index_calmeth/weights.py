@@ -1,33 +1,30 @@
-import itertools
 import numpy as np
 from .non_dimension import toone
+from .check_func import array_check
 
 
-def __variability(data_origin: np.ndarray) -> np.ndarray:  # critic方法指标变异性数据
-    data = toone(data_origin.copy(), mode='0')
-    assert isinstance(data, np.ndarray)
-    m, n = data.shape
-
-    variabilities = []
-    for j in range(n):
-        ave_x = data[:, j].mean()
-        diff = np.array(data[:, j] - ave_x)
-        sum_var = np.sum(diff**2 / (m - 1))
-        variabilities.append(sum_var**0.5)
-    return np.array(variabilities)
+def __variability(data: np.ndarray) -> np.ndarray:
+    array_check(data=data)
+    length, _ = data.shape
+    ave_x = np.mean(data, axis=0)
+    diff = data - ave_x
+    sum_var = np.sum(diff**2, axis=0) / (length - 1)
+    return np.sqrt(sum_var)
 
 
-def __conflict(data_origin: np.ndarray) -> np.ndarray:  # critic方法指标冲突性数据
-    corr_matrix = np.corrcoef(data_origin, rowvar=False)
-    conflicts = []
-    p, q = corr_matrix.shape
-    conflicts.extend(sum((1 - corr_matrix[i, j]) for i in range(p)) for j in range(q))
-
-    return np.array(conflicts)
+def __conflict(data: np.ndarray) -> np.ndarray:
+    array_check(data=data)
+    try:
+        corr_matrix: np.ndarray = np.corrcoef(data, rowvar=False)
+    except np.linalg.LinAlgError as e:
+        raise np.linalg.LinAlgError("指标存在严重多重共线性") from e
+    conflicts: np.ndarray = (1 - corr_matrix).sum(axis=0)
+    return conflicts
 
 
 def critic(data_origin: np.ndarray) -> np.ndarray:
-    """通过所提供数据计算critic权重
+    """
+    通过所提供数据计算critic权重
 
     Args:
         data_origin (np.ndarray): 待计算权重的数据
@@ -35,17 +32,16 @@ def critic(data_origin: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: critic权重数组
     """
-    info1 = __variability(data_origin)
-    info2 = __conflict(data_origin)
-    information = np.array(info1) * np.array(info2)
-    information[np.isnan(information)] = 0
-
-    _, q = data_origin.shape
-    sum_info = information.sum()
+    info1: np.ndarray = __variability(data_origin)
+    info2: np.ndarray = __conflict(data_origin)
+    information: np.ndarray = np.multiply(info1, info2)
+    information = np.nan_to_num(information)
+    _, width = data_origin.shape
+    sum_info: float = information.sum()
     if sum_info == 0:
-        return np.ones(q) / q
-    weights = [information[c] / sum_info for c in range(q)]
-    return np.array(weights)
+        return np.ones(width) / width
+    weights: np.ndarray = information / sum_info
+    return weights
 
 
 def ewm(data_origin: np.ndarray) -> np.ndarray:
@@ -57,19 +53,14 @@ def ewm(data_origin: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: ewm权重数组
     """
+    array_check(data=data_origin)
     data = toone(data_origin.copy(), mode='0')
     assert isinstance(data, np.ndarray)
-    m, n = data.shape
-    entropy = []
-
-    for j in range(n):
-        data[:, j] = data[:, j] / np.sum(data[:, j])
-        np.place(data[:, j], data[:, j] == 0, 1)
-        ej = -np.log(1 / m) * np.sum(data[:, j] * np.log(data[:, j]))
-        entropy.append(ej)
-
-    weights = [(1 - entropy[c]) / (m - np.sum(entropy)) for c in range(n)]
-    return np.array(weights)
+    length, _ = data.shape
+    data /= np.sum(data, axis=0)
+    data = np.clip(data, a_min=1e-10, a_max=None)
+    entropy = -np.log(1 / length) * np.sum(data * np.log(data), axis=0)
+    return (1 - entropy) / (length - np.sum(entropy))
 
 
 def stddev(data_origin: np.ndarray) -> np.ndarray:
@@ -81,33 +72,25 @@ def stddev(data_origin: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: stddev权重数组
     """
+    array_check(data=data_origin)
     data = toone(data_origin.copy(), mode='0')
-    assert isinstance(data, np.ndarray)
-    _, n = data.shape
-
-    info = [np.std(data[:, j]) for j in range(n)]
-    if np.sum(info) == 0:
-        return np.ones(n) / n
-    weights = [(i / np.sum(info)) for i in info]
-    return np.array(weights)
+    width = data.shape[1]
+    info = np.std(data, axis=0)
+    return np.ones(width) / width if np.sum(info) == 0 else np.divide(info, np.sum(info))
 
 
 def gini(data_origin: np.ndarray) -> np.ndarray:
-    """通过所提供数据计算基尼系数法权重
+    """
+    计算基尼系数法权重
 
     Args:
-        data_origin (np.ndarray): 待计算权重的数据
+        data (np.ndarray): 待计算权重的数据
 
     Returns:
         np.ndarray: 基尼系数法权重数组
     """
-    data = data_origin.copy()
-    m, n = data.shape
-    Gini = []
-    for j in range(n):
-        gini_j = [
-            np.abs(data[u, j] - data[v, j])
-            for u, v in itertools.product(range(m), range(m))
-        ]
-        Gini.append(np.sum(gini_j) / (m**2 - m))
-    return np.array(Gini / np.sum(Gini))
+    array_check(data=data_origin)
+    length, _ = data_origin.shape
+    diff_array = np.abs(data_origin[:, :, np.newaxis] - data_origin[:, :, np.newaxis].T)
+    score = 2 / (length * (length - 1)) * np.sum(diff_array, axis=(0, 1))
+    return score / np.sum(score)

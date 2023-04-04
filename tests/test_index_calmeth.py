@@ -1,6 +1,6 @@
-from index_calmeth import toone, topsis, rsr, ni_rsr, critic, stddev, ewm, gini
 import numpy as np
 import pytest
+from index_calmeth import toone, topsis, rsr, ni_rsr, critic, stddev, ewm, gini
 
 test_array = np.array([[1, 7, 6, 5, 4],
                        [3, 9, 4, 2, 1],

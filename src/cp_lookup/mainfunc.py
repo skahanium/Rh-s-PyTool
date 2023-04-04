@@ -1,6 +1,7 @@
+from math import radians, cos, sin, asin, sqrt
 from .classdefine import Addr
 from .special import ZXCITIES
-from math import radians, cos, sin, asin, sqrt
+
 
 
 def lookup(name: str, level: str | None = None) -> str | None:
@@ -17,8 +18,11 @@ def lookup(name: str, level: str | None = None) -> str | None:
         new_name = ZXCITIES[name]
         obj_area = Addr(new_name, level="province").addr
     else:
-        obj_area = Addr(name, level=level).addr
-    return obj_area[0, "name"]  # type: ignore
+        try:
+            obj_area = Addr(name, level=level).addr
+        except Exception as e:
+            raise ValueError(f"无法找到{name}的全称") from e
+    return None if len(obj_area) == 0 else obj_area[0, "name"]
 
 
 def belongs_to(name: str, level: str | None = None) -> str | None:
@@ -35,11 +39,14 @@ def belongs_to(name: str, level: str | None = None) -> str | None:
         new_name = ZXCITIES[name]
         obj_area = Addr(new_name, level="province")
     else:
-        obj_area = Addr(name, level=level)
+        try:
+            obj_area = Addr(name, level=level)
+        except Exception as e:
+            raise ValueError(f"无法找到{name}的上级行政区") from e
     return obj_area._belongs_to()
 
 
-def coordinate(name: str, level: str | None = None) -> tuple[float, float]:
+def coordinate(name: str, level: str | None = None) -> tuple[float, float] | None:
     """根据区域名得到其行政中心的坐标
 
     Args:
@@ -53,8 +60,11 @@ def coordinate(name: str, level: str | None = None) -> tuple[float, float]:
         new_name = ZXCITIES[name]
         obj_area = Addr(new_name, level="province")
     else:
-        obj_area = Addr(name, level=level)
-    lat, lon = obj_area._coordinate()
+        try:
+            obj_area = Addr(name, level=level)
+            lat, lon = obj_area._coordinate()
+        except Exception as e:
+            raise ValueError(f"无法找到{name}的坐标") from e
     return lat, lon
 
 
@@ -71,14 +81,14 @@ def haversine(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
         float: 球面距离，单位：km
     """
     # 将十进制度数转化为弧度
-    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])  # radians：将角度转化为弧度
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
 
     # haversine（半正矢）公式
     dlon = lon2 - lon1
     dlat = lat2 - lat1
     a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
     c = 2 * asin(sqrt(a))
-    r = 6371  # 地球平均半径，单位为公里
+    r = 6371 
     return c * r
 
 
@@ -99,6 +109,13 @@ def dist(
     Note:
         level1、level2默认值为None，当为None时不区分查找范围，因此很可能出现重名错误。
     """
-    city1_lat, city1_lon = coordinate(name1, level=level1)
-    city2_lat, city2_lon = coordinate(name2, level=level2)
-    return haversine(city1_lat, city1_lon, city2_lat, city2_lon)
+    try:
+        city1_lat: float
+        city1_lon: float
+        city1_lat, city1_lon = coordinate(name1, level=level1)
+        city2_lat: float
+        city2_lon: float
+        city2_lat, city2_lon = coordinate(name2, level=level2)
+        return haversine(city1_lat, city1_lon, city2_lat, city2_lon)
+    except Exception as e:
+        raise ValueError(f"无法计算{name1}与{name2}之间的球面距离") from e
