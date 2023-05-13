@@ -5,7 +5,7 @@ test.py
 *.ipynb
 __pypackages__/
 .ipynb_checkpoints
-.pdm.toml
+.pdm-python
 dist
 .venv
 .env

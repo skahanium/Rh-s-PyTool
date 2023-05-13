@@ -140,7 +140,7 @@ class Addr:
                 return level_data.filter(pl.col("adcode") == code)
 
     def _belongs_to(self) -> str | None:
-        assert isinstance(self.addr, pl.DataFrame)
+        assert isinstance(self.addr, pl.DataFrame), "无法查询到对应的数据范围！！！"
         code = self.addr[0, "adcode"]
         if str.endswith(code, "0" * 8):
             fcode = code[:2] + "0" * 10
@@ -153,7 +153,7 @@ class Addr:
             return fdata[0, "name"]
 
     def _coordinate(self) -> tuple[float, float]:
-        assert isinstance(self.addr, pl.DataFrame)
+        assert isinstance(self.addr, pl.DataFrame), "无法查询到对应的数据范围！！！"
         if self.addr.shape[0] == 0:
             raise ValueError("No coordinates found")
         lat = self.addr[0, "latitude"]
